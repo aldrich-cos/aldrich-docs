@@ -32,6 +32,775 @@ To achieve this level of intimacy and power, we must abandon traditional app arc
 
 ---
 
+## SYSTEM ARCHITECTURE OVERVIEW
+
+> **Read this before the pillars.** The five pillars each go deep on one layer of the system. This section gives you the complete picture first — every client, every backend service, every communication path, and the exact journey data takes from a user's mouth to a completed action and back. If you understand this section, the pillars will make immediate sense. If you skip it, the pillars will feel disconnected.
+
+---
+
+### The 10,000-Foot View
+
+This system has three physical zones that must work as one coherent brain:
+
+```
+╔══════════════════════════════════════════════════════════════════════╗
+║  ZONE 1: USER DEVICES (The Senses + The Hands)                      ║
+║  iOS · Android · macOS · Windows                                    ║
+║  What runs here: audio capture, local AI, UI rendering, approvals   ║
+╠══════════════════════════════════════════════════════════════════════╣
+║  ZONE 2: THE WIRE (The Nervous System)                              ║
+║  WebSocket · HTTPS · BLE · mDNS · Local P2P                        ║
+║  What flows here: encrypted intents, SDUI cards, action approvals  ║
+╠══════════════════════════════════════════════════════════════════════╣
+║  ZONE 3: ALDRICH CLOUD (The Brain)                                  ║
+║  Go services · LLM · Memory · OAuth Vault · Safety Layer           ║
+║  What runs here: reasoning, memory, agentic execution, persistence  ║
+╚══════════════════════════════════════════════════════════════════════╝
+```
+
+No zone can operate usefully without the others. The design goal is that **Zone 1 degrades gracefully when Zone 3 is unreachable**, and Zone 3 **never sees raw user data** — only the compressed, authorized summaries that Zone 1 chooses to send.
+
+---
+
+### Zone 1: What Lives on the Client
+
+Every client is fundamentally a **sensor node and approval surface**. It captures context, classifies intent, and renders decisions. It does not make high-stakes decisions on its own.
+
+#### iOS Application
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  iOS APPLICATION LAYERS                                        │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  UI LAYER (SwiftUI)                                    │   │
+│  │  • SDUI Renderer — parses server JSON → native views   │   │
+│  │  • Lock screen widget (WidgetKit extension)            │   │
+│  │  • Notification handling + biometric approval gate     │   │
+│  │  • Settings, action history, memory viewer             │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                          ↕ Swift actors                         │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  INTELLIGENCE LAYER                                    │   │
+│  │  • Intent Router — local vs. cloud routing decision    │   │
+│  │  • Gemma 2B (Core ML / BNPL quantized) — local LLM    │   │
+│  │  • Wake-word detector (OpenWakeWord, CoreML compiled)  │   │
+│  │  • Thermal state monitor → dynamic routing switch      │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                          ↕                                      │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  SENSOR LAYER                                          │   │
+│  │  • VAD (Silero, CoreML — runs on ANE at ~6mAh/hr)     │   │
+│  │  • AVAudioEngine — 16kHz mono PCM ring buffer (3s)    │   │
+│  │  • HealthKit reader (sleep, HRV, activity)            │   │
+│  │  • Location context (coarse — city level only)        │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                          ↕                                      │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  SECURITY & STORAGE LAYER                              │   │
+│  │  • Secure Enclave — audio buffer AES-256-GCM keys      │   │
+│  │  • Keychain — JWT access token + WebSocket session key │   │
+│  │  • SQLite (encrypted, SQLCipher) — local memory cache  │   │
+│  │  • BGProcessingTask scheduler — model pre-warm         │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                          ↕                                      │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  COMMUNICATION LAYER                                   │   │
+│  │  • WebSocket client (URLSessionWebSocketTask)          │   │
+│  │  • HTTP/2 REST client (URLSession)                    │   │
+│  │  • BLE Peripheral Manager (CoreBluetooth)             │   │
+│  │  • mDNS advertiser (Network.framework / Bonjour)      │   │
+│  └─────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**What the iOS app owns and never gives up:**
+- Raw audio (processed and discarded on-device)
+- Biometric data (touch/face ID result — a boolean yes/no — is all that crosses the wire)
+- Health metrics (processed into a scalar "energy score" on-device)
+- The audio ring buffer (encrypted in RAM via Secure Enclave, wiped after intent extraction)
+
+**What the iOS app sends to the cloud:**
+- Text transcript of the user's intent (never the audio)
+- Encrypted action approvals (biometric result + action ID + device attestation token)
+- Memory ingestion events (entities extracted from email/calendar, never full content by default)
+- Session heartbeat (keeps the WebSocket alive, carries device state: thermal level, battery %)
+
+---
+
+#### Android Application
+
+The Android app mirrors the iOS architecture with platform-specific implementations:
+
+```
+iOS Component               → Android Equivalent
+─────────────────────────────────────────────────
+AVAudioEngine               → AudioRecord + MediaProjection API
+CoreML / ANE                → TensorFlow Lite + Google Tensor TPU
+Secure Enclave (AES key)    → Android Keystore + StrongBox HSM
+BGProcessingTask            → WorkManager (PeriodicWorkRequest)
+CoreBluetooth (Peripheral)  → BluetoothLeAdvertiser
+WidgetKit                   → Glance API (Jetpack)
+URLSessionWebSocketTask     → OkHttp WebSocket
+AVAudioSession (.record)    → Foreground Service (required for bg audio on Android 14+)
+```
+
+**Key Android-specific difference:** Android 14+ requires a **foreground service with a persistent notification** for any background audio processing. This means the user will see "Aldrich is listening" in their notification shade — always. On Android this is less stigmatized than iOS (where it is a hardware orange dot) but it must be designed as a trust signal, not apologized for.
+
+**Android foreground service declaration:**
+```xml
+<!-- AndroidManifest.xml -->
+<service
+    android:name=".AldrichListeningService"
+    android:foregroundServiceType="microphone|mediaProjection"
+    android:exported="false" />
+
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+```
+
+---
+
+#### macOS Desktop Daemon
+
+The macOS daemon is a distinct binary from the main app — it runs as a **Login Item** (LaunchAgent), starts at boot, lives in the menu bar, and never shows a dock icon. It has fundamentally different capabilities than mobile:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  macOS DAEMON (separate binary, runs as LaunchAgent)           │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  SCREEN CONTEXT ENGINE                                 │   │
+│  │  • AXUIElement API — reads active window title,        │   │
+│  │    frontmost app, focused text field content           │   │
+│  │  • CGWindowList — captures visible app list            │   │
+│  │  • No screenshot/OCR — only accessibility tree data   │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                          ↕                                      │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  LOCAL ACTION EXECUTOR                                 │   │
+│  │  • AXUIElement write API — types into text fields,    │   │
+│  │    clicks buttons, navigates menus                    │   │
+│  │  • NSAppleEventDescriptor — sends Apple Events to     │   │
+│  │    scriptable apps (Mail, Calendar, Finder)           │   │
+│  │  • NSWorkspace — opens URLs, launches apps            │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                          ↕                                      │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  P2P MESH HUB (desktop is the hub, phone is leaf)     │   │
+│  │  • mDNS (Bonjour) service advertisement               │   │
+│  │  • BLE Central Manager — pairs with phone             │   │
+│  │  • Local TCP server (127.0.0.1 + LAN) for commands    │   │
+│  │  • WebRTC data channel (fallback if LAN isolated)     │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                          ↕                                      │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  MENU BAR UI (SwiftUI MenuBarExtra)                    │   │
+│  │  • Activity status (idle / listening / acting)        │   │
+│  │  • Quick approve/reject for pending actions           │   │
+│  │  • Settings and permission management                 │   │
+│  └─────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Required macOS entitlements:**
+```xml
+<key>com.apple.security.automation.apple-events</key><true/>
+<key>com.apple.security.temporary-exception.apple-events</key>
+<array>
+  <string>com.apple.mail</string>
+  <string>com.apple.iCal</string>
+</array>
+```
+
+The Accessibility permission (`kAXTrustedCheckOptionPrompt`) must be granted by the user in **System Settings → Privacy & Security → Accessibility**. This is a one-time prompt that cannot be pre-approved. Onboarding must explain this clearly with a visual walkthrough — a raw OS permission dialog without context causes ~40% drop-off.
+
+---
+
+#### Windows Desktop Daemon (V2)
+
+The Windows daemon mirrors macOS functionality using the Windows-native equivalent APIs:
+
+```
+macOS API                   → Windows Equivalent
+─────────────────────────────────────────────────
+AXUIElement (read)          → IUIAutomation COM interface
+AXUIElement (write)         → IUIAutomation InvokePattern / ValuePattern
+NSAppleEventDescriptor      → WScript.Shell COM + SendKeys (limited)
+CoreBluetooth Central       → Windows.Devices.Bluetooth (WinRT)
+Bonjour mDNS                → DNS-SD via Bonjour for Windows (or native mDNS)
+LaunchAgent (login item)    → Windows Task Scheduler (logon trigger) or Registry Run key
+MenuBarExtra (SwiftUI)      → System tray icon (Win32 NOTIFYICONDATA)
+```
+
+Language choice for Windows daemon: **C++ with WinRT projections**. C# works too but requires .NET runtime dependency. C++ produces a ~2MB self-contained binary with no runtime prerequisites, which is important for a background daemon that users will not think about.
+
+---
+
+### Zone 2: How Clients Talk to the Cloud
+
+Every byte that crosses the wire between a client and the Aldrich backend follows these rules:
+
+1. **All connections are TLS 1.3 minimum.** No exceptions. Certificate pinning enforced in mobile apps.
+2. **All requests carry a short-lived JWT (15-minute TTL).** Refresh tokens are stored in Keychain/Keystore only — never in app state.
+3. **Persistent connections for real-time.** REST for mutations (create, approve, reject). WebSocket for everything the server needs to push to the client (SDUI cards, notifications, circuit breaker signals).
+4. **Local-first for local commands.** Phone-to-desktop commands use the P2P mesh and never touch the cloud server.
+
+#### Connection Types Map
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│  WHO TALKS TO WHOM, HOW, AND WHAT THEY SEND                        │
+│                                                                      │
+│  Mobile App ──── HTTPS/2 ──────────────────▶ Aldrich API            │
+│               (REST: mutations, auth)                                │
+│                                                                      │
+│  Mobile App ──── WebSocket ────────────────▶ Aldrich WS Hub         │
+│               (real-time: SDUI push,                                 │
+│                circuit breaker kill signals,                         │
+│                cross-device state sync)                              │
+│                                                                      │
+│  Desktop Daemon ── WebSocket ──────────────▶ Aldrich WS Hub         │
+│                  (same as mobile)                                    │
+│                                                                      │
+│  Mobile ──── BLE (GATT) ─────────────────▶ Desktop Daemon           │
+│           (pairing + session key exchange)                           │
+│                                                                      │
+│  Mobile ──── TCP (LAN) ──────────────────▶ Desktop Daemon           │
+│           (local commands: "type this", "open app X")               │
+│           (AES-256-GCM encrypted with BLE-derived session key)      │
+│                                                                      │
+│  Mobile ──── mDNS (Bonjour) ─────────────▶ Desktop Daemon           │
+│           (discovery: "find Aldrich daemon on this LAN")            │
+│                                                                      │
+│  Backend ──── OAuth 2.0 (HTTPS) ──────────▶ Gmail / Slack / etc.    │
+│           (action execution on user's behalf)                        │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+#### WebSocket Message Protocol
+
+All WebSocket messages use a single envelope format. The `type` field determines how the client processes the payload:
+
+```go
+// Every WebSocket message in both directions uses this envelope
+type WSMessage struct {
+    Type      string          `json:"type"`
+    MessageID string          `json:"message_id"` // UUID, for dedup
+    UserID    string          `json:"user_id"`
+    DeviceID  string          `json:"device_id"`  // which device sent/should receive
+    Timestamp int64           `json:"ts"`         // Unix ms
+    Payload   json.RawMessage `json:"payload"`
+}
+
+// Server → Client message types:
+// "sdui_card"         → render an action card
+// "action_status"     → update status of a pending action
+// "memory_sync"       → push a memory update to all devices
+// "circuit_breaker"   → STOP_ALL kill signal
+// "session_expire"    → JWT about to expire, trigger refresh
+// "notification"      → simple text notification (fallback)
+
+// Client → Server message types:
+// "intent"            → user spoke or typed an intent
+// "action_approve"    → biometric approved; payload contains action_id + device_attestation
+// "action_reject"     → user rejected an action
+// "action_undo"       → user undid an executed action
+// "heartbeat"         → device state: thermal_level, battery_pct, network_type
+// "memory_event"      → new memory to ingest (email summary, calendar change)
+```
+
+#### Authentication Flow (Every Request)
+
+```
+1. App launch / session start:
+   POST /auth/refresh  { refresh_token: "..." }
+   ← { access_token: "eyJ...", expires_in: 900 }  (15 min)
+
+2. Every API request:
+   Authorization: Bearer eyJ...
+
+3. Every WebSocket frame:
+   First frame after connect: { type: "auth", token: "eyJ..." }
+   Server validates; rejects connection if invalid
+
+4. Token refresh (proactive, 2 min before expiry):
+   POST /auth/refresh  (same as step 1)
+   New access_token replaces old in Keychain
+
+5. Token refresh failure (revoked/expired):
+   WS connection closes with code 4001
+   App redirects to OAuth re-authorization flow
+```
+
+---
+
+### Zone 3: What the Backend Does
+
+The backend is a collection of **Go microservices** (or a single modular monolith in V1 — avoid premature splitting) running on ECS Fargate, all communicating internally via direct function calls (monolith) or gRPC (microservices phase in V2+).
+
+#### Complete Backend Service Map
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│                        ALDRICH BACKEND                              │
+│                                                                      │
+│  INGRESS                                                             │
+│  ┌────────────────────────────────────────────────────────────┐     │
+│  │  API Gateway (Go net/http + gorilla/mux)                  │     │
+│  │  • TLS termination (ACM certificate)                      │     │
+│  │  • JWT validation (all routes)                            │     │
+│  │  • Rate limiting (per user: 100 req/min REST, WS exempt) │     │
+│  │  • Request ID injection (for distributed tracing)        │     │
+│  │  • Panic recovery middleware                              │     │
+│  └──────────────────────────────┬─────────────────────────────┘     │
+│                                 │ routes to:                        │
+│  ┌──────────────────────────────▼─────────────────────────────┐     │
+│  │  WebSocket Hub (gorilla/websocket)                        │     │
+│  │  • One goroutine per connection (up to 100K concurrent)   │     │
+│  │  • Per-user connection registry (device_id → conn)        │     │
+│  │  • Broadcast: push to all devices for a user_id          │     │
+│  │  • Ping/pong keepalive (30s interval)                     │     │
+│  └──────────────────────────────┬─────────────────────────────┘     │
+│                                 │                                    │
+│  CORE PROCESSING                │                                    │
+│  ┌──────────────────────────────▼─────────────────────────────┐     │
+│  │  Safety Middleware (runs before everything else)           │     │
+│  │  • Sandbox Classifier: is this action safe to auto-exec?  │     │
+│  │  • Circuit Breaker check: is this user's breaker tripped? │     │
+│  │  • Action budget: has this user exceeded actions/minute?  │     │
+│  │  • Idempotency: is this a duplicate request?              │     │
+│  └──────────────────────────────┬─────────────────────────────┘     │
+│                                 │                                    │
+│  ┌──────────────────────────────▼─────────────────────────────┐     │
+│  │  Intent Orchestrator                                      │     │
+│  │  • Parses incoming intent (text + device context)         │     │
+│  │  • Queries Memory Hub for relevant context                │     │
+│  │  • Passes enriched context to ReAct Engine               │     │
+│  │  • Receives action plan from ReAct Engine                │     │
+│  │  • Routes: auto-execute vs. pending approval vs. reject   │     │
+│  └──────────────────────────────┬─────────────────────────────┘     │
+│                                 │                                    │
+│  ┌──────────────────────────────▼─────────────────────────────┐     │
+│  │  ReAct Engine (Go FSM)                                    │     │
+│  │  • Calls Claude claude-sonnet-4-6 API with tool schemas          │     │
+│  │  • Executes tool calls through Tool Registry             │     │
+│  │  • Enforces 8-step chain max + 30K token budget          │     │
+│  │  • Error recovery loop (3 retries, 6K token budget)      │     │
+│  │  • Writes each step to action_records table              │     │
+│  └──────────────────────────────┬─────────────────────────────┘     │
+│                                 │                                    │
+│  ┌──────────────────────────────▼─────────────────────────────┐     │
+│  │  Tool Registry                                            │     │
+│  │  • Maintains map[string]Tool (interface)                  │     │
+│  │  • Each tool: Gmail, Calendar, Slack, Notion, Yelp...     │     │
+│  │  • Pre-call: fetches OAuth token from Vault              │     │
+│  │  • Post-call: validates response schema                  │     │
+│  │  • Pre-call: runs response through LLM Firewall          │     │
+│  └──────────────────────────────┬─────────────────────────────┘     │
+│                                 │                                    │
+│  SUPPORTING SERVICES            │                                    │
+│  ┌──────────────────────────────▼─────────────────────────────┐     │
+│  │  Memory Hub Service                                       │     │
+│  │  • Ingestion: Kafka consumer → normalize → embed → store  │     │
+│  │  • Retrieval: TEMPR (semantic + keyword + graph + time)   │     │
+│  │  • CRDT merge on reconnect                               │     │
+│  │  • Forgetting curve GC (nightly batch job)               │     │
+│  └──────────────────────────────┬─────────────────────────────┘     │
+│                                 │                                    │
+│  ┌──────────────────────────────▼─────────────────────────────┐     │
+│  │  OAuth Vault Service                                      │     │
+│  │  • Stores all user OAuth tokens (KMS envelope encrypted)  │     │
+│  │  • Proactive refresh (5 min before expiry)               │     │
+│  │  • Handles Google/Slack/Notion token revocation recovery  │     │
+│  │  • Per-provider rate limit tracking + backoff             │     │
+│  └──────────────────────────────┬─────────────────────────────┘     │
+│                                 │                                    │
+│  ┌──────────────────────────────▼─────────────────────────────┐     │
+│  │  SDUI Generator                                           │     │
+│  │  • Converts action plan output → JSON schema card         │     │
+│  │  • Selects component types based on action category       │     │
+│  │  • Adds accessibility labels, expiry, biometric flag      │     │
+│  │  • Pushes via WebSocket Hub to all user devices           │     │
+│  └──────────────────────────────┬─────────────────────────────┘     │
+│                                 │                                    │
+│  ┌──────────────────────────────▼─────────────────────────────┐     │
+│  │  Background Workers (separate goroutines / ECS tasks)     │     │
+│  │  • Memory GC: nightly Ebbinghaus decay + cold archive     │     │
+│  │  • Token refresh: poll expiring tokens every 60s          │     │
+│  │  • Integration schema drift: weekly API spec check        │     │
+│  │  • Action record archival: monthly S3 migration           │     │
+│  └──────────────────────────────────────────────────────────--┘     │
+│                                                                      │
+│  DATA STORES                                                         │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌───────────┐  │
+│  │  PostgreSQL  │ │   Redis      │ │    Kafka     │ │    S3     │  │
+│  │  + pgvector  │ │ (cache +     │ │  (3-broker   │ │ (cold     │  │
+│  │  (primary DB)│ │  sessions +  │ │   cluster,   │ │  archive) │  │
+│  │              │ │  circuit     │ │   12 parts)  │ │           │  │
+│  │              │ │  breaker)    │ │              │ │           │  │
+│  └──────────────┘ └──────────────┘ └──────────────┘ └───────────┘  │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### The Complete Data Journey: Voice to Action to Approval
+
+This is the most important thing to understand about the system. Every autonomous action follows this exact path. Nothing is skipped, nothing is reordered.
+
+```
+STEP 0: ALWAYS-ON SENSING (on-device, zero cloud involvement)
+  ┌─────────────────────────────────────────────────────────┐
+  │  DSP chip captures audio at 16kHz mono                  │
+  │  → 3-second rolling ring buffer in Secure Enclave RAM   │
+  │  → Silero VAD runs on ANE (<6mAh/hr), looks for speech  │
+  │  If silence: buffer overwrites itself, nothing saved    │
+  └───────────────────────────┬─────────────────────────────┘
+                              │ speech detected
+                              ▼
+STEP 1: WAKE WORD + INTENT CAPTURE
+  ┌─────────────────────────────────────────────────────────┐
+  │  Wake-word model fires (OpenWakeWord, ANE compiled)     │
+  │  → Whisper Tiny transcribes speech to text (on-device) │
+  │  → Transcript: "Set up dinner with the team this week" │
+  │  → Raw audio discarded from ring buffer immediately     │
+  └───────────────────────────┬─────────────────────────────┘
+                              │ text only from here
+                              ▼
+STEP 2: LOCAL INTENT CLASSIFICATION
+  ┌─────────────────────────────────────────────────────────┐
+  │  Gemma 2B Intent Router classifies:                     │
+  │  • Complexity: simple (local) vs. complex (cloud)       │
+  │  • Domain: calendar / email / general / search          │
+  │  • Urgency: immediate vs. queueable                     │
+  │  • Thermal check: if CRITICAL → force cloud path        │
+  │                                                         │
+  │  Decision: "calendar + multi-person + restaurant        │
+  │             = complex → cloud path"                     │
+  └───────────────────────────┬─────────────────────────────┘
+                              │ encrypted intent payload
+                              ▼
+STEP 3: CLOUD HANDOFF (HTTPS/WS to Aldrich API)
+  ┌─────────────────────────────────────────────────────────┐
+  │  Payload sent (all encrypted in transit via TLS 1.3):  │
+  │  {                                                      │
+  │    "intent": "Set up dinner with the team this week",  │
+  │    "device_context": {                                  │
+  │      "thermal": "nominal",                             │
+  │      "battery": 82,                                    │
+  │      "timezone": "America/New_York",                   │
+  │      "local_time": "2026-04-10T14:23:00-04:00"        │
+  │    },                                                   │
+  │    "session_id": "uuid...",                            │
+  │    "idempotency_key": "sha256(intent+device+ts)"       │
+  │  }                                                      │
+  └───────────────────────────┬─────────────────────────────┘
+                              ▼
+STEP 4: API GATEWAY VALIDATION
+  ┌─────────────────────────────────────────────────────────┐
+  │  JWT verified (signature + expiry)                      │
+  │  Rate limit check (100 req/min per user)                │
+  │  Idempotency check (Redis: seen this key in 5s? skip)   │
+  │  Request ID injected for tracing                        │
+  └───────────────────────────┬─────────────────────────────┘
+                              ▼
+STEP 5: SAFETY PRE-CHECK
+  ┌─────────────────────────────────────────────────────────┐
+  │  Circuit breaker check: is this user's breaker tripped? │
+  │  → If yes: return 503, notify device                    │
+  │                                                         │
+  │  Sandbox pre-classification:                            │
+  │  "dinner + team" → involves calendar + communication   │
+  │  → Likely moderate risk; full check deferred to post-  │
+  │     ReAct when actual tool calls are known              │
+  └───────────────────────────┬─────────────────────────────┘
+                              ▼
+STEP 6: MEMORY CONTEXT RETRIEVAL
+  ┌─────────────────────────────────────────────────────────┐
+  │  Memory Hub receives user_id + intent text              │
+  │  Runs TEMPR retrieval (parallel):                       │
+  │  • Semantic search: "team dinner, restaurant"          │
+  │  • Entity search: known team members, dietary prefs     │
+  │  • Temporal: recent calendar events, last dinner        │
+  │  • Graph: "team" → resolves to [Alice, Bob, Carol, Dan]│
+  │                                                         │
+  │  Returns context block (~2,000 tokens):                │
+  │  "Team: Alice (vegetarian), Bob, Carol, Dan            │
+  │   Alice prefers Italian. Last team dinner: Feb 14.     │
+  │   User works until 6 PM most weekdays."               │
+  └───────────────────────────┬─────────────────────────────┘
+                              ▼
+STEP 7: REACT ENGINE EXECUTION
+  ┌─────────────────────────────────────────────────────────┐
+  │  System prompt + memory context + intent → Claude claude-sonnet-4-6  │
+  │                                                         │
+  │  Step 1 — Reason: "Need to find overlapping free time  │
+  │            for 4 people this week (Thu/Fri best)"      │
+  │  Step 2 — Act: call calendar.getFreeBusy(4 people)     │
+  │  Step 3 — Observe: "Thursday 7 PM all 4 are free"     │
+  │  Step 4 — Reason: "Need a restaurant, Alice vegetarian,│
+  │            Italian preferred, near office"             │
+  │  Step 5 — Act: call yelp.search(Italian, vegetarian,  │
+  │            near:office, evening, seats:5)              │
+  │  Step 6 — Observe: "Osteria Marco, 4.6★, 0.3mi,      │
+  │            has vegetarian menu, open Thurs 6-11 PM"   │
+  │  Step 7 — Reason: "Create invite + draft confirmation" │
+  │  Step 8 — Act: call calendar.createEvent(draft=true)   │
+  │                                                         │
+  │  Each Act call:                                         │
+  │  1. Passes through Sandbox Classifier                   │
+  │  2. LLM Firewall sanitizes API response (Steps 3,6)    │
+  │  3. Action recorded to action_records table            │
+  │  4. Circuit breaker counter incremented                │
+  └───────────────────────────┬─────────────────────────────┘
+                              ▼
+STEP 8: SANDBOX FINAL CLASSIFICATION
+  ┌─────────────────────────────────────────────────────────┐
+  │  Now that we know exact tool calls:                     │
+  │  • calendar.createEvent → reversible, moderate risk    │
+  │  • email.sendInvites to 4 people → REQUIRES APPROVAL   │
+  │    (bulk communication threshold = 5, we're at 4,      │
+  │     but this is first send → approval required)        │
+  │                                                         │
+  │  Decision: PENDING APPROVAL — push to user             │
+  └───────────────────────────┬─────────────────────────────┘
+                              ▼
+STEP 9: SDUI CARD GENERATION
+  ┌─────────────────────────────────────────────────────────┐
+  │  SDUI Generator builds the approval card:              │
+  │  {                                                      │
+  │    "type": "action_card",                              │
+  │    "title": "Team Dinner — Thursday 7 PM",             │
+  │    "components": [                                      │
+  │      { "type": "text", "content": "Osteria Marco      │
+  │        (Italian, vegetarian-friendly, 0.3mi away)" }, │
+  │      { "type": "text", "content": "Inviting Alice,    │
+  │        Bob, Carol, Dan" },                             │
+  │      { "type": "action_row", "actions": [             │
+  │        { "label": "Send Invites", "style": "primary", │
+  │          "requires_biometric": true,                   │
+  │          "action": { "type": "approve",               │
+  │                      "action_id": "uuid..." } },       │
+  │        { "label": "Edit", ... },                       │
+  │        { "label": "Reject", ... }                      │
+  │      ]}                                                 │
+  │    ],                                                   │
+  │    "expires_at": "+10 minutes"                         │
+  │  }                                                      │
+  └───────────────────────────┬─────────────────────────────┘
+                              ▼
+STEP 10: PUSH TO ALL DEVICES (WebSocket)
+  ┌─────────────────────────────────────────────────────────┐
+  │  WebSocket Hub looks up all connections for user_id     │
+  │  Pushes SDUI card to:                                   │
+  │  • iPhone (shows as lock screen notification + card)   │
+  │  • macOS daemon (shows as menu bar badge + popover)    │
+  │  • iPad (if connected)                                 │
+  │  All devices show the same card simultaneously         │
+  └───────────────────────────┬─────────────────────────────┘
+                              │ user sees card, taps "Send Invites"
+                              ▼
+STEP 11: BIOMETRIC APPROVAL ON DEVICE
+  ┌─────────────────────────────────────────────────────────┐
+  │  iOS: LAContext.evaluatePolicy(.biometrics)             │
+  │  → FaceID scan succeeds                                │
+  │  → One-time approval token generated:                  │
+  │    { action_id: "uuid", nonce: "random32",             │
+  │      device_attestation: DCAppAttestService.attest(),  │
+  │      timestamp: now() }                                │
+  │  → Signed with device private key (Secure Enclave)     │
+  │  → Sent to backend via WebSocket or HTTPS POST         │
+  └───────────────────────────┬─────────────────────────────┘
+                              ▼
+STEP 12: APPROVAL VALIDATION + EXECUTION
+  ┌─────────────────────────────────────────────────────────┐
+  │  Backend validates:                                     │
+  │  • Nonce is unused (Redis SET NX: one-time only)       │
+  │  • Timestamp within 30-second window                   │
+  │  • Device attestation valid (DCAppAttestService)       │
+  │  • action_id matches a pending record for this user    │
+  │                                                         │
+  │  If valid:                                              │
+  │  1. Fetch OAuth token from Vault (Google Calendar)     │
+  │  2. Execute: POST /calendar/v3/events (create event)   │
+  │  3. Execute: POST /gmail/v1/messages/send (invites)    │
+  │  4. Update action_records: status → 'executed'         │
+  │  5. Set undo_deadline = NOW() + 30 seconds             │
+  │  6. Ingest outcome to Memory Hub:                      │
+  │     "Organized team dinner, Thursday 7 PM, Osteria     │
+  │      Marco, all 4 attended on [date]" (stored post)   │
+  └───────────────────────────┬─────────────────────────────┘
+                              ▼
+STEP 13: CONFIRMATION PUSH + UNDO WINDOW
+  ┌─────────────────────────────────────────────────────────┐
+  │  WebSocket push to all devices:                        │
+  │  { type: "action_status",                              │
+  │    status: "executed",                                 │
+  │    summary: "Calendar invite sent to 4 people.        │
+  │              Osteria Marco, Thursday 7 PM.",           │
+  │    undo_available_until: "2026-04-10T14:24:30Z" }     │
+  │                                                         │
+  │  UI shows: "Done ✓  Undo (28s)" snackbar               │
+  │                                                         │
+  │  If user taps Undo within 30s:                         │
+  │  → DELETE /calendar/v3/events/{id}  (calendar)        │
+  │  → action_records: status → 'undone'                  │
+  │  → Memory Hub: retract the outcome entry              │
+  └─────────────────────────────────────────────────────────┘
+
+TOTAL ELAPSED TIME (typical):
+  Step 0-2:  ~800ms (VAD + wake word + local classification)
+  Step 3-6:  ~400ms (network + gateway + memory retrieval)
+  Step 7:    ~2,800ms (8-step ReAct chain with Claude)
+  Step 8-10: ~200ms (sandbox + SDUI generation + WS push)
+  Step 11:   ~600ms (FaceID scan)
+  Step 12-13: ~300ms (execution + confirmation push)
+  ─────────────────────────────────────────────────
+  TOTAL: ~5.1 seconds from voice to "Done ✓"
+  (vs. 15-20 minutes if done manually)
+```
+
+---
+
+### How the Clients Stay in Sync Across Devices
+
+A user has three devices connected: iPhone, iPad, MacBook. All three must show consistent state at all times.
+
+```
+SYNC EVENTS AND WHO HANDLES THEM:
+
+Event: User approves action on iPhone
+→ iPhone sends approval to backend
+→ Backend executes action
+→ Backend WebSocket broadcasts action_status to ALL devices
+→ iPad and MacBook dismiss the pending card automatically
+→ All three show "Done ✓" simultaneously
+
+Event: User adds memory on MacBook ("My dentist appointment is next Monday")
+→ MacBook daemon sends memory_event to backend
+→ Backend ingests to Memory Hub
+→ Backend WebSocket pushes memory_sync to iPhone and iPad
+→ All devices now have this memory in local SQLite cache
+
+Event: Phone goes offline (airplane mode)
+→ WebSocket drops
+→ Phone switches to offline mode: queues new memory events locally
+→ Pending action approvals are held in local queue
+→ When connection restores: phone sends queued events with original timestamps
+→ Backend applies CRDT merge for any conflicting state
+
+Event: Circuit breaker trips on backend
+→ Backend broadcasts via WebSocket AND UDP broadcast (LAN)
+→ All connected WebSocket clients receive circuit_breaker message
+→ Desktop daemon receives UDP broadcast independently
+→ All devices freeze pending actions and show "AI paused" banner
+```
+
+---
+
+### How the Local P2P Mesh Works
+
+When the phone and desktop are on the same Wi-Fi network, they can communicate directly without going through the cloud. This enables sub-50ms local commands (vs. 200ms+ cloud round trip) and works even during internet outages.
+
+```
+PAIRING (one-time, via BLE):
+
+  Phone (BLE Peripheral)         Desktop (BLE Central)
+       │                               │
+       │ advertise: service UUID       │
+       │ ◄──────────────────────────── │ scan + connect
+       │                               │
+       │ ──── public key (P256) ──────▶│
+       │ ◄─── public key (P256) ────── │
+       │                               │
+       │  Both compute:                │
+       │  ECDH(myPrivKey, peerPubKey)  │
+       │  → shared secret              │
+       │  HKDF(shared, salt, info)     │
+       │  → 32-byte session key        │
+       │                               │
+       │  All future P2P traffic       │
+       │  encrypted: AES-256-GCM       │
+       │  with this session key        │
+
+DISCOVERY (on each LAN connection):
+
+  Phone broadcasts mDNS: "_aldrich._tcp.local" with TXT record:
+    deviceID=<uuid>, publicKeyHash=<hash>
+
+  Desktop sees the advertisement, verifies publicKeyHash matches
+  the paired device's key → establishes local TCP connection
+
+  If mDNS fails (corporate Wi-Fi with client isolation):
+    Fallback 1: BLE for small payloads directly
+    Fallback 2: WebRTC data channel via public STUN server
+    Fallback 3: Route through cloud (highest latency but always works)
+
+LOCAL COMMAND FLOW (phone instructs desktop):
+
+  Phone: "Open my notes for the 2 PM meeting"
+  → Local intent classification: "desktop action, low complexity"
+  → Skip cloud entirely
+  → Encrypt: AES-GCM(session_key, { action: "open_app",
+                                     app: "Notion",
+                                     context: "2PM meeting" })
+  → Send over local TCP to Desktop daemon
+  → Desktop daemon: AXUIElement opens Notion, searches for "2PM"
+  → Result sent back to phone via same local channel
+  → Total latency: ~30-80ms (vs. 400ms+ via cloud)
+```
+
+---
+
+### What Happens When Things Go Wrong
+
+The system must degrade gracefully, not catastrophically. Here is the failure matrix:
+
+```
+COMPONENT DOWN       │ IMPACT                  │ DEGRADED BEHAVIOR
+─────────────────────┼─────────────────────────┼──────────────────────────────
+Anthropic API        │ No complex reasoning     │ Gemini fallback → Gemma local
+                     │                         │ Simple tasks still work
+─────────────────────┼─────────────────────────┼──────────────────────────────
+Kafka                │ Memory ingestion queued  │ Direct DB write fallback
+                     │                         │ Slight memory lag acceptable
+─────────────────────┼─────────────────────────┼──────────────────────────────
+Redis                │ No circuit breaker,      │ In-memory counter fallback
+                     │ no session cache         │ Circuit breaker still fires
+                     │                         │ (local) but not broadcast
+─────────────────────┼─────────────────────────┼──────────────────────────────
+PostgreSQL           │ No memory retrieval,     │ READONLY mode: surface cached
+                     │ no action records        │ memories from device SQLite
+                     │                         │ No new actions until restored
+─────────────────────┼─────────────────────────┼──────────────────────────────
+Internet (phone)     │ No cloud reasoning       │ Local Gemma 2B for simple Q&A
+                     │                         │ Queue complex tasks for retry
+                     │                         │ P2P mesh still works locally
+─────────────────────┼─────────────────────────┼──────────────────────────────
+WebSocket connection │ No real-time push        │ Client polls every 30s (REST)
+                     │                         │ until WS reconnects (expo backoff)
+─────────────────────┼─────────────────────────┼──────────────────────────────
+OAuth token expired  │ Specific tool broken     │ Surface re-auth prompt for
+ or revoked          │                         │ that integration only; others
+                     │                         │ continue unaffected
+─────────────────────┼─────────────────────────┼──────────────────────────────
+Entire AWS region    │ Full service outage      │ Route53 DNS failover to
+                     │                         │ standby region (15 min RTO)
+```
+
+---
+
+### Summary: The Single Mental Model
+
+If you take away one thing from this overview, it is this:
+
+> **The client is the senses. The cloud is the brain. The wire is the nervous system. The safety layer is the immune system. They must work together, fail independently, and the user must always feel in control.**
+
+Every design decision in the five pillars that follow flows from this principle. The local processing exists because the brain should not need to see everything the senses perceive. The safety layer exists because the brain can be wrong and must be constrained. The SDUI push exists because the user is the final authority, not the AI.
+
+---
+
 ## PILLAR 1: The Memory Hub (Cognimemo vs. Hindsight)
 
 ### 1. Feasibility
