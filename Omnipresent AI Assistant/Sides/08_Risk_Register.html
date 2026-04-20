@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aldrich — Risk Register</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="deck">
+
+<section class="slide cover active">
+  <div class="deck-title">Aldrich · Deck 8 of 8</div>
+  <div class="eyebrow">Risk Register</div>
+  <h1>What could kill us — and what we'll do about it.</h1>
+  <p class="subtitle">25 risks across six categories. Each scored, owned, and paired with concrete triggers, mitigations, and contingency plans. Every critical risk is survivable with preparation.</p>
+  <div class="meta">Source: Risk_Register.md · v1.0</div>
+  <div class="slide-num">01</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">How to read this register</div>
+  <h2 class="title">Every risk has six fields.</h2>
+  <ul>
+    <li><strong>Likelihood</strong> — Very Low (&lt;5%) / Low (5–20%) / Medium (20–50%) / High (50–80%) / Very High (&gt;80%) over 18 months.</li>
+    <li><strong>Impact</strong> — Cosmetic / Minor / Major / Severe / Existential.</li>
+    <li><strong>Risk Score</strong> — qualitative likelihood × impact, reviewed monthly.</li>
+    <li><strong>Trigger</strong> — the observable signal that says it's happening now.</li>
+    <li><strong>Mitigation</strong> — prevention before the trigger fires.</li>
+    <li><strong>Contingency</strong> — response when the trigger fires.</li>
+    <li><strong>Owner</strong> — a named individual (by role), not a team.</li>
+  </ul>
+  <div class="slide-num">02</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risk dashboard — Critical risks (weekly review)</div>
+  <h2 class="title">Five Critical risks.</h2>
+  <table>
+    <tr><th>#</th><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Owner</th></tr>
+    <tr><td>1</td><td>iOS always-on listening blocked</td><td>Very High</td><td>Severe</td><td>CTO</td></tr>
+    <tr><td>2</td><td>LLM reliability at long chains (&lt;80%)</td><td>High</td><td>Severe</td><td>Head of AI</td></tr>
+    <tr><td>5</td><td>Runway exhaustion before PMF</td><td>Medium</td><td>Existential</td><td>CEO/CFO</td></tr>
+    <tr><td>6</td><td>Apple/Google ship first-party equivalent</td><td>High</td><td>Severe</td><td>CEO</td></tr>
+    <tr><td>7</td><td>First public trust incident</td><td>High</td><td>Severe</td><td>CEO + Safety</td></tr>
+    <tr><td>16</td><td>Data breach (memory leaked)</td><td>Low</td><td>Existential</td><td>Head of Security</td></tr>
+    <tr><td>17</td><td>Unable to raise Series A</td><td>Medium</td><td>Existential</td><td>CEO</td></tr>
+  </table>
+  <div class="slide-num">03</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="num">Category 1</div>
+  <h2>Platform &amp; distribution risks.</h2>
+  <p class="blurb">Aldrich lives inside two walled gardens controlled by Apple and Google.</p>
+  <div class="slide-num">04</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risk #1 — Platform · CRITICAL</div>
+  <h2 class="title">iOS always-on listening is not feasible.</h2>
+  <p><strong>Likelihood:</strong> Very High · <strong>Impact:</strong> Severe · <strong>Owner:</strong> CTO</p>
+  <p>iOS enforces orange mic indicator, kills background audio after short windows, requires foreground for any practical mic use. Any workaround is grounds for App Store rejection.</p>
+  <ul>
+    <li><strong>Mitigation.</strong> Reframe from "omnipresent" → "present on demand." Build around push-triggered moments: location arrival, calendar briefings, notification interception. On Android, exercise foreground service carefully — same "user feels in control" philosophy. Update every external piece of copy before V1.</li>
+    <li><strong>Contingency.</strong> Proactively correct any reviewer/investor under that misperception. With users: explain the OS constraint and demonstrate the alternative trigger-based design.</li>
+  </ul>
+  <div class="slide-num">05</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risk #3 — Platform · HIGH</div>
+  <h2 class="title">App Store / Play Store rejection during launch.</h2>
+  <p><strong>Likelihood:</strong> Medium (30–40% first submission) · <strong>Impact:</strong> Severe · <strong>Owner:</strong> CEO + CTO</p>
+  <ul>
+    <li><strong>Triggers.</strong> Guideline 2.5.1 (OS functionality), 4.0 (design), or 5.1.1 (privacy) cited. 14+ days in review. Apple/Google policy update implicating assistant apps.</li>
+    <li><strong>Mitigation.</strong> Pre-submission Apple Office Hours. Scope V1 to least-OS-intrusive feature set. No private APIs. Pair every permission request with plain-English in-app explanation. Use Apple's own Intents/Shortcuts. Attach 2-min screen recording.</li>
+    <li><strong>Contingency.</strong> Day 1: read rejection carefully, don't re-submit. Day 2: appeal or fix. Day 3–5: minimum change + detailed explanation. Two same-grounds rejections → request live call. Three → pivot feature out of V1, ship without it.</li>
+  </ul>
+  <div class="slide-num">06</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risk #6 — Platform · CRITICAL</div>
+  <h2 class="title">Apple or Google ships a first-party equivalent.</h2>
+  <p><strong>Likelihood:</strong> High (60–80% over 24 months) · <strong>Impact:</strong> Severe · <strong>Owner:</strong> CEO</p>
+  <ul>
+    <li><strong>Triggers.</strong> WWDC / Google I/O announcements of personal agents, cross-app memory, proactive suggestions. Multi-step Siri demos. Public on-device LLM models for developers.</li>
+    <li><strong>Mitigation.</strong> Build where platforms <em>won't</em> — cross-platform, non-native integrations (Notion, Slack, Linear, Airtable, Jira). Own "your data, your agent, not Apple's." Integrate with OS primitives where available. Maintain a 6-month feature runway ahead of incumbents on proactive behavior. Build B2B/prosumer use cases.</li>
+    <li><strong>Contingency.</strong> Same week of announcement: blog post on the difference. Email blast to existing users. Board within 2 weeks. If feature overlap &gt;60% → pivot to narrower wedge (B2B or specific vertical).</li>
+  </ul>
+  <div class="slide-num">07</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risk #14 — Platform · HIGH</div>
+  <h2 class="title">iOS Shortcuts / App Intents deprecated or throttled.</h2>
+  <p><strong>Likelihood:</strong> Low (10–20%) · <strong>Impact:</strong> Severe · <strong>Owner:</strong> CTO</p>
+  <ul>
+    <li><strong>Triggers.</strong> Deprecation in iOS release notes. Rate limits on Shortcuts execution. App Intents API surface shrinks.</li>
+    <li><strong>Mitigation.</strong> Don't rely on a single automation path — every cross-app action has a fallback (Shortcut → native SDK → web/API → manual). Maintain a swappable ActionAdapter abstraction. Be visible in Apple's developer program.</li>
+    <li><strong>Contingency.</strong> Pivot affected features to next-best path. Communicate transparently. Accelerate web/desktop surface if iOS becomes too hostile.</li>
+  </ul>
+  <div class="slide-num">08</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="num">Category 2</div>
+  <h2>AI &amp; product reliability risks.</h2>
+  <p class="blurb">LLMs are probabilistic. They will fail. The system has to be safe anyway.</p>
+  <div class="slide-num">09</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risk #2 — AI · CRITICAL</div>
+  <h2 class="title">LLM reliability at long tool chains (&lt;80%).</h2>
+  <p><strong>Likelihood:</strong> High (60–70% if we attempt long chains) · <strong>Impact:</strong> Severe · <strong>Owner:</strong> Head of AI</p>
+  <p>97% per-step success → 8-step chain ~22% failure end-to-end. No user trusts that twice.</p>
+  <ul>
+    <li><strong>Mitigation.</strong> Cap V1 chain depth at 3 without explicit approval. Approval gate on every non-reversible action. Classifier routes deterministic intents to traditional code; reasoning to LLM. Retry with decay. 200+ realistic eval set, run weekly. Circuit breaker on 3 user-visible errors per session.</li>
+    <li><strong>Contingency.</strong> Tighten approval gates (promote optional → mandatory). Reduce chain depth cap globally; communicate as "quality improvement." Invest in a planner→critic model.</li>
+  </ul>
+  <div class="slide-num">10</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risk #4 — AI · HIGH</div>
+  <h2 class="title">Prompt injection / jailbreak in production.</h2>
+  <p><strong>Likelihood:</strong> High (70%+ attempts; varies success) · <strong>Impact:</strong> Major to Severe · <strong>Owner:</strong> Head of Security</p>
+  <ul>
+    <li><strong>Mitigation (defense in depth).</strong> Content-role separation — external content wrapped in "untrusted" tags. First-pass classifier flags imperatives. Hard-coded allowlist of destructive actions (separate non-LLM policy engine). Biometric gate for high-trust. Memory-write requires explicit user tap. Continuous red team + bug bounty within 6 months. 30-day undo stack.</li>
+    <li><strong>Contingency.</strong> Hour 1: kill switch on the action class. Hour 2–24: incident response, notify affected, log, estimate blast radius. 24–72h: public postmortem. Add vector to eval harness.</li>
+  </ul>
+  <div class="slide-num">11</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risk #13 — AI · HIGH</div>
+  <h2 class="title">Memory drift &amp; contradiction accumulation.</h2>
+  <p><strong>Likelihood:</strong> High (70%+ over 18 months) · <strong>Impact:</strong> Major · <strong>Owner:</strong> Head of AI</p>
+  <p>Long-tenured users accumulate contradictions: old job, closed coffee shop, wrong birthday. Retrieval quality degrades — the assistant feels dumb precisely for the highest-value users.</p>
+  <ul>
+    <li><strong>Mitigation.</strong> Fact provenance (source, timestamp, user-confirmation). Recency bias in retrieval. Background contradiction detector → surface to user. Monthly memory review UI. Forgetting curve. User-pinnable "canonical" memories.</li>
+    <li><strong>Contingency.</strong> User-facing memory cleanup flow. Emergency retrieval-weight adjustment. Long-term: structured schema for high-value entities (employer, location, spouse, routines) with explicit "current" vs "historical" fields.</li>
+  </ul>
+  <div class="slide-num">12</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risks #15 + #24 — AI · HIGH / HIGH</div>
+  <h2 class="title">Over-automation backlash. On-device LLM quality plateau.</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>#15 — Over-automation</h3>
+      <p>Users say they want automation; the product can cross a line. "Why did you just send that?" is a churn moment.</p>
+      <p><strong>Mitigation:</strong> Default to suggest, not act. Transparent logs. Dial of control (Ask everything → Money/people only → Low-stakes trust → Full autopilot). Default = middle. Celebration of restraint.</p>
+    </div>
+    <div class="col">
+      <h3>#24 — On-device plateau</h3>
+      <p>If small models stall &lt;15% below cloud, we either pay cloud costs for everything (bad UE) or ship a worse experience.</p>
+      <p><strong>Mitigation:</strong> Router scopes on-device to well-defined tasks. Reasoning + generation stays on cloud. Quarterly evals of new on-device models (Phi, Llama-small, Gemma variants).</p>
+    </div>
+  </div>
+  <div class="slide-num">13</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="num">Category 3</div>
+  <h2>Financial risks.</h2>
+  <p class="blurb">Three risks that can take the company off the table.</p>
+  <div class="slide-num">14</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risk #5 — Financial · CRITICAL</div>
+  <h2 class="title">Runway exhaustion before PMF.</h2>
+  <p><strong>Likelihood:</strong> Medium (30–40%) · <strong>Impact:</strong> Existential · <strong>Owner:</strong> CEO/CFO</p>
+  <ul>
+    <li><strong>Triggers.</strong> Cash runway &lt;9 months. Burn multiple (net burn ÷ net new ARR) &gt;3×. Past M9 with no term sheet.</li>
+    <li><strong>Mitigation.</strong> Raise $4M, plan $3M, spend $2.5M (25% buffer). Monthly burn discipline with hard +10% variance stop. Milestone-gated hires. Revenue-generating beta at M6 not M12. Stage the fundraise.</li>
+    <li><strong>Contingency.</strong> 9mo runway: freeze hiring, cut discretionary, accelerate raise. 6mo: layoffs of non-essentials, cash-generating features. 3mo: bridge or down-round; consider acquihire in parallel. 1mo: notify board, avoid bad deals under duress.</li>
+  </ul>
+  <div class="slide-num">15</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risk #10 — Financial · HIGH</div>
+  <h2 class="title">LLM unit economics inversion.</h2>
+  <p><strong>Likelihood:</strong> Medium (30%) · <strong>Impact:</strong> Severe · <strong>Owner:</strong> CFO/CTO</p>
+  <ul>
+    <li><strong>Triggers.</strong> Avg LLM cost/user &gt; $5/mo. Power-user (top 5%) &gt; $25/mo. Anthropic announces &gt;20% price change.</li>
+    <li><strong>Mitigation.</strong> Multi-provider (Claude/GPT/open-source via Bedrock). Aggressive caching for deterministic sub-responses. Token-budget enforcement: Free 10K/day, Pro 100K, Power 300K. Volume-tier contracts with advance-notice clauses.</li>
+    <li><strong>Contingency.</strong> Increase Free rate limits → nudge to paid. Raise prices with 60-day notice as "investment in quality." Accelerate on-device handling.</li>
+  </ul>
+  <div class="slide-num">16</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risks #17 + #11 — Financial · CRITICAL / HIGH</div>
+  <h2 class="title">Series A unraisable. Weak paid conversion.</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>#17 — Can't raise A</h3>
+      <p><strong>Existential.</strong> No term sheets 6 weeks in. Investor feedback clusters around retention, conversion, LTV gap.</p>
+      <p><strong>Mitigation:</strong> Retention-first product (D1, D7, D30 healthy before raising). Cohort-over-cohort LTV:CAC story. CEO maintains quarterly updates with ~25 Series A investors from seed close.</p>
+      <p><strong>Contingency:</strong> Bridge from existing investors. Pivot to efficient GTM (B2B). Smaller A at lower valuation rather than no A. Worst case: lifestyle business at $5–10M ARR.</p>
+    </div>
+    <div class="col">
+      <h3>#11 — Weak conversion</h3>
+      <p><strong>Severe.</strong> Trial→paid &lt;15% after 30 days. NPS high but conversion low = "love it but wouldn't pay."</p>
+      <p><strong>Mitigation:</strong> A/B price points ($8/$15/$25/$35) in first 1K cohort. Anchor upgrade prompts to pain-moments. Annual discount. Team plans. Feature-gated premium.</p>
+      <p><strong>Contingency:</strong> Re-test pricing $10/$25. "Pay what you think" tier for learning. Pivot to B2B where WTP is higher.</p>
+    </div>
+  </div>
+  <div class="slide-num">17</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="num">Category 4</div>
+  <h2>Trust, security &amp; regulatory risks.</h2>
+  <p class="blurb">The category most likely to trigger an existential moment.</p>
+  <div class="slide-num">18</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risk #7 — Trust · CRITICAL</div>
+  <h2 class="title">First public trust incident.</h2>
+  <p><strong>Likelihood:</strong> High (80%+ over 18 months — something will go wrong publicly) · <strong>Impact:</strong> Severe if mishandled, Minor if handled well · <strong>Owner:</strong> CEO + Head of Safety</p>
+  <ul>
+    <li><strong>Mitigation.</strong> Pre-written incident playbooks, owners defined, comms drafted. Transparency by default — every action logged, user-visible, reversible. "Restraint over reach" PRD principle: every PRD asks "what's the worst this can do?" User pre-flight on risky actions makes incidents easier to explain ("user approved").</li>
+    <li><strong>Contingency.</strong> Hour 1: acknowledge to affected user. Hour 2: incident channel (CEO, Safety, CX, Comms). Hour 4: decision on user-base-wide comms (default yes). Day 1: public postmortem if &gt;100 users or &gt;1 tweet. Day 3: product fix deployed. Day 7: all affected users contacted with explanation + remedy.</li>
+  </ul>
+  <div class="slide-num">19</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risk #16 — Security · CRITICAL</div>
+  <h2 class="title">Data breach (memory leaked).</h2>
+  <p><strong>Likelihood:</strong> Low (5–10% over 24 months) · <strong>Impact:</strong> Existential · <strong>Owner:</strong> Head of Security</p>
+  <p>Aldrich's memory contains the most sensitive data a user has. A breach isn't 500M credentials on HIBP — it's "your life story is on 4chan."</p>
+  <ul>
+    <li><strong>Mitigation.</strong> Encryption at rest + in transit (non-negotiable). Per-user encryption keys held in user-controlled keychain. Least-privilege access internally — no engineer touches raw memory except via audited break-glass. SOC 2 Type II within 12 months; ISO 27001 within 24. Quarterly external pentest. Bug bounty before 10K paying users. Zero-knowledge for sensitive memory classes by Year 2.</li>
+    <li><strong>Contingency.</strong> H 0–2: containment. H 2–12: scope assessment. H 12–72: GDPR/CCPA notifications (72h SLA). Week 1: public + individual disclosure. Offer credit monitoring, consider lifetime free service for affected users.</li>
+  </ul>
+  <div class="slide-num">20</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risks #8, #18, #23 — Regulatory + Legal</div>
+  <h2 class="title">GDPR/EU AI Act. IP litigation. Forced regulated-AI status.</h2>
+  <ul>
+    <li><strong>#8 — GDPR / CCPA / EU AI Act violation (Medium / Major-to-Severe).</strong> DSR can't be fulfilled in 30 days; user complaint to a regulator. <strong>Mitigation:</strong> privacy by design, ROPA, in-app DSR self-serve, DPIA pre-launch, DPO/external counsel from Day 1, AI Act compliance map. Owner: Legal counsel.</li>
+    <li><strong>#18 — IP litigation, patent troll or incumbent (Low / Major).</strong> <strong>Mitigation:</strong> legal review of key interactions pre-launch, file defensive patents, join LOT/OIN, IP litigation insurance as scale grows. Owner: Legal counsel.</li>
+    <li><strong>#23 — Forced regulated-AI service status (Low / Severe).</strong> Higher if we expand into health/finance. <strong>Mitigation:</strong> scope discipline — Aldrich is not a medical/legal/financial advisor; route those intents to "ask a professional." Geo-gate advisory features out of EU until conformity is achieved.</li>
+  </ul>
+  <div class="slide-num">21</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="num">Category 5</div>
+  <h2>Operational risks.</h2>
+  <p class="blurb">The risks that don't kill us — but slowly bleed us.</p>
+  <div class="slide-num">22</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risks #9, #19, #25 — Integrations, Vendor, Support</div>
+  <h2 class="title">API breakage. Anthropic lock-in. Support load.</h2>
+  <ul>
+    <li><strong>#9 — API integration breakage cascade (Very High / Minor each, Major cumulative).</strong> Synthetic test calls every 15 min per integration. Versioned adapters spun up side-by-side. Graceful degradation ("Can't reach Gmail right now — retry?"). V1 limits to top-10 services.</li>
+    <li><strong>#19 — Vendor lock-in / Anthropic pricing (Medium / Major).</strong> Provider abstraction layer — model swap is config-only. Shadow-test 10% of traffic on backup provider continuously. Volume-tier contracts with notice periods. Diversify intent classification to cheaper open models from day one.</li>
+    <li><strong>#25 — Support load explodes (High / Minor each, Major cumulative).</strong> In-app "explain that action" button reduces tickets. Self-service memory + action logs. Tiered: AI-first → human-second → premium response for Power. Content + docs preempt common Qs.</li>
+  </ul>
+  <div class="slide-num">23</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risks #12 + #20 — People</div>
+  <h2 class="title">Key-person dependency. AI-talent shortage.</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>#12 — Key person leaves</h3>
+      <p><strong>Medium / Major.</strong> Triggers: sole owner of a critical system, single on-call without backup, visible burnout.</p>
+      <p><strong>Mitigation:</strong> Pair programming + knowledge shares. Runbooks for every key task. 4-yr vesting w/ cliff, accelerated on change of control. Cross-training rotation. Bench depth: 2+ engineers per critical system within 6 months.</p>
+    </div>
+    <div class="col">
+      <h3>#20 — Can't hire AI talent</h3>
+      <p><strong>Medium / Major.</strong> Senior AI engineers in extreme demand; can't compete on FAANG comp.</p>
+      <p><strong>Mitigation:</strong> Mission + equity story (consumer AI is preferred by mission-driven engineers). 0.5–2% equity for strong early hires. Remote-friendly global hiring. CEO spends 30% of Year-1 time recruiting.</p>
+    </div>
+  </div>
+  <div class="slide-num">24</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="num">Category 6</div>
+  <h2>Competitive &amp; market risks.</h2>
+  <p class="blurb">Bundling, undercutting, and a UX bet that could miss.</p>
+  <div class="slide-num">25</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Risks #6/#22 + #21</div>
+  <h2 class="title">Incumbent bundling. Voice-first UX rejection.</h2>
+  <ul>
+    <li><strong>#22 — Incumbent bundles or matches (High / Major-to-Severe).</strong> Apple/Google/Microsoft/OpenAI bundle a personal assistant into existing products that undercuts our paid price. <strong>Mitigation:</strong> Compete on neutrality. Cross-platform across iOS, Android, Mac, Windows, web. Memory sovereignty narrative. Build a loyal community that prefers us for identity reasons.</li>
+    <li><strong>#21 — Voice-first UX rejection (Low / Major).</strong> Users may prefer text/tap, especially in public, at work, in households. <strong>Mitigation:</strong> Multi-modal from day one — voice, text, tap, generative UI all primary. Default sensibly per context (calendar = tap; walking = voice). Re-weight UX toward text/visual if voice usage &lt;30% of sessions after Month 3.</li>
+  </ul>
+  <div class="slide-num">26</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="num">Process</div>
+  <h2>How we review this register.</h2>
+  <p class="blurb">Monthly. Quarterly. Annual.</p>
+  <div class="slide-num">27</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">Review cadence</div>
+  <h2 class="title">Three rituals — none of them optional.</h2>
+  <ul>
+    <li><strong>Monthly review.</strong> Exec team reviews dashboard at month-start. Any risk with score change is discussed. Triggers fired in prior month → contingency post-mortem. New risks added; outdated archived. Update version, circulate to board.</li>
+    <li><strong>Quarterly deep-dive.</strong> Pick the three highest-score risks. 60-min team session: "If this fires next month, what's our actual response?" Stress-test the contingency.</li>
+    <li><strong>Annual register re-baseline.</strong> Board process — zero-based recreate. Don't just edit last year's. Compare to catch what we've unconsciously dropped.</li>
+  </ul>
+  <div class="slide-num">28</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Risk Register</div>
+  <div class="kicker">The five risks most likely to kill Aldrich</div>
+  <h2 class="title">Weighted by likelihood × impact, adjusted for manageability.</h2>
+  <ol style="list-style:none;counter-reset:k;margin:1.2rem 0;max-width:980px">
+    <li style="counter-increment:k;position:relative;padding-left:2.4rem;font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--ink-soft);margin-bottom:1rem">
+      <span style="position:absolute;left:0;top:0;font-family:var(--mono);font-size:18px;color:var(--accent);font-weight:600">1</span>
+      <strong>Runway exhaustion before PMF (#5).</strong> Mitigated by disciplined burn and early revenue milestones.
+    </li>
+    <li style="counter-increment:k;position:relative;padding-left:2.4rem;font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--ink-soft);margin-bottom:1rem">
+      <span style="position:absolute;left:0;top:0;font-family:var(--mono);font-size:18px;color:var(--accent);font-weight:600">2</span>
+      <strong>First public trust incident (#7).</strong> Mitigated by design principles and response playbook.
+    </li>
+    <li style="counter-increment:k;position:relative;padding-left:2.4rem;font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--ink-soft);margin-bottom:1rem">
+      <span style="position:absolute;left:0;top:0;font-family:var(--mono);font-size:18px;color:var(--accent);font-weight:600">3</span>
+      <strong>LLM reliability at long chains (#2).</strong> Mitigated by scope cap, approval gates, eval harness.
+    </li>
+    <li style="counter-increment:k;position:relative;padding-left:2.4rem;font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--ink-soft);margin-bottom:1rem">
+      <span style="position:absolute;left:0;top:0;font-family:var(--mono);font-size:18px;color:var(--accent);font-weight:600">4</span>
+      <strong>Apple/Google ship a competing feature (#6).</strong> Mitigated by cross-platform + memory sovereignty moat.
+    </li>
+    <li style="counter-increment:k;position:relative;padding-left:2.4rem;font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--ink-soft);margin-bottom:1rem">
+      <span style="position:absolute;left:0;top:0;font-family:var(--mono);font-size:18px;color:var(--accent);font-weight:600">5</span>
+      <strong>Prompt injection in production (#4).</strong> Mitigated by defense-in-depth, undo stack, circuit breaker.
+    </li>
+  </ol>
+  <div class="slide-num">29</div>
+</section>
+
+<section class="slide closing">
+  <div class="end">End of Deck 8</div>
+  <h2>Every critical risk is survivable with preparation. What isn't survivable is ignoring them.</h2>
+  <p style="font-size:18px;color:var(--ink-soft);max-width:780px;line-height:1.55">The discipline of this register is to keep risks visible even when they feel abstract — so that when the trigger fires, we already know what to do.</p>
+  <div class="nav-hint">← / → to navigate · <a href="index.html" style="color:var(--accent);text-decoration:none">Back to index</a> · You've reached the end of the deck set.</div>
+  <div class="slide-num">30</div>
+</section>
+
+</div>
+
+<!-- Glossary modal -->
+<div class="glossary-modal" id="glossary-modal">
+  <div class="glossary-box">
+    <h2>Glossary</h2>
+    <p class="sub">Abbreviations used across the Aldrich deck set. Press Esc or click outside to close. Keyboard: G to open.</p>
+    <dl>
+      <dt>ADR</dt><dd>Architecture Decision Record.</dd>
+      <dt>ANE</dt><dd>Apple Neural Engine (on-device ML accelerator).</dd>
+      <dt>API</dt><dd>Application Programming Interface.</dd>
+      <dt>ARR / MRR</dt><dd>Annual / Monthly Recurring Revenue.</dd>
+      <dt>ARPU</dt><dd>Average Revenue Per User.</dd>
+      <dt>AWS</dt><dd>Amazon Web Services.</dd>
+      <dt>BIPA</dt><dd>Biometric Information Privacy Act (Illinois).</dd>
+      <dt>CAC</dt><dd>Customer Acquisition Cost.</dd>
+      <dt>CCPA</dt><dd>California Consumer Privacy Act.</dd>
+      <dt>CDN</dt><dd>Content Delivery Network.</dd>
+      <dt>CEO / CTO</dt><dd>Chief Executive / Technology Officer.</dd>
+      <dt>COGS</dt><dd>Cost of Goods Sold.</dd>
+      <dt>CoS</dt><dd>Chief of Staff.</dd>
+      <dt>CRDT</dt><dd>Conflict-free Replicated Data Type (multi-device sync).</dd>
+      <dt>CX</dt><dd>Customer Experience (support function).</dd>
+      <dt>DPA</dt><dd>Data Processing Agreement with vendors.</dd>
+      <dt>DPIA</dt><dd>Data Protection Impact Assessment (GDPR).</dd>
+      <dt>DPO</dt><dd>Data Protection Officer (GDPR role).</dd>
+      <dt>DSR</dt><dd>Data Subject Request (GDPR access/delete request).</dd>
+      <dt>EA</dt><dd>Executive Assistant.</dd>
+      <dt>EU AI Act</dt><dd>European Union Artificial Intelligence Act.</dd>
+      <dt>FL</dt><dd>Fully Loaded — base salary + ~30% for benefits, equipment, payroll tax.</dd>
+      <dt>FSM</dt><dd>Finite State Machine.</dd>
+      <dt>FTE</dt><dd>Full-Time Equivalent.</dd>
+      <dt>GA</dt><dd>General Availability (public launch).</dd>
+      <dt>GDPR</dt><dd>General Data Protection Regulation (EU privacy law).</dd>
+      <dt>GTM</dt><dd>Go-to-Market plan.</dd>
+      <dt>HIBP</dt><dd>Have I Been Pwned (public breach-data service).</dd>
+      <dt>HN</dt><dd>Hacker News (launch channel).</dd>
+      <dt>IC</dt><dd>Individual Contributor (non-management role).</dd>
+      <dt>IP</dt><dd>Intellectual Property.</dd>
+      <dt>JTBD</dt><dd>Jobs To Be Done (framework).</dd>
+      <dt>KMS</dt><dd>Key Management Service (encryption-key storage).</dd>
+      <dt>LLM</dt><dd>Large Language Model (Claude, GPT-4, Gemini).</dd>
+      <dt>LTV</dt><dd>Lifetime Value — total gross profit per customer.</dd>
+      <dt>M365</dt><dd>Microsoft 365.</dd>
+      <dt>MSK</dt><dd>Managed Streaming for Kafka (AWS).</dd>
+      <dt>MTTR</dt><dd>Mean Time To Recovery.</dd>
+      <dt>MVP</dt><dd>Minimum Viable Product.</dd>
+      <dt>NPS</dt><dd>Net Promoter Score.</dd>
+      <dt>NPU</dt><dd>Neural Processing Unit (Android equivalent of ANE).</dd>
+      <dt>OAuth</dt><dd>Open Authorization — standard for third-party app access.</dd>
+      <dt>P0 / P99</dt><dd>Priority 0 (critical bug) / 99th percentile latency.</dd>
+      <dt>PH</dt><dd>Product Hunt (launch channel).</dd>
+      <dt>PII</dt><dd>Personally Identifiable Information.</dd>
+      <dt>PKM</dt><dd>Personal Knowledge Management (Mem, Reflect, etc.).</dd>
+      <dt>PKR / USD</dt><dd>Pakistani Rupee / US Dollar. 1 USD ≈ 285 PKR (2026 approx).</dd>
+      <dt>PMF</dt><dd>Product-Market Fit.</dd>
+      <dt>PRD</dt><dd>Product Requirements Document.</dd>
+      <dt>RDS</dt><dd>Relational Database Service (AWS).</dd>
+      <dt>ReAct</dt><dd>Reasoning + Acting — interleaved reasoning and tool-call pattern for LLM agents.</dd>
+      <dt>ROPA</dt><dd>Record of Processing Activities (GDPR).</dd>
+      <dt>SaaS</dt><dd>Software as a Service.</dd>
+      <dt>SAM / SOM / TAM</dt><dd>Serviceable Addressable / Serviceable Obtainable / Total Addressable Market.</dd>
+      <dt>SCIM</dt><dd>System for Cross-domain Identity Management (enterprise user provisioning).</dd>
+      <dt>SDK</dt><dd>Software Development Kit.</dd>
+      <dt>SDUI</dt><dd>Server-Driven UI — UI described by server JSON, rendered client-side.</dd>
+      <dt>SEO</dt><dd>Search Engine Optimization.</dd>
+      <dt>SEV</dt><dd>Severity (SEV-1 = critical, SEV-3 = minor).</dd>
+      <dt>SLA</dt><dd>Service Level Agreement.</dd>
+      <dt>SMB</dt><dd>Small and Medium Business.</dd>
+      <dt>SOC 2</dt><dd>Service Organization Control 2 (enterprise security compliance).</dd>
+      <dt>SSO</dt><dd>Single Sign-On.</dd>
+      <dt>T&amp;S</dt><dd>Trust &amp; Safety team.</dd>
+      <dt>ToS</dt><dd>Terms of Service.</dd>
+      <dt>TTFT</dt><dd>Time To First Token (LLM latency).</dd>
+      <dt>UDP</dt><dd>User Datagram Protocol.</dd>
+      <dt>UI / UX</dt><dd>User Interface / User Experience.</dd>
+      <dt>VA</dt><dd>Virtual Assistant (human or AI).</dd>
+      <dt>VAD</dt><dd>Voice Activity Detection.</dd>
+      <dt>VIP</dt><dd>Very Important Person (user-designated priority contact).</dd>
+      <dt>WCAG</dt><dd>Web Content Accessibility Guidelines.</dd>
+      <dt>WTP</dt><dd>Willingness To Pay.</dd>
+      <dt>WWDC</dt><dd>Apple Worldwide Developers Conference.</dd>
+    </dl>
+  </div>
+  <button class="glossary-close" id="glossary-close" aria-label="Close glossary">×</button>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="nav">
+  <button id="glossary-btn" class="nav-glossary" title="Glossary (G)">?</button>
+  <button id="home" class="nav-home" title="First slide (Home)">⌂</button>
+  <button id="to-index" class="nav-index" title="Back to index (I)">≡</button>
+  <button id="prev" title="Previous (←)">‹</button>
+  <button id="next" title="Next (→)">›</button>
+</div>
+<script src="nav.js"></script>
+</body>
+</html>

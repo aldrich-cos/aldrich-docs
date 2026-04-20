@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aldrich — Idea Validation</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="deck">
+
+<section class="slide cover active">
+  <div class="deck-title">Aldrich · Deck 1 of 8</div>
+  <div class="eyebrow">Idea Validation</div>
+  <h1>An honest reality check.</h1>
+  <p class="subtitle">A skeptical, evidence-based evaluation of whether Aldrich should actually be built — designed to challenge the plan, not flatter it.</p>
+  <div class="meta">Source: Idea_Validation.md · 14 sections</div>
+  <div class="slide-num">01</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">The bottom line, stated up front</div>
+  <h2 class="title">A valid idea — partially delusional in its current scope.</h2>
+  <p class="lede">The hyper-useful proactive personal assistant idea is real and worth building. But three of the load-bearing promises of the "omnipresent, always-on, cross-device, agentic AI chief-of-staff" vision cannot be delivered on iOS in 2026 as described.</p>
+  <ul>
+    <li><strong>Buildable in 8–12 months:</strong> a ruthlessly scoped, push-to-listen, approval-gated MVP — Android-first or desktop-first.</li>
+    <li><strong>Everything else is a 2–4 year story</strong> that depends on platform concessions you do not control.</li>
+  </ul>
+  <div class="slide-num">02</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 1 — The 11 claims being validated</div>
+  <h2 class="title">The plan makes 11 high-confidence claims. Here are the verdicts.</h2>
+  <table>
+    <tr><th>#</th><th>Claim</th><th>Verdict</th></tr>
+    <tr><td>1</td><td>Proactive AI assistant is a payable category</td><td><strong>Probably true</strong></td></tr>
+    <tr><td>2</td><td>No product fills proactive + memory + agency quadrant</td><td><strong>Mostly true</strong></td></tr>
+    <tr><td>3</td><td>Window is 2025–2027 before Apple/Google close it</td><td>Overstated</td></tr>
+    <tr><td>4</td><td>iOS + Android + desktop + wearable in V1</td><td><strong>False</strong></td></tr>
+    <tr><td>5</td><td>On-device LLMs make privacy-first viable</td><td>True for tier-1 only</td></tr>
+    <tr><td>6</td><td>180M SAM → 900K paying in 3 years</td><td>~25–40% achievable</td></tr>
+    <tr><td>7</td><td>Memory creates defensible switching costs</td><td>True, but takes 6+ months</td></tr>
+    <tr><td>8</td><td>Gross margin 82–90% after LLM</td><td>True for light, false for heavy</td></tr>
+    <tr><td>9</td><td>Apple/Google can't copy in 12 months</td><td>True technically, irrelevant commercially</td></tr>
+    <tr><td>10</td><td>$18/mo supports unit economics</td><td>Marginal</td></tr>
+    <tr><td>11</td><td>4-person team ships V1 in 8 months</td><td>Optimistic by ~40%</td></tr>
+  </table>
+  <div class="slide-num">03</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 2 — Problem validation</div>
+  <h2 class="title">The problem is real. The solution has more risk than the plan admits.</h2>
+  <p>Knowledge workers switch apps ~1,200 times a day and spend ~28% of the workweek on email. Even if those numbers are off by 30%, the underlying truth stands: knowledge work is drowning in coordination overhead and existing AI is shallow.</p>
+  <div class="cols">
+    <div class="col">
+      <h3>What's validated</h3>
+      <ul>
+        <li>People are frustrated with their tools.</li>
+        <li>People pay for ChatGPT Plus and Notion AI at scale.</li>
+        <li>Willingness-to-pay curve exists.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>What's riskier</h3>
+      <ul>
+        <li>Users want <strong>agency, not autonomy</strong> — set me up to act fast.</li>
+        <li>Trust decays sharply after one wrong action.</li>
+        <li>Stated preference for autonomy &gt; revealed preference.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-num">04</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 2 — Positioning risk</div>
+  <h2 class="title">The "Chief of Staff" analogy is doing too much work.</h2>
+  <p class="lede">Only ~0.5% of the SAM has ever had a human chief of staff. Most users don't know what to delegate because they've never delegated.</p>
+  <p>The aha moment ("the AI catches a calendar conflict you would have missed") is real — but it's more accurately described as <strong>a very good assistant</strong>, not a chief of staff. A CoS metaphor sets expectations the product will disappoint.</p>
+  <div class="verdict warn">
+    <div class="label">Recommendation</div>
+    <p>Run 20 paid user interviews before finalizing the trust-progression UX, not after.</p>
+  </div>
+  <div class="slide-num">05</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="num">Section 3</div>
+  <h2>Technical Feasibility</h2>
+  <p class="blurb">Where the plan is honest, where it quietly overstates, and where it's fine but fragile.</p>
+  <div class="slide-num">06</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 3a — Where the plan is honest</div>
+  <h2 class="title">Several core architectural calls are correct.</h2>
+  <ul>
+    <li><strong>iOS background audio is impossible.</strong> The plan correctly marks this a dealbreaker.</li>
+    <li><strong>Circuit breaker, undo stack, biometric gate</strong> are all buildable and well-scoped. Safety-first is the right call.</li>
+    <li><strong>On-device Gemma 2B</strong> for intent routing on tier-1 devices is realistic. 180ms TTFT on Apple Neural Engine is plausible.</li>
+    <li><strong>200k context + memory retrieval</strong> (pgvector → Hindsight) is plausible — numbers match published HNSW benchmarks.</li>
+    <li><strong>21.7% failure at 8 ReAct steps</strong> is the right order of magnitude. Most pitches hide this.</li>
+  </ul>
+  <div class="slide-num">07</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 3b — Where the plan quietly overstates</div>
+  <h2 class="title">Four areas where the spec is more optimistic than it admits.</h2>
+  <ul>
+    <li><strong>Cross-device continuity</strong> is 2 years of work, not a V1.5 feature. Last-write-wins produces 2–5% session collisions — a weekly trust-destroying event per user.</li>
+    <li><strong>Dynamic API ingestion</strong> is dismissed as V2 — it's actually V3+. ~30 of top-50 tools have correct OpenAPI specs. 5 V1 integrations = ~20 person-weeks.</li>
+    <li><strong>Always-on Android audio</strong> is feasible but commercially risky: persistent notification alarms users; Samsung/Xiaomi kill it on ~40% of devices; ~5–8% daily battery hit.</li>
+    <li><strong>Prompt injection</strong> is not solved. Llama Guard catches ~85% of known categories. The remaining 15% is where the real attacks live.</li>
+  </ul>
+  <div class="slide-num">08</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 3 — Verdict</div>
+  <h2 class="title">V1 is buildable. The vision is not.</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>V1 (descoped)</h3>
+      <p class="bignum good">~75%</p>
+      <p>likely to ship in 12 months — push-to-listen, cloud-ReAct, mobile-only, 5 integrations, approval-gated.</p>
+    </div>
+    <div class="col">
+      <h3>The full vision</h3>
+      <p class="bignum bad">~20%</p>
+      <p>likely to ship in 3 years at acceptable quality. Treat as 5-year horizon, not a 2-year roadmap.</p>
+    </div>
+  </div>
+  <div class="slide-num">09</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="num">Section 4</div>
+  <h2>Market Reality vs. Market Claims</h2>
+  <p class="blurb">Three different TAMs are conflated in the plan. Here's the honest one.</p>
+  <div class="slide-num">10</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 4 — Market sizing</div>
+  <h2 class="title">Pick one TAM. Stop conflating.</h2>
+  <div class="stats">
+    <div class="stat"><div class="num">~30M</div><div class="label">ChatGPT Plus paying subs at $20/mo — the real ceiling for consumer AI paid adoption today</div></div>
+    <div class="stat"><div class="num">1.5M</div><div class="label">5% of ChatGPT Plus = ~$324M ARR — realistic SOM over 3–4 years</div></div>
+    <div class="stat"><div class="num">~300K</div><div class="label">2% of heavy SaaS users globally over 3 years = $65M ARR</div></div>
+  </div>
+  <p style="margin-top:1.8rem">The plan's <strong>900K paying / $194M ARR in year 3</strong> is the high end. Reasonable if everything goes right — not a base case. Plan for $20M–$65M ARR; treat $194M as upside.</p>
+  <div class="slide-num">11</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 4 — Window narrative</div>
+  <h2 class="title">"The window closes in 2 years" is overstated.</h2>
+  <p>Platform giants ship mediocre default versions; focused startups capture the premium segment that cares.</p>
+  <ul>
+    <li><strong>Evernote</strong> survived Apple Notes, Google Keep, and OneNote for 10+ years.</li>
+    <li><strong>Superhuman</strong> survived Gmail's inline AI for 5+ years on a premium tier.</li>
+    <li><strong>Notion</strong> out-executed Microsoft, Google, and Atlassian for 6+ years.</li>
+    <li><strong>Linear</strong> took share from Jira despite Atlassian's incumbency.</li>
+  </ul>
+  <div class="verdict">
+    <div class="label">Real watch list</div>
+    <p>Not Apple/Google. Watch Glean, Rewind 2.0, Granola, MultiOn, Lindy, and OpenAI's "ChatGPT for desktop" — the focused fast-followers.</p>
+  </div>
+  <div class="slide-num">12</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 5 — Competitive landscape</div>
+  <h2 class="title">The biggest threat isn't a competitor. It's commoditization.</h2>
+  <p class="lede">The single most likely way Aldrich dies: <strong>no single competitor wins, but every tool ships its own AI layer</strong> (Slack AI, Notion AI, Gmail AI, Linear AI), and the user never feels the cross-tool pain sharply enough to pay $18/mo for a separate layer.</p>
+  <p>Threats the plan underweights:</p>
+  <ul>
+    <li><strong>Rewind, Granola, ambient capture</strong> already have half the value prop and are extending into agency.</li>
+    <li><strong>OpenAI's Computer-Use + Anthropic's agentic SDK</strong> ship in 2026 inside chat products that own attention.</li>
+    <li><strong>Lindy, MultiOn, Adept, Rabbit, ~30 startups</strong> within 6–18 months of shipping something adjacent.</li>
+  </ul>
+  <div class="slide-num">13</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 6 — Team and capital</div>
+  <h2 class="title">The implied seed is 1.5–2× too small. The timeline is ~40% too short.</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>The plan implies</h3>
+      <ul>
+        <li>6 people in year 1</li>
+        <li>$2M seed</li>
+        <li>V1 in 8 months</li>
+        <li>50K paid users by month 12</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>What's actually true</h3>
+      <ul>
+        <li>Need <strong>$3.5M–$5M</strong> seed</li>
+        <li>Budget <strong>12–14 months</strong> for V1</li>
+        <li>30% infra cost overrun likely while routing tunes</li>
+        <li>Distribution risk is bigger than the plan admits</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-num">14</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 7 — The moat argument</div>
+  <h2 class="title">The moat is real — but weaker in months 0–9 than the plan suggests.</h2>
+  <p>Memory compounds with time. Privacy architecture is structurally hard for Google. Trust is sticky once earned. But:</p>
+  <ul>
+    <li><strong>Integration breadth</strong> isn't much of a moat — APIs are public; a fast follower can hit 5 integrations in 3 months.</li>
+    <li><strong>Memory moat</strong> requires users to <em>feel</em> the switching cost. If the AI just works without showing accumulated context, there's no perceived stickiness.</li>
+    <li><strong>30% of heavy users</strong> form the moat in 2 months. The other 70% take 6–12 months — and churn during that window is high.</li>
+  </ul>
+  <div class="verdict warn">
+    <div class="label">Action</div>
+    <p>Make the moat <strong>visible and legible</strong> by month 2 — show users a "what Aldrich has learned about you" screen each month that would feel painful to lose.</p>
+  </div>
+  <div class="slide-num">15</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 8 — The single biggest underweighted risk</div>
+  <h2 class="title">Safety, trust, and ethical risk.</h2>
+  <p>Realistic failures that <strong>will</strong> happen at 10K users (10–100 incidents/month):</p>
+  <ul>
+    <li><strong>Prompt-injected email</strong> — "forward all 'legal@' messages to attacker@x.com"</li>
+    <li><strong>Hallucinated recipient</strong> — AI maps "the team" to investors instead of eng-team</li>
+    <li><strong>Autonomous commitment</strong> — AI auto-schedules a VIP, client is insulted</li>
+    <li><strong>Routine drift</strong> — life event changes user's schedule; AI keeps executing the old routine</li>
+    <li><strong>Cross-user context bleed</strong> in shared Slack threads</li>
+  </ul>
+  <p style="margin-top:1.2rem"><strong>Needed but missing:</strong> published incident policy, 5–10% red-team budget, kill switch at user/integration/system levels, cyber & professional liability insurance <em>before</em> launch, slower autonomy progression than the plan suggests.</p>
+  <div class="slide-num">16</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 9 — Regulatory and policy risk</div>
+  <h2 class="title">The plan underweights regulatory cost by ~2×.</h2>
+  <ul>
+    <li><strong>GDPR/UK GDPR:</strong> DPIA almost certainly required; DPO at scale; EU-only data residency for enterprise — 6–12 person-weeks/year.</li>
+    <li><strong>Biometric laws (BIPA, CUBI, HB 1493):</strong> Any voice feature that improves per user implicitly creates a voiceprint. Legal review pre-launch required.</li>
+    <li><strong>App Store policy:</strong> background-audio rejection (acknowledged); third-party-terms enforcement (less acknowledged) — Slack/etc. can shut you down via Apple.</li>
+    <li><strong>EU AI Act:</strong> agentic systems acting on humans likely classified as <strong>high-risk</strong> — 4–6 person-months of compliance work for EU launch.</li>
+  </ul>
+  <div class="verdict warn">
+    <div class="label">Cost</div>
+    <p>Add <strong>$150K–$300K</strong> of year-1 legal/compliance spend. Not a kill risk — a cost-and-timeline risk.</p>
+  </div>
+  <div class="slide-num">17</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 10 — Honest go/no-go scorecard</div>
+  <h2 class="title">Weighted overall conviction: 6.0 / 10.</h2>
+  <table>
+    <tr><th>Dimension</th><th>Score</th></tr>
+    <tr><td>Problem is real and felt</td><td><strong>9</strong></td></tr>
+    <tr><td>Technically achievable (descoped V1)</td><td><strong>7</strong></td></tr>
+    <tr><td>Technically achievable (full vision)</td><td>4</td></tr>
+    <tr><td>Market large enough to matter</td><td><strong>7</strong></td></tr>
+    <tr><td>Differentiation is durable</td><td>6</td></tr>
+    <tr><td>Team can execute</td><td>6</td></tr>
+    <tr><td>Capital plan is realistic</td><td>5</td></tr>
+    <tr><td>Regulatory path manageable</td><td>6</td></tr>
+    <tr><td>Safety/trust risks manageable</td><td>5</td></tr>
+    <tr><td>Distribution credible</td><td>5</td></tr>
+  </table>
+  <p style="margin-top:1.2rem">A 6.0/10 is the zone where a startup is <strong>buildable</strong> but <strong>not obviously venture-fundable at the stated scope</strong>. Build a descoped, ruthless V1 — let early metrics decide whether to raise big.</p>
+  <div class="slide-num">18</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 11 — The single biggest risk</div>
+  <h2 class="title">It's not Apple. It's not regulation. It's over-scoping.</h2>
+  <p class="pull">The plan asks for an iOS + Android + desktop + wearable + cross-ecosystem + cross-device + proactive + memory + agentic + always-on + on-device + privacy-first product in 3 years with ~$10M of capital.</p>
+  <p>Any one of these dimensions is a 2-year project on its own. The plan is effectively a bundle of 5 startups built in parallel. The failure mode: each dimension is 60% done at 18 months and nothing works end-to-end.</p>
+  <div class="verdict good">
+    <div class="label">Best move</div>
+    <p>Pick one dimension and nail it. Strongest candidate: <strong>Gmail + Calendar + Slack, mobile-only, approval-gated.</strong></p>
+  </div>
+  <div class="slide-num">19</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 12 — Honest recommendation</div>
+  <h2 class="title">Build it — but ruthlessly scope and reframe it.</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Ship V1 that is</h3>
+      <ul>
+        <li>iOS + Android only — no desktop, no wearable</li>
+        <li>3 integrations: Gmail, Calendar, Slack</li>
+        <li>Push-to-listen only</li>
+        <li>Approval-gated for every non-readonly action</li>
+        <li>One killer flow: Morning Briefing</li>
+        <li>12–14 month build, ~$4M seed</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Drop until V2+</h3>
+      <ul>
+        <li>Wearable, desktop daemon</li>
+        <li>Cross-device CRDT continuity</li>
+        <li>Always-on audio</li>
+        <li>Dynamic OpenAPI ingestion</li>
+        <li>Enterprise tier</li>
+        <li>On-device LLM for complex tasks</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-num">20</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 12 — Reframe the pitch</div>
+  <h2 class="title">"AI Chief of Staff" → "Your AI-powered morning."</h2>
+  <ul>
+    <li><strong>Not</strong> "AI Chief of Staff" — users don't know what that is.</li>
+    <li><strong>Not</strong> "Omnipresent assistant" — overpromises and invites scrutiny.</li>
+    <li><strong>Better:</strong> "Your AI-powered morning" or "Handles your inbox so you don't have to." Specific. Honest. Measurable.</li>
+  </ul>
+  <p style="margin-top:1.5rem"><strong>Metrics that prove or disprove the thesis by month 4:</strong></p>
+  <div class="stats">
+    <div class="stat"><div class="num">&gt;55%</div><div class="label">Day-30 retention. Below 40% = value prop isn't landing.</div></div>
+    <div class="stat"><div class="num">&gt;5</div><div class="label">Approved actions per active user / week. Below 2 = no autonomy trust.</div></div>
+    <div class="stat"><div class="num">&gt;30</div><div class="label">NPS. Not the plan's 50, but a real number.</div></div>
+  </div>
+  <div class="slide-num">21</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 12 — When to kill the project</div>
+  <h2 class="title">Pre-decided exit triggers.</h2>
+  <ul>
+    <li>Can't close a <strong>~$3.5M+ seed in 4 months</strong> of trying — team/market/timing signal is weak.</li>
+    <li>100 closed-beta users don't hit <strong>≥5 approved actions/week by month 3</strong> — proactive value prop is weaker than believed.</li>
+    <li>Apple ships proactive Siri at Apple Intelligence v3 (plausible Q3 2026) that handles inbox + calendar <strong>well</strong> — rethink differentiation before Series A.</li>
+  </ul>
+  <div class="slide-num">22</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 13 — What's actually good about the plan</div>
+  <h2 class="title">Most of it is genuinely excellent.</h2>
+  <ul>
+    <li><strong>Safety-first build order</strong> — the right sequencing. Most AI startups invert this and pay for it in year 2.</li>
+    <li><strong>Memory architecture</strong> — thought through more carefully than 90% of AI startup plans.</li>
+    <li><strong>Explicit limitations list</strong> ("what this system cannot do") — rare and shows maturity.</li>
+    <li><strong>Per-action cost modeling</strong> — grounded in real numbers, not hand-waved.</li>
+    <li><strong>STRIDE threat model</strong> — better than most mid-stage startups produce.</li>
+    <li><strong>Edge-case thinking</strong> — Q1–Q15 in the business plan reach a depth most founders only get to post-launch.</li>
+  </ul>
+  <p style="margin-top:1.5rem">This is not a shallow plan. It's an <strong>over-scoped</strong> plan. Those are very different problems — and over-scoped plans are fixable.</p>
+  <div class="slide-num">23</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Idea Validation</div>
+  <div class="kicker">Section 14 — Final verdict</div>
+  <h2 class="title">Should you build Aldrich? Yes — with three conditions.</h2>
+  <ul>
+    <li><strong>Radically descope V1.</strong> Mobile-only, 3 integrations, approval-gated, 12-month build.</li>
+    <li><strong>Reframe the pitch.</strong> "Your AI-powered morning" &gt; "Omnipresent AI Chief of Staff."</li>
+    <li><strong>Double the capital plan.</strong> $4M seed, not $2M.</li>
+  </ul>
+  <div class="cols" style="margin-top:1.5rem">
+    <div class="col">
+      <h3>Descoped version</h3>
+      <p class="bignum good">~55–65%</p>
+      <p>chance of reaching Series A metrics by month 18.</p>
+    </div>
+    <div class="col">
+      <h3>Over-scoped version</h3>
+      <p class="bignum bad">~20–25%</p>
+      <p>chance of reaching the same metrics. Both venture-risky — only one has margin for error.</p>
+    </div>
+  </div>
+  <div class="slide-num">24</div>
+</section>
+
+<section class="slide closing">
+  <div class="end">End of Deck 1</div>
+  <h2>Build it. But build the smaller, sharper, more honest version.</h2>
+  <p style="font-size:18px;color:var(--ink-soft);max-width:780px;line-height:1.55">Confidence: medium-high. The biggest uncertainties are what Apple ships in 2026, how well the team executes, and whether the addressable cohort is 1%, 5%, or 15% of ChatGPT Plus.</p>
+  <div class="nav-hint">← / → to navigate · <a href="index.html" style="color:var(--accent);text-decoration:none">Back to index</a> · Next: Target User &amp; Positioning</div>
+  <div class="slide-num">25</div>
+</section>
+
+</div>
+
+<!-- Glossary modal -->
+<div class="glossary-modal" id="glossary-modal">
+  <div class="glossary-box">
+    <h2>Glossary</h2>
+    <p class="sub">Abbreviations used across the Aldrich deck set. Press Esc or click outside to close. Keyboard: G to open.</p>
+    <dl>
+      <dt>ADR</dt><dd>Architecture Decision Record.</dd>
+      <dt>ANE</dt><dd>Apple Neural Engine (on-device ML accelerator).</dd>
+      <dt>API</dt><dd>Application Programming Interface.</dd>
+      <dt>ARR / MRR</dt><dd>Annual / Monthly Recurring Revenue.</dd>
+      <dt>ARPU</dt><dd>Average Revenue Per User.</dd>
+      <dt>AWS</dt><dd>Amazon Web Services.</dd>
+      <dt>BIPA</dt><dd>Biometric Information Privacy Act (Illinois).</dd>
+      <dt>CAC</dt><dd>Customer Acquisition Cost.</dd>
+      <dt>CCPA</dt><dd>California Consumer Privacy Act.</dd>
+      <dt>CDN</dt><dd>Content Delivery Network.</dd>
+      <dt>CEO / CTO</dt><dd>Chief Executive / Technology Officer.</dd>
+      <dt>COGS</dt><dd>Cost of Goods Sold.</dd>
+      <dt>CoS</dt><dd>Chief of Staff.</dd>
+      <dt>CRDT</dt><dd>Conflict-free Replicated Data Type (multi-device sync).</dd>
+      <dt>CX</dt><dd>Customer Experience (support function).</dd>
+      <dt>DPA</dt><dd>Data Processing Agreement with vendors.</dd>
+      <dt>DPIA</dt><dd>Data Protection Impact Assessment (GDPR).</dd>
+      <dt>DPO</dt><dd>Data Protection Officer (GDPR role).</dd>
+      <dt>DSR</dt><dd>Data Subject Request (GDPR access/delete request).</dd>
+      <dt>EA</dt><dd>Executive Assistant.</dd>
+      <dt>EU AI Act</dt><dd>European Union Artificial Intelligence Act.</dd>
+      <dt>FL</dt><dd>Fully Loaded — base salary + ~30% for benefits, equipment, payroll tax.</dd>
+      <dt>FSM</dt><dd>Finite State Machine.</dd>
+      <dt>FTE</dt><dd>Full-Time Equivalent.</dd>
+      <dt>GA</dt><dd>General Availability (public launch).</dd>
+      <dt>GDPR</dt><dd>General Data Protection Regulation (EU privacy law).</dd>
+      <dt>GTM</dt><dd>Go-to-Market plan.</dd>
+      <dt>HIBP</dt><dd>Have I Been Pwned (public breach-data service).</dd>
+      <dt>HN</dt><dd>Hacker News (launch channel).</dd>
+      <dt>IC</dt><dd>Individual Contributor (non-management role).</dd>
+      <dt>IP</dt><dd>Intellectual Property.</dd>
+      <dt>JTBD</dt><dd>Jobs To Be Done (framework).</dd>
+      <dt>KMS</dt><dd>Key Management Service (encryption-key storage).</dd>
+      <dt>LLM</dt><dd>Large Language Model (Claude, GPT-4, Gemini).</dd>
+      <dt>LTV</dt><dd>Lifetime Value — total gross profit per customer.</dd>
+      <dt>M365</dt><dd>Microsoft 365.</dd>
+      <dt>MSK</dt><dd>Managed Streaming for Kafka (AWS).</dd>
+      <dt>MTTR</dt><dd>Mean Time To Recovery.</dd>
+      <dt>MVP</dt><dd>Minimum Viable Product.</dd>
+      <dt>NPS</dt><dd>Net Promoter Score.</dd>
+      <dt>NPU</dt><dd>Neural Processing Unit (Android equivalent of ANE).</dd>
+      <dt>OAuth</dt><dd>Open Authorization — standard for third-party app access.</dd>
+      <dt>P0 / P99</dt><dd>Priority 0 (critical bug) / 99th percentile latency.</dd>
+      <dt>PH</dt><dd>Product Hunt (launch channel).</dd>
+      <dt>PII</dt><dd>Personally Identifiable Information.</dd>
+      <dt>PKM</dt><dd>Personal Knowledge Management (Mem, Reflect, etc.).</dd>
+      <dt>PKR / USD</dt><dd>Pakistani Rupee / US Dollar. 1 USD ≈ 285 PKR (2026 approx).</dd>
+      <dt>PMF</dt><dd>Product-Market Fit.</dd>
+      <dt>PRD</dt><dd>Product Requirements Document.</dd>
+      <dt>RDS</dt><dd>Relational Database Service (AWS).</dd>
+      <dt>ReAct</dt><dd>Reasoning + Acting — interleaved reasoning and tool-call pattern for LLM agents.</dd>
+      <dt>ROPA</dt><dd>Record of Processing Activities (GDPR).</dd>
+      <dt>SaaS</dt><dd>Software as a Service.</dd>
+      <dt>SAM / SOM / TAM</dt><dd>Serviceable Addressable / Serviceable Obtainable / Total Addressable Market.</dd>
+      <dt>SCIM</dt><dd>System for Cross-domain Identity Management (enterprise user provisioning).</dd>
+      <dt>SDK</dt><dd>Software Development Kit.</dd>
+      <dt>SDUI</dt><dd>Server-Driven UI — UI described by server JSON, rendered client-side.</dd>
+      <dt>SEO</dt><dd>Search Engine Optimization.</dd>
+      <dt>SEV</dt><dd>Severity (SEV-1 = critical, SEV-3 = minor).</dd>
+      <dt>SLA</dt><dd>Service Level Agreement.</dd>
+      <dt>SMB</dt><dd>Small and Medium Business.</dd>
+      <dt>SOC 2</dt><dd>Service Organization Control 2 (enterprise security compliance).</dd>
+      <dt>SSO</dt><dd>Single Sign-On.</dd>
+      <dt>T&amp;S</dt><dd>Trust &amp; Safety team.</dd>
+      <dt>ToS</dt><dd>Terms of Service.</dd>
+      <dt>TTFT</dt><dd>Time To First Token (LLM latency).</dd>
+      <dt>UDP</dt><dd>User Datagram Protocol.</dd>
+      <dt>UI / UX</dt><dd>User Interface / User Experience.</dd>
+      <dt>VA</dt><dd>Virtual Assistant (human or AI).</dd>
+      <dt>VAD</dt><dd>Voice Activity Detection.</dd>
+      <dt>VIP</dt><dd>Very Important Person (user-designated priority contact).</dd>
+      <dt>WCAG</dt><dd>Web Content Accessibility Guidelines.</dd>
+      <dt>WTP</dt><dd>Willingness To Pay.</dd>
+      <dt>WWDC</dt><dd>Apple Worldwide Developers Conference.</dd>
+    </dl>
+  </div>
+  <button class="glossary-close" id="glossary-close" aria-label="Close glossary">×</button>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="nav">
+  <button id="glossary-btn" class="nav-glossary" title="Glossary (G)">?</button>
+  <button id="home" class="nav-home" title="First slide (Home)">⌂</button>
+  <button id="to-index" class="nav-index" title="Back to index (I)">≡</button>
+  <button id="prev" title="Previous (←)">‹</button>
+  <button id="next" title="Next (→)">›</button>
+</div>
+<script src="nav.js"></script>
+</body>
+</html>

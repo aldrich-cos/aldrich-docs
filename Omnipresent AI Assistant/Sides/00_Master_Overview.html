@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aldrich — Master Overview (Internal)</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="deck">
+
+<!-- Cover -->
+<section class="slide cover active">
+  <div class="deck-title">Aldrich · Deck 00 · Internal</div>
+  <div class="eyebrow">Master Overview</div>
+  <h1>The whole plan, one room.</h1>
+  <p class="subtitle">An in-house presentation. The problem we're betting on, the technical bet to solve it, what it takes in capital and effort at Pakistan cost base, the challenges (no flattering), and the side bets we could spin out separately.</p>
+  <div class="meta">In-house · 2026-04-20 · Synthesizes Decks 01–08</div>
+  <div class="slide-num">01</div>
+</section>
+
+<!-- Ground rules -->
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview</div>
+  <div class="kicker">What this deck is — and isn't</div>
+  <h2 class="title">Ground rules for the room.</h2>
+  <ul>
+    <li><strong>Not an investor pitch.</strong> No hype words. No best-case framing. We're picking apart our own plan.</li>
+    <li><strong>Not a feature catalog.</strong> Deck 05 has the build order; Deck 06 has how it works. This deck is thesis, cost, risks, choices.</li>
+    <li><strong>Disagreement is expected.</strong> Numbers here are point estimates with wide error bars. If you think a number is wrong, say so — that's the value of this room.</li>
+    <li><strong>One outcome.</strong> Either we agree on descoped V1, the ~$1M seed target, and the two-bet side-hustle stance, or we surface what's blocking each.</li>
+  </ul>
+  <div class="slide-num">02</div>
+</section>
+
+<!-- ====== Part 1: Core Issue ====== -->
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Master Overview</div>
+  <div class="num">Part 1 of 5</div>
+  <h2>The core issue.</h2>
+  <p class="blurb">What problem are we solving — and is anyone willing to pay for it.</p>
+  <div class="slide-num">03</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 1</div>
+  <div class="kicker">The problem</div>
+  <h2 class="title">Knowledge work is drowning in coordination — and existing AI is shallow.</h2>
+  <p>Knowledge workers switch apps ~1,200 times a day and spend ~28% of the workweek on email. Even discounted 30%, the truth holds: people are paying a coordination tax that AI tools talk about reducing but don't.</p>
+  <ul>
+    <li><strong>ChatGPT-class tools</strong> are reactive, stateless, confined to a chat window. Leave the chat — the value evaporates.</li>
+    <li><strong>Apple Intelligence / Gemini / Siri</strong> are ecosystem-locked and shallow on third-party tools — useless for the 60% who live in Slack + Notion + Linear.</li>
+    <li><strong>Productivity apps</strong> (Notion, Motion, Superhuman) each solve one slice. None see across the whole workflow.</li>
+    <li><strong>Human EAs</strong> work but cost $60K–$120K/year — accessible to ~0.5% of the market.</li>
+  </ul>
+  <div class="slide-num">04</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 1</div>
+  <div class="kicker">The opportunity — an empty quadrant</div>
+  <h2 class="title">Proactive × deep memory × cross-tool agency. Empty today.</h2>
+  <p>Two axes that matter. The top-right corner is whitespace.</p>
+  <table>
+    <tr><th></th><th>Reactive</th><th>Proactive</th></tr>
+    <tr><td><strong>Deep memory</strong></td><td>Mem.ai, Rewind, Granola</td><td><strong>Aldrich</strong> · Motion (partial)</td></tr>
+    <tr><td><strong>Shallow memory</strong></td><td>ChatGPT, Claude, Perplexity, Gemini</td><td>Siri, Google Assistant, Apple Intelligence, Copilot</td></tr>
+  </table>
+  <div class="verdict warn">
+    <div class="label">The honest caveat</div>
+    <p>This quadrant stays empty for <strong>12–24 months</strong>. After that, at least 1–3 credible competitors will be in it. Our window to defensible scale is roughly 18 months.</p>
+  </div>
+  <div class="slide-num">05</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 1</div>
+  <div class="kicker">Who we're building for — Maya, primary V1 target</div>
+  <h2 class="title">VP-of-Product types. Drowning. Will pay.</h2>
+  <p>Age 32–45, $150K–$400K comp, scaling tech company. 50+ tools/day. Misses commitments. Owes 2am emails. Wants <strong>quiet competence</strong>, not another tool.</p>
+  <div class="cols">
+    <div class="col">
+      <h3>Stated demand</h3>
+      <ul>
+        <li>"Stop me missing follow-ups."</li>
+        <li>"I want my evenings back."</li>
+        <li>"Prep me for my 9am."</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Revealed preference</h3>
+      <ul>
+        <li>Wants <strong>agency</strong>, not autonomy.</li>
+        <li>Trust collapses after one wrong action. Permanently.</li>
+        <li>Pays $18/mo. Won't pay $50/mo (would hire a VA).</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:1.2rem"><strong>Buyers at $18/mo today:</strong> ~30M (ChatGPT Plus). <strong>Realistic SOM 3–4 years:</strong> 1–5M. The plan's 900K Year-3 target is the <em>high end</em> of that range — not base case.</p>
+  <div class="slide-num">06</div>
+</section>
+
+<!-- ====== Part 2: How we'll solve it ====== -->
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Master Overview</div>
+  <div class="num">Part 2 of 5</div>
+  <h2>How we'll address it.</h2>
+  <p class="blurb">Five pillars. One safety spine. Ruthless V1 scope.</p>
+  <div class="slide-num">07</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 2</div>
+  <div class="kicker">Architecture in one breath</div>
+  <h2 class="title">Voice → on-device intent → memory → cloud ReAct → safety → action → undo.</h2>
+  <p>The runtime path runs 5–15 times per active user per day:</p>
+  <ul>
+    <li><strong>On-device:</strong> Silero VAD → Gemma 2B intent classifier (~180ms TTFT). Simple intents handled locally; complex ones encrypted to cloud.</li>
+    <li><strong>Cloud:</strong> pgvector retrieves top-20 memories → Claude Sonnet ReAct loop (max 8 steps, 30k token budget) → SDUI card generated.</li>
+    <li><strong>Safety layer:</strong> sandbox classifier → biometric gate for high-risk → 30s undo window → committed to action_records.</li>
+    <li><strong>Memory write:</strong> async via Kafka → pgvector. User-visible action doesn't wait.</li>
+  </ul>
+  <div class="slide-num">08</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 2</div>
+  <div class="kicker">The five pillars — built by dependency</div>
+  <h2 class="title">17 weeks of build. Foundation first, even when it's not demoable.</h2>
+  <table>
+    <tr><th>Order</th><th>Pillar</th><th>Weeks</th><th>Why here</th></tr>
+    <tr><td>1</td><td><strong>Safety foundation</strong></td><td>2–4</td><td>Retrofitting safety later is the #1 failure mode of agent products</td></tr>
+    <tr><td>2</td><td><strong>Memory Hub</strong></td><td>4–7</td><td>Longest lever for retention — product gets better with use</td></tr>
+    <tr><td>3</td><td><strong>ReAct + routing</strong></td><td>7–10</td><td>The brain. Cheap small model for intent; Claude for reasoning</td></tr>
+    <tr><td>4</td><td><strong>V1 features (5 streams)</strong></td><td>10–13</td><td>Briefing, calendar, email, onboarding, settings in parallel</td></tr>
+    <tr><td>5</td><td><strong>Mobile clients</strong></td><td>13–15</td><td>iOS + Android. No desktop, no wearable in V1</td></tr>
+  </table>
+  <p style="margin-top:1rem">Total: <strong>17 weeks engineering + 5 weeks beta = 22 weeks to paid GA.</strong></p>
+  <div class="slide-num">09</div>
+</section>
+
+<!-- ====== V1 / V1.5 / V2 / V3 comparison ====== -->
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 2</div>
+  <div class="kicker">Versioned scope — side by side</div>
+  <h2 class="title">What ships in V1, V1.5, V2, V3 — one table.</h2>
+  <table class="compare">
+    <tr>
+      <th></th>
+      <th class="v1">V1 <span style="font-weight:400">(M0–5)</span></th>
+      <th class="v15">V1.5 <span style="font-weight:400">(M5–9)</span></th>
+      <th class="v2">V2 <span style="font-weight:400">(M9–14)</span></th>
+      <th class="v3">V3 <span style="font-weight:400">(M14+)</span></th>
+    </tr>
+    <tr>
+      <td>Platforms</td>
+      <td class="new">iOS + Android</td>
+      <td class="new">+ macOS desktop</td>
+      <td class="new">+ Apple Watch / Wear OS</td>
+      <td>+ Enterprise admin console</td>
+    </tr>
+    <tr>
+      <td>Integrations</td>
+      <td class="new">Gmail, Calendar, Slack (3)</td>
+      <td class="new">+ Linear, Jira, Notion deep</td>
+      <td class="new">+ Web browsing agent, Airtable</td>
+      <td>+ Finance, Health APIs (gated)</td>
+    </tr>
+    <tr>
+      <td>Memory</td>
+      <td class="new">Personal Hub (Cognimemo)</td>
+      <td class="new">+ Group / household memory</td>
+      <td class="new">+ Shared team memory</td>
+      <td class="new">+ Federated learning (opt-in)</td>
+    </tr>
+    <tr>
+      <td>Actions</td>
+      <td class="new">Calendar, email triage, tasks — approval-gated</td>
+      <td class="new">+ Broader email, travel, custom skills</td>
+      <td class="new">+ Multi-agent delegation</td>
+      <td class="new">+ Financial, health (highly gated)</td>
+    </tr>
+    <tr>
+      <td>Listening mode</td>
+      <td>Push-to-listen only</td>
+      <td>+ Trigger-based proactivity</td>
+      <td>+ Ambient capture (non-audio, opt-in)</td>
+      <td>— (policy unchanged)</td>
+    </tr>
+    <tr>
+      <td>Team / business</td>
+      <td class="no">Single user only</td>
+      <td class="new">Group memory (≤5 seats)</td>
+      <td class="new">Team plans + developer API</td>
+      <td class="new">SSO, SCIM, SOC 2 Type II, DPA</td>
+    </tr>
+    <tr>
+      <td>Safety layer</td>
+      <td class="ok">Sandbox + circuit breaker + undo + biometric</td>
+      <td class="ok">+ Red-team bounty program</td>
+      <td class="ok">+ Cross-agent policy engine</td>
+      <td class="ok">+ External audit (ISO 27001)</td>
+    </tr>
+    <tr>
+      <td>Pricing tier</td>
+      <td>Free / $18 Pro / $35 Power</td>
+      <td>+ Family ($29 · 5 seats)</td>
+      <td>+ Team plans ($15/seat)</td>
+      <td>+ Enterprise (custom)</td>
+    </tr>
+    <tr>
+      <td>User target</td>
+      <td>10K (launch wk) → 100K (M12)</td>
+      <td>100K → 250K</td>
+      <td>250K → 600K</td>
+      <td>600K → 900K+</td>
+    </tr>
+  </table>
+  <div class="slide-num">10</div>
+</section>
+
+<!-- ====== Part 3: What it'll take — Pakistan cost base ====== -->
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Master Overview</div>
+  <div class="num">Part 3 of 5</div>
+  <h2>What it'll take.</h2>
+  <p class="blurb">Capital, time, people — at Pakistan cost base, inside an existing organization.</p>
+  <div class="slide-num">11</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 3</div>
+  <div class="kicker">Our structural edge — building inside an existing org</div>
+  <h2 class="title">Three cost levers that drop Year-1 burn by ~80%.</h2>
+  <div class="cols three">
+    <div class="col">
+      <h3>Lever 1 — Existing CEO</h3>
+      <p style="font-size:15px;line-height:1.55;color:var(--ink-soft)">CEO already in-seat at parent organization. <strong>Zero incremental salary</strong> against Aldrich. Contrast with $180K fully-loaded in the SF benchmark plan.</p>
+    </div>
+    <div class="col">
+      <h3>Lever 2 — Fractional CTO</h3>
+      <p style="font-size:15px;line-height:1.55;color:var(--ink-soft)">CTO dedicates ~25–30% to Aldrich while running parent tech. <strong>Attributed cost ~$6–8K/yr</strong>, not $340K US-benchmark.</p>
+    </div>
+    <div class="col">
+      <h3>Lever 3 — PK salary base</h3>
+      <p style="font-size:15px;line-height:1.55;color:var(--ink-soft)">All engineering, design, PM hired at Pakistani market rates. <strong>~85–90% saving</strong> vs SF/NYC fully-loaded equivalents.</p>
+    </div>
+  </div>
+  <div class="verdict good">
+    <div class="label">Bottom-line impact</div>
+    <p>Year-1 cost: <strong>$2.55M → ~$470K</strong>. Seed ask: <strong>$4M → ~$1M</strong>. Runway on the same capital is longer, and we can validate PMF before raising externally.</p>
+  </div>
+  <div class="slide-num">12</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 3</div>
+  <div class="kicker">Pakistani salary bands we're hiring at</div>
+  <h2 class="title">Three bands. ±30% per candidate history.</h2>
+  <p style="font-size:15px;color:var(--muted);margin-bottom:.4rem">Conversion rate used: <strong>1 USD ≈ 285 PKR</strong> (April 2026 approximate). Fully-loaded (FL) adds 30% for benefits, equipment, payroll taxes, office/tools.</p>
+  <table>
+    <tr>
+      <th>Band</th>
+      <th>PKR / month</th>
+      <th>USD / month</th>
+      <th>Base / year (USD)</th>
+      <th>Fully loaded / year</th>
+      <th>Range ±30%</th>
+    </tr>
+    <tr>
+      <td><strong>Junior</strong></td>
+      <td>PKR 150K</td>
+      <td>$526</td>
+      <td>$6,316</td>
+      <td class="new"><strong>$8,200</strong></td>
+      <td>$5,700 – $10,700</td>
+    </tr>
+    <tr>
+      <td><strong>Intermediate</strong></td>
+      <td>PKR 250K</td>
+      <td>$877</td>
+      <td>$10,526</td>
+      <td class="new"><strong>$13,700</strong></td>
+      <td>$9,600 – $17,800</td>
+    </tr>
+    <tr>
+      <td><strong>Senior</strong></td>
+      <td>PKR 450K</td>
+      <td>$1,579</td>
+      <td>$18,947</td>
+      <td class="new"><strong>$24,600</strong></td>
+      <td>$17,200 – $32,000</td>
+    </tr>
+  </table>
+  <div class="verdict">
+    <div class="label">Note</div>
+    <p>Range reflects candidate history: years of experience, domain fit (ML / iOS / security), past employers. Senior with niche agentic-AI experience trends toward upper band; generalist intermediates toward lower.</p>
+  </div>
+  <div class="slide-num">13</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 3</div>
+  <div class="kicker">Team &amp; cost — Year 1 people plan</div>
+  <h2 class="title">8 roles. ~$125K total people cost. ~85% saving.</h2>
+  <table>
+    <tr>
+      <th>Role</th>
+      <th>Band</th>
+      <th>Start</th>
+      <th>FL / year</th>
+      <th>Y1 pro-rated</th>
+      <th>US bench</th>
+    </tr>
+    <tr><td>CEO</td><td>Existing (org)</td><td>M0</td><td>$0</td><td><strong>$0</strong></td><td>$180,000</td></tr>
+    <tr><td>CTO (fractional 25%)</td><td>Senior × 0.25</td><td>M0</td><td>$6,150</td><td><strong>$6,150</strong></td><td>$340,000</td></tr>
+    <tr><td>Sr iOS Engineer</td><td>Senior</td><td>M1</td><td>$24,600</td><td><strong>$22,550</strong></td><td>$257,000</td></tr>
+    <tr><td>Sr Android Engineer</td><td>Senior</td><td>M2</td><td>$24,600</td><td><strong>$20,500</strong></td><td>$217,000</td></tr>
+    <tr><td>AI / ML Engineer</td><td>Senior</td><td>M3</td><td>$24,600</td><td><strong>$18,450</strong></td><td>$218,000</td></tr>
+    <tr><td>Product Designer</td><td>Intermediate</td><td>M1</td><td>$13,700</td><td><strong>$12,560</strong></td><td>$202,000</td></tr>
+    <tr><td>Product Manager</td><td>Intermediate</td><td>M4</td><td>$13,700</td><td><strong>$9,130</strong></td><td>$153,000</td></tr>
+    <tr><td>Security / Backend</td><td>Senior (contract→hire)</td><td>M4</td><td>$24,600</td><td><strong>$15,000</strong></td><td>$220,000</td></tr>
+    <tr><td>Fringe / equipment / office share</td><td>—</td><td>—</td><td>—</td><td><strong>$20,000</strong></td><td>$53,000</td></tr>
+    <tr><td><strong>Total Year 1 people</strong></td><td></td><td></td><td></td><td><strong>$124,340</strong></td><td>$1,840,000</td></tr>
+  </table>
+  <div class="slide-num">14</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 3</div>
+  <div class="kicker">Year 1 burn — all-in</div>
+  <h2 class="title">Roughly <span style="color:var(--accent)">$470K</span>. Dominated by infra, not people.</h2>
+  <table>
+    <tr><th>Category</th><th>Year 1 (USD)</th><th>US-bench equivalent</th><th>Note</th></tr>
+    <tr><td>People (8 FTE)</td><td><strong>$124,000</strong></td><td>$1,840,000</td><td>PK salaries + fringe + existing CEO + fractional CTO</td></tr>
+    <tr><td>Legal + compliance</td><td><strong>$75,000</strong></td><td>$226,000</td><td>Local counsel + international GDPR/privacy advisor</td></tr>
+    <tr><td>Infrastructure + LLM APIs + tools</td><td><strong>$151,000</strong></td><td>$151,000</td><td>AWS, Anthropic, Cognimemo — global prices, no PK discount</td></tr>
+    <tr><td>Marketing + brand + launch</td><td><strong>$75,000</strong></td><td>$100,000</td><td>Targeting global audience, produced locally</td></tr>
+    <tr><td>Contingency (10%)</td><td><strong>$43,000</strong></td><td>$232,000</td><td>Buffer for inevitable surprises</td></tr>
+    <tr><td><strong>Total Year 1 burn</strong></td><td><strong>~$468,000</strong></td><td>$2,549,000</td><td><strong>~82% cheaper</strong></td></tr>
+  </table>
+  <div class="slide-num">15</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 3</div>
+  <div class="kicker">Year 1 burn — visualized</div>
+  <h2 class="title">Infra &amp; LLM APIs now the biggest line, not people.</h2>
+  <div class="chart-bars">
+    <div class="bar-row">
+      <div class="bar-label">Infrastructure + LLM</div>
+      <div class="bar-track"><div class="bar-fill" style="width:32.3%"></div></div>
+      <div class="bar-value"><strong>$151K</strong> · 32%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">People (8 FTE)</div>
+      <div class="bar-track"><div class="bar-fill good" style="width:26.5%"></div></div>
+      <div class="bar-value"><strong>$124K</strong> · 27%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">Legal + compliance</div>
+      <div class="bar-track"><div class="bar-fill warn" style="width:16.0%"></div></div>
+      <div class="bar-value"><strong>$75K</strong> · 16%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">Marketing + brand</div>
+      <div class="bar-track"><div class="bar-fill warn" style="width:16.0%"></div></div>
+      <div class="bar-value"><strong>$75K</strong> · 16%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">Contingency</div>
+      <div class="bar-track"><div class="bar-fill muted" style="width:9.2%"></div></div>
+      <div class="bar-value"><strong>$43K</strong> · 9%</div>
+    </div>
+  </div>
+  <div class="verdict">
+    <div class="label">Insight</div>
+    <p>In the US-benchmark plan, people were <strong>72%</strong> of Year 1 burn. In the PK-based plan, <strong>global infra costs (LLM APIs, AWS) are now the biggest line at 32%</strong>. Cost optimization focus shifts from headcount to routing + caching.</p>
+  </div>
+  <div class="slide-num">16</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 3</div>
+  <div class="kicker">US vs. Pakistan — stacked comparison</div>
+  <h2 class="title">Same plan. Same milestones. One-fifth the burn.</h2>
+  <div class="stack-bar">
+    <div class="seg" style="flex:1840;background:#1a73e8">People $1.84M</div>
+    <div class="seg" style="flex:226;background:#174ea6">Legal $226K</div>
+    <div class="seg" style="flex:151;background:#1e8e3e">Infra $151K</div>
+    <div class="seg" style="flex:100;background:#e37400">Mkt $100K</div>
+    <div class="seg" style="flex:232;background:#9aa0a6">Buffer $232K</div>
+  </div>
+  <p style="font-family:var(--mono);font-size:13px;color:var(--muted);margin:.4rem 0 1.4rem">US benchmark — $2.55M total</p>
+
+  <div class="stack-bar">
+    <div class="seg" style="flex:124;background:#1a73e8">People $124K</div>
+    <div class="seg" style="flex:75;background:#174ea6">Legal $75K</div>
+    <div class="seg" style="flex:151;background:#1e8e3e">Infra $151K</div>
+    <div class="seg" style="flex:75;background:#e37400">Mkt $75K</div>
+    <div class="seg" style="flex:43;background:#9aa0a6">Buffer $43K</div>
+  </div>
+  <p style="font-family:var(--mono);font-size:13px;color:var(--muted);margin:.4rem 0 1rem">Pakistan base — $468K total (~82% saving)</p>
+
+  <div class="stack-legend">
+    <div class="k"><span class="swatch" style="background:#1a73e8"></span>People</div>
+    <div class="k"><span class="swatch" style="background:#174ea6"></span>Legal + compliance</div>
+    <div class="k"><span class="swatch" style="background:#1e8e3e"></span>Infrastructure + LLM APIs</div>
+    <div class="k"><span class="swatch" style="background:#e37400"></span>Marketing</div>
+    <div class="k"><span class="swatch" style="background:#9aa0a6"></span>Contingency</div>
+  </div>
+  <div class="slide-num">17</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 3</div>
+  <div class="kicker">Revised fundraise math</div>
+  <h2 class="title">$1M covers 18 months instead of $4M covering 14.</h2>
+  <div class="callout-grid">
+    <div class="callout good"><div class="cl-label">Seed target</div><div class="cl-value">~$1M</div><div class="cl-note">Down from $4M implied by US-benchmark Year-1 burn. Could be raised as an internal check, angel round, or small syndicate.</div></div>
+    <div class="callout"><div class="cl-label">Runway</div><div class="cl-value">18–20 mo</div><div class="cl-note">$1M ÷ ~$470K Y1 burn × buffer = ~20 months to Series A inflection. More runway on less capital.</div></div>
+    <div class="callout"><div class="cl-label">Dilution</div><div class="cl-value">~10–15%</div><div class="cl-note">At a $6M–$10M post-money valuation — realistic given the descoped scope and parent-org backing.</div></div>
+    <div class="callout warn"><div class="cl-label">What stays the same</div><div class="cl-value">Infra + LLM</div><div class="cl-note">AWS, Anthropic, Gemini pricing is global. ~$151K Y1, scaling to ~$1M at 100K users. This is where cost discipline now matters most.</div></div>
+  </div>
+  <div class="slide-num">18</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 3</div>
+  <div class="kicker">Time — the 22-week critical path</div>
+  <h2 class="title">Kickoff to paying users in ~5 months. Series A inflection ~12 months later.</h2>
+  <div class="chart-bars">
+    <div class="bar-row"><div class="bar-label">Kickoff + foundations</div><div class="bar-track"><div class="bar-fill muted" style="width:9%"></div></div><div class="bar-value">Wk 0–1</div></div>
+    <div class="bar-row"><div class="bar-label">Safety foundation</div><div class="bar-track"><div class="bar-fill" style="width:18%"></div></div><div class="bar-value">Wk 2–4</div></div>
+    <div class="bar-row"><div class="bar-label">Memory Hub</div><div class="bar-track"><div class="bar-fill" style="width:32%"></div></div><div class="bar-value">Wk 4–7</div></div>
+    <div class="bar-row"><div class="bar-label">ReAct + routing</div><div class="bar-track"><div class="bar-fill" style="width:46%"></div></div><div class="bar-value">Wk 7–10</div></div>
+    <div class="bar-row"><div class="bar-label">V1 features (5 streams)</div><div class="bar-track"><div class="bar-fill" style="width:59%"></div></div><div class="bar-value">Wk 10–13</div></div>
+    <div class="bar-row"><div class="bar-label">Polish + beta prep</div><div class="bar-track"><div class="bar-fill good" style="width:77%"></div></div><div class="bar-value">Wk 13–17</div></div>
+    <div class="bar-row"><div class="bar-label">Controlled beta</div><div class="bar-track"><div class="bar-fill good" style="width:91%"></div></div><div class="bar-value">Wk 17–20</div></div>
+    <div class="bar-row"><div class="bar-label">Paid GA launch</div><div class="bar-track"><div class="bar-fill good" style="width:100%"></div></div><div class="bar-value">Wk 20–22</div></div>
+  </div>
+  <div class="slide-num">19</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 3</div>
+  <div class="kicker">Unit economics at 100K paying users</div>
+  <h2 class="title">$8.61 gross profit / user / month. ~9× LTV : CAC.</h2>
+  <div class="stats">
+    <div class="stat"><div class="num">$13.50</div><div class="label">Net revenue / user / month after App Store fees</div></div>
+    <div class="stat"><div class="num">$3.39</div><div class="label">Blended LLM cost / paying user / month</div></div>
+    <div class="stat"><div class="num">$8.61</div><div class="label">Gross profit / user / month (~48% margin)</div></div>
+    <div class="stat"><div class="num">~$22</div><div class="label">Blended CAC across organic, content, referral, paid</div></div>
+    <div class="stat"><div class="num">~$207</div><div class="label">LTV at 2% steady-state monthly churn</div></div>
+    <div class="stat"><div class="num">173K</div><div class="label">Break-even paying users (US-bench cost base)</div></div>
+  </div>
+  <p style="margin-top:1rem;font-size:15px;color:var(--muted)">At PK cost base the fixed-cost denominator is lower → break-even drops to <strong>~70K–90K paying users</strong>. We still target the same product quality bar; we just hit profitability sooner.</p>
+  <div class="slide-num">20</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 3</div>
+  <div class="kicker">3-year trajectory</div>
+  <h2 class="title">Plan vs. honest base case.</h2>
+  <table>
+    <tr><th>Year</th><th>Users (plan)</th><th>ARR (plan)</th><th>Honest base case</th><th>Y-end burn / mo (PK base)</th></tr>
+    <tr><td>1</td><td>100K</td><td>~$1M</td><td>50K · $0.5M</td><td>$40–50K</td></tr>
+    <tr><td>2</td><td>300K</td><td>$8–12M</td><td>150K · $4–6M</td><td>$200–280K</td></tr>
+    <tr><td>3</td><td>900K</td><td>$35–50M (optimistic $194M)</td><td>400–500K · $20–35M</td><td>$800K–$1.2M</td></tr>
+  </table>
+  <p style="margin-top:1rem">We'll budget on the base case, fundraise the range, <strong>never claim the upside as the plan</strong>.</p>
+  <div class="slide-num">21</div>
+</section>
+
+<!-- ====== Part 4: Challenges ====== -->
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Master Overview</div>
+  <div class="num">Part 4 of 5</div>
+  <h2>Challenges. No flattering.</h2>
+  <p class="blurb">Eight uncomfortable truths the room needs to look at directly.</p>
+  <div class="slide-num">22</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 4</div>
+  <div class="kicker">Challenge 1 — Over-scoping</div>
+  <h2 class="title">The single biggest internal risk.</h2>
+  <p class="pull">The original plan asks for iOS + Android + desktop + wearable + cross-ecosystem + cross-device + proactive + memory + agentic + always-on + on-device + privacy-first in 3 years.</p>
+  <p>Each dimension is a 2-year project on its own. Built in parallel, the failure mode is: each is 60% done at month 18 and nothing works end-to-end. <strong>Over-scoped version has ~20–25% chance of Series A metrics. Descoped version: ~55–65%.</strong></p>
+  <div class="verdict good">
+    <div class="label">Required decision</div>
+    <p>This room agrees today: <strong>iOS + Android only. 3 integrations. Push-to-listen. Approval-gated. Morning Briefing as the killer flow.</strong> Any V1 scope expansion requires founder + CTO sign-off in writing.</p>
+  </div>
+  <div class="slide-num">23</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 4</div>
+  <div class="kicker">Challenge 2 — The platform problem</div>
+  <h2 class="title">iOS won't let us do half the original dream.</h2>
+  <ul>
+    <li><strong>Always-on listening:</strong> impossible on iOS today. Orange dot, background-audio kill, App Store rejection. <strong>Not negotiable.</strong></li>
+    <li><strong>Cross-device continuity</strong> with conflict resolution requires CRDTs, vector clocks, battery-aware scheduling. V2 minimum.</li>
+    <li><strong>App Store rejection</strong> on first submission: 30–40% likelihood. Mitigated only by pre-submission Apple Office Hours + extreme V1 conservatism.</li>
+    <li><strong>Apple cuts us off:</strong> if Slack/etc. tighten ToS and Apple enforces, we have no recourse. Pivot → Android + macOS.</li>
+  </ul>
+  <p style="margin-top:1rem">Reframe external copy: <strong>"present on demand," not "omnipresent."</strong></p>
+  <div class="slide-num">24</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 4</div>
+  <div class="kicker">Challenge 3 — The trust problem</div>
+  <h2 class="title">One wrong email tanks the brand. And it will happen.</h2>
+  <p>At 10K users, 0.1–1%/month/user incidents = <strong>10–100 incidents/month</strong>. Realistic failures in production:</p>
+  <ul>
+    <li>Prompt-injected email — "forward all 'legal@' to attacker"</li>
+    <li>Hallucinated recipient — "team" → investors instead of eng</li>
+    <li>Auto-scheduled VIP — client is insulted</li>
+    <li>Routine drift after life event — old routine still executing</li>
+    <li>Cross-user context bleed in shared Slack threads</li>
+  </ul>
+  <p style="margin-top:1rem"><strong>Required but underscoped:</strong> published incident policy, 5–10% red-team budget on eng time, three-tier kill switch (user/feature/system), liability insurance <em>before</em> launch, autonomy progression slowed to M4–6 (not M2).</p>
+  <div class="slide-num">25</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 4</div>
+  <div class="kicker">Challenge 4 — The distribution problem</div>
+  <h2 class="title">We start with zero distribution.</h2>
+  <p>Apple 1.4B preinstalled. Google 3B. ChatGPT 200M weekly. We have a waitlist we haven't built yet.</p>
+  <div class="cols">
+    <div class="col">
+      <h3>Could work</h3>
+      <ul>
+        <li>Founder-led PR + content</li>
+        <li>Viral in-product hooks</li>
+        <li>Creator partnerships</li>
+        <li>Waitlist gamification</li>
+        <li>Integration partnerships</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Won't work (yet)</h3>
+      <ul>
+        <li>Paid acquisition at V1 — CAC $40+ for unknown category</li>
+        <li>Enterprise sales — wrong motion</li>
+        <li>SEO — too competitive; intent is wrong</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:1rem"><strong>Kill criterion:</strong> if we can't get 10K signups in launch week with founder-led PR + primed waitlist, the distribution thesis is broken.</p>
+  <div class="slide-num">26</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 4</div>
+  <div class="kicker">Challenge 5 — Market sizing reality</div>
+  <h2 class="title">900K users / $194M ARR is the optimistic end of a real range.</h2>
+  <div class="chart-bars">
+    <div class="bar-row"><div class="bar-label">ChatGPT Plus (ceiling)</div><div class="bar-track"><div class="bar-fill muted" style="width:100%">30M subs</div></div><div class="bar-value">~30M</div></div>
+    <div class="bar-row"><div class="bar-label">Realistic SOM 3–4 yrs</div><div class="bar-track"><div class="bar-fill good" style="width:5%"></div></div><div class="bar-value">~1.5M / $324M ARR</div></div>
+    <div class="bar-row"><div class="bar-label">Plan target Yr 3</div><div class="bar-track"><div class="bar-fill warn" style="width:3%"></div></div><div class="bar-value">900K / $194M ARR</div></div>
+    <div class="bar-row"><div class="bar-label">Honest base case Yr 3</div><div class="bar-track"><div class="bar-fill" style="width:1.5%"></div></div><div class="bar-value">400–500K / $20–35M</div></div>
+  </div>
+  <p style="margin-top:1.2rem">Plan on $20–65M ARR by Year 3. Treat $194M as upside. Investors hear the difference between credible and pitched.</p>
+  <div class="slide-num">27</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 4</div>
+  <div class="kicker">Challenge 6 — Talent risk at PK base</div>
+  <h2 class="title">Hiring senior AI talent locally is harder than senior mobile.</h2>
+  <ul>
+    <li><strong>Sr iOS, Sr Android:</strong> local market supply is strong — $24K FL is competitive within Pakistan. Hiring risk: <strong>LOW</strong>.</li>
+    <li><strong>Sr ML engineer with agentic-AI experience:</strong> thin market locally. Competes with remote USD offers from US/EU startups. Hiring risk: <strong>MEDIUM-HIGH</strong>.</li>
+    <li><strong>Product Designer with consumer-AI UX experience:</strong> limited domestic portfolio. May need to train up an intermediate or hire part-time international advisor. Risk: <strong>MEDIUM</strong>.</li>
+    <li><strong>Security Engineer with agent-safety specialty:</strong> very rare locally. Start with Senior contractor, convert after month 6. Risk: <strong>MEDIUM</strong>.</li>
+  </ul>
+  <div class="verdict warn">
+    <div class="label">Mitigation</div>
+    <p>Budget the upper band (+30%) for the ML and security roles. Allow remote hires across the region (Lahore, Karachi, Islamabad) and accept 1–2 remote international advisors on retainer if local search fails by Month 2.</p>
+  </div>
+  <div class="slide-num">28</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 4</div>
+  <div class="kicker">Challenge 7 — Commoditization is the existential risk</div>
+  <h2 class="title">Not a competitor. The category itself getting absorbed.</h2>
+  <p class="pull">The most likely way Aldrich dies: Slack, Notion, Gmail, Linear, and every other tool ships its own AI layer — and the user never feels enough cross-tool pain to pay $18/mo for a separate layer.</p>
+  <p><strong>Defense:</strong> stake out the user who lives in 4+ tools. Find them. Convince them. Make the cross-tool memory visible enough to feel painful to lose. If we can't define this user with precision by end of beta, we have a positioning failure — not a feature failure.</p>
+  <div class="slide-num">29</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 4</div>
+  <div class="kicker">Challenge 8 — Honest scorecard</div>
+  <h2 class="title">Weighted overall conviction: 6.0 / 10.</h2>
+  <div class="chart-bars">
+    <div class="bar-row"><div class="bar-label">Problem real &amp; felt</div><div class="bar-track"><div class="bar-fill good" style="width:90%"></div></div><div class="bar-value"><strong>9</strong> / 10</div></div>
+    <div class="bar-row"><div class="bar-label">V1 technically achievable</div><div class="bar-track"><div class="bar-fill good" style="width:70%"></div></div><div class="bar-value"><strong>7</strong> / 10</div></div>
+    <div class="bar-row"><div class="bar-label">Market large enough</div><div class="bar-track"><div class="bar-fill good" style="width:70%"></div></div><div class="bar-value"><strong>7</strong> / 10</div></div>
+    <div class="bar-row"><div class="bar-label">Differentiation durable</div><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><div class="bar-value"><strong>6</strong> / 10</div></div>
+    <div class="bar-row"><div class="bar-label">Team can execute</div><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><div class="bar-value"><strong>6</strong> / 10</div></div>
+    <div class="bar-row"><div class="bar-label">Capital plan realistic (PK base)</div><div class="bar-track"><div class="bar-fill good" style="width:75%"></div></div><div class="bar-value"><strong>7.5</strong> / 10</div></div>
+    <div class="bar-row"><div class="bar-label">Safety/trust risks manageable</div><div class="bar-track"><div class="bar-fill warn" style="width:50%"></div></div><div class="bar-value"><strong>5</strong> / 10</div></div>
+    <div class="bar-row"><div class="bar-label">Distribution credible</div><div class="bar-track"><div class="bar-fill warn" style="width:50%"></div></div><div class="bar-value"><strong>5</strong> / 10</div></div>
+    <div class="bar-row"><div class="bar-label">Full vision achievable</div><div class="bar-track"><div class="bar-fill bad" style="width:40%"></div></div><div class="bar-value"><strong>4</strong> / 10</div></div>
+  </div>
+  <p style="margin-top:1rem"><strong>6.0/10</strong> is the zone where a startup is <em>buildable but not obviously venture-fundable at original scope</em>. PK cost base lifts capital realism to 7.5. Build the descoped V1. Let metrics decide whether to raise big.</p>
+  <div class="slide-num">30</div>
+</section>
+
+<!-- ====== Part 5: Side hustles ====== -->
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Master Overview</div>
+  <div class="num">Part 5 of 5</div>
+  <h2>Side hustles.</h2>
+  <p class="blurb">Low-effort, high-reward subsets of the main build that could ship separately.</p>
+  <div class="slide-num">31</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 5</div>
+  <div class="kicker">Thesis — why spin out at all</div>
+  <h2 class="title">We're already building 5 valuable products inside one company.</h2>
+  <p>The Aldrich build path produces several pieces of internal IP with standalone market value. Spinning some out could:</p>
+  <ul>
+    <li><strong>De-risk the main bet.</strong> A successful spin-out validates the underlying tech without depending on consumer GTM.</li>
+    <li><strong>Generate distribution.</strong> A free or developer-facing product becomes an acquisition channel for Aldrich proper.</li>
+    <li><strong>Earn revenue earlier.</strong> Some could generate $500K–$2M ARR within 12 months at a fraction of the build cost.</li>
+    <li><strong>Build team brand.</strong> Open-source + developer tools are recruiting and credibility magnets.</li>
+  </ul>
+  <p style="margin-top:1rem"><strong>Danger:</strong> distraction. Each side hustle is scoped to ≤1 engineer + part-time founder involvement.</p>
+  <div class="slide-num">32</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 5</div>
+  <div class="kicker">Side hustle effort × reward matrix</div>
+  <h2 class="title">Five candidates. Two worth doing now.</h2>
+  <table>
+    <tr><th>#</th><th>Side hustle</th><th>Effort (person-weeks)</th><th>Year-1 ARR potential</th><th>Strategic value</th><th>When</th></tr>
+    <tr><td>1</td><td>Memory-as-a-Service API</td><td>8–10</td><td>$200K–$800K</td><td>Validates memory IP as standalone</td><td>Post-V1 (M6+)</td></tr>
+    <tr class="v1"><td>2</td><td><strong>Approval Gate SDK (open source)</strong></td><td class="ok"><strong>4</strong></td><td>$300K–$1M (hosted tier)</td><td>Dev brand + recruiting magnet</td><td class="new"><strong>Start now</strong></td></tr>
+    <tr><td>3</td><td>Adversarial test corpus / red-team</td><td>2</td><td>$250K–$1.5M (enterprise)</td><td>Niche but high margin</td><td>Series A+</td></tr>
+    <tr class="v15"><td>4</td><td><strong>Standalone Morning Briefing</strong></td><td class="ok"><strong>5</strong></td><td>N/A (distribution play)</td><td>Consumer acquisition funnel for Aldrich</td><td class="new"><strong>Pre-launch</strong></td></tr>
+    <tr><td>5</td><td>"Aldrich Lite" Chrome extension</td><td>6–8</td><td>Medium-high (tactical)</td><td>Taps into ChatGPT's 200M user funnel</td><td>Post-V1 (M5+)</td></tr>
+  </table>
+  <div class="verdict good">
+    <div class="label">Recommendation</div>
+    <p>Pick exactly two: <strong>#2 (Approval Gate SDK)</strong> and <strong>#4 (Morning Briefing)</strong>. Reject the others until post-Series A. Two is a stretch; three is a distraction.</p>
+  </div>
+  <div class="slide-num">33</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 5</div>
+  <div class="kicker">Side hustle #1 — Memory-as-a-Service</div>
+  <h2 class="title">"Mem0 for AI agents" — a paid API for persistent user memory.</h2>
+  <p><strong>What:</strong> Productize the Cognimemo wrapper + ranking + contradiction detector + provenance schema as a B2B API. Other AI app builders plug it in instead of building memory themselves.</p>
+  <div class="cols">
+    <div class="col"><h3>Effort</h3><p><strong>Medium.</strong> 6–10 weeks of one engineer to add multi-tenant + billing + dashboard.</p></div>
+    <div class="col"><h3>Reward</h3><p><strong>High.</strong> Every AI startup needs memory. Pricing $0.10–$1 per 1K facts/month. Year-1 ARR realistic: $200K–$800K.</p></div>
+  </div>
+  <div class="verdict">
+    <div class="label">Risk</div>
+    <p>Mem0, Zep, and Supermemory already in this space. Differentiation must be on contradiction detector + provenance — not raw vector retrieval.</p>
+  </div>
+  <div class="slide-num">34</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 5</div>
+  <div class="kicker">Side hustle #2 — Approval Gate SDK</div>
+  <h2 class="title">Open-source the safety toolkit. Charge for the hosted version.</h2>
+  <p><strong>What:</strong> Open-source the sandbox classifier + circuit breaker + undo stack + biometric-gated action pattern as a Go/TypeScript SDK. Any developer building an AI agent that takes user actions can drop it in. Hosted + premium adversarial test corpus is paid.</p>
+  <div class="cols">
+    <div class="col"><h3>Effort</h3><p><strong>Low.</strong> ~4 weeks of one engineer to extract, document, and ship. Open-source maintenance ~5–10 hrs/week.</p></div>
+    <div class="col"><h3>Reward</h3><p><strong>Medium-high.</strong> Developer brand + recruiting magnet. Hosted tier could land $300K–$1M ARR Y1 from agentic AI startups + enterprise.</p></div>
+  </div>
+  <div class="verdict good">
+    <div class="label">Strategic upside</div>
+    <p>If this becomes the standard for "how to build agentic AI safely," it shapes the category in our favor. Equivalent to what LangChain did for retrieval — but for safety.</p>
+  </div>
+  <div class="slide-num">35</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 5</div>
+  <div class="kicker">Side hustle #3 — Adversarial test corpus</div>
+  <h2 class="title">Sell the 500-case adversarial suite to enterprise AI teams.</h2>
+  <p><strong>What:</strong> Productize the internal adversarial test suite (prompt injection, impersonation, exfiltration, bulk-action abuse) as a subscription corpus + quarterly red-team engagement. Every enterprise AI program needs this.</p>
+  <div class="cols">
+    <div class="col"><h3>Effort</h3><p><strong>Low.</strong> ~2 weeks of one engineer to package + sell-sheet. Corpus is a byproduct of our own quarterly red team.</p></div>
+    <div class="col"><h3>Reward</h3><p><strong>Medium.</strong> 10–20 enterprise customers at $25K–$75K/year = $250K–$1.5M ARR. Lower volume, higher margin.</p></div>
+  </div>
+  <div class="verdict warn">
+    <div class="label">Why we wait</div>
+    <p>Requires a sales person we don't have. Document the corpus IP cleanly from day one so we can productize later without rework. Activate at Series A+.</p>
+  </div>
+  <div class="slide-num">36</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 5</div>
+  <div class="kicker">Side hustle #4 — Standalone Morning Briefing</div>
+  <h2 class="title">Free consumer app: "Your morning, in 30 seconds." Pure summary, no agency.</h2>
+  <p><strong>What:</strong> Strip everything agentic. Calendar preview + email triage + Slack mention summary, delivered as one card. No actions taken — just visibility. Free, ad-free, no signup beyond OAuth. Drives Aldrich waitlist.</p>
+  <div class="cols">
+    <div class="col"><h3>Effort</h3><p><strong>Low.</strong> Phase 4 Stream A + C of the V1 build, minus action-taking. 4–6 weeks of focused work by 1 engineer + designer.</p></div>
+    <div class="col"><h3>Reward</h3><p><strong>High for distribution.</strong> Mass-appeal consumer hook. 100K+ downloads achievable with PH / social. ~5–10% convert into Aldrich waitlist.</p></div>
+  </div>
+  <div class="verdict">
+    <div class="label">Strategic value</div>
+    <p>Acquisition funnel + product validation + content marketing in one. Risk: brand confusion ("which product am I using?") — mitigate with clear "powered by Aldrich" framing.</p>
+  </div>
+  <div class="slide-num">37</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 5</div>
+  <div class="kicker">Side hustle #5 — "Aldrich Lite" Chrome extension</div>
+  <h2 class="title">Add persistent memory + cross-conversation context to ChatGPT.</h2>
+  <p><strong>What:</strong> Chrome extension intercepts ChatGPT conversations, extracts facts via the Memory Hub, and injects relevant context on future conversations. "The LLM that remembers you" — powered by Aldrich.</p>
+  <div class="cols">
+    <div class="col"><h3>Effort</h3><p><strong>Low-medium.</strong> ~6–8 weeks for one engineer. Browser extension + bridge to Memory Hub. Risk of breakage as ChatGPT UI changes.</p></div>
+    <div class="col"><h3>Reward</h3><p><strong>Medium-high.</strong> Plugs into ChatGPT's 200M-user funnel. 0.5% adoption = 1M users — instant distribution and category validation.</p></div>
+  </div>
+  <div class="verdict bad">
+    <div class="label">Risk to flag</div>
+    <p>OpenAI could ship native memory and obsolete the extension overnight. <strong>Treat as a 6-month tactical play, not a durable business.</strong> Distribution tool, not a revenue line.</p>
+  </div>
+  <div class="slide-num">38</div>
+</section>
+
+<!-- Decisions -->
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Master Overview</div>
+  <div class="num">Decisions</div>
+  <h2>What we want from this room.</h2>
+  <p class="blurb">Six decisions. If we don't reach them today, we surface what's blocking each.</p>
+  <div class="slide-num">39</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Decisions</div>
+  <div class="kicker">Required decisions</div>
+  <h2 class="title">Six asks. Yes / No / "Need more data."</h2>
+  <table>
+    <tr><th>#</th><th>Decision</th><th>Implication if Yes</th></tr>
+    <tr><td>D1</td><td>Approve descoped V1: iOS + Android · 3 integrations · push-to-listen · approval-gated · Morning Briefing killer flow</td><td>Kickoff Week 0</td></tr>
+    <tr><td>D2</td><td>Approve ~$1M seed target (PK cost base, not $4M US-bench). Plan $700K spent, $470K committed, 25% buffer</td><td>Fundraise plan locks</td></tr>
+    <tr><td>D3</td><td>Approve 22-week paid GA timeline with 5 phase gates. Slip &gt;10% triggers a re-plan, not push-through</td><td>Roadmap signed</td></tr>
+    <tr><td>D4</td><td>Approve kill criteria: can't close $1M+ in 4 months → kill · beta users &lt;5 actions/wk by M3 → kill · Apple ships proactive Siri Q3 2026 → rethink</td><td>Exit triggers documented</td></tr>
+    <tr><td>D5</td><td>Approve side-hustle stance: two bets only — Approval Gate SDK + Standalone Morning Briefing. Rest parked until post-A</td><td>Scope discipline holds</td></tr>
+    <tr><td>D6</td><td>Approve positioning reframe: drop "omnipresent" and "always-on" from all copy. Lead with "personal AI chief of staff" or "your AI-powered morning"</td><td>Marketing site + deck refresh</td></tr>
+  </table>
+  <div class="slide-num">40</div>
+</section>
+
+<!-- Closing -->
+<section class="slide closing">
+  <div class="end">End of Deck 00</div>
+  <h2>Build the smaller, sharper, more honest version. Two side bets. One disciplined V1. Six decisions — today.</h2>
+  <p style="font-size:19px;color:var(--ink-soft);max-width:820px;line-height:1.55">If anyone in this room can't say yes to the descoped V1, the $1M seed, and the two-bet side-hustle stance, we surface that now — before we hire a single person against the wrong plan.</p>
+  <div class="nav-hint">← / → to navigate · Press G for glossary · <a href="index.html" style="color:var(--accent);text-decoration:none">Back to index</a> · Decks 01–08 have the full detail behind every claim.</div>
+  <div class="slide-num">41</div>
+</section>
+
+</div>
+
+<!-- Glossary modal -->
+<div class="glossary-modal" id="glossary-modal">
+  <div class="glossary-box">
+    <h2>Glossary — abbreviations used in this deck</h2>
+    <p class="sub">Press Esc or click outside to close. Keyboard: G to open.</p>
+    <dl>
+      <dt>PKR</dt><dd>Pakistani Rupee. 1 USD ≈ 285 PKR (April 2026 approximate rate used throughout).</dd>
+      <dt>USD</dt><dd>United States Dollar.</dd>
+      <dt>FTE</dt><dd>Full-Time Equivalent — a full-time headcount unit.</dd>
+      <dt>FL</dt><dd>Fully Loaded — base salary plus ~30% for benefits, equipment, payroll tax, and office/tool share.</dd>
+      <dt>CEO</dt><dd>Chief Executive Officer — existing in parent organization, $0 incremental.</dd>
+      <dt>CTO</dt><dd>Chief Technology Officer — fractional (~25%) from parent organization.</dd>
+      <dt>PMF</dt><dd>Product-Market Fit — evidence that the product satisfies a market's demand at scale.</dd>
+      <dt>MVP</dt><dd>Minimum Viable Product — smallest product that proves the thesis.</dd>
+      <dt>GTM</dt><dd>Go-to-Market — the plan for reaching and converting users.</dd>
+      <dt>LLM</dt><dd>Large Language Model — Claude, GPT-4, Gemini, etc.</dd>
+      <dt>API</dt><dd>Application Programming Interface — programmatic hook into a service.</dd>
+      <dt>SDK</dt><dd>Software Development Kit — library developers integrate into their apps.</dd>
+      <dt>SDUI</dt><dd>Server-Driven UI — UI described by server JSON and rendered by the client.</dd>
+      <dt>ReAct</dt><dd>Reasoning + Acting — an LLM agent pattern of interleaved reasoning and tool calls.</dd>
+      <dt>VAD</dt><dd>Voice Activity Detection — detecting when a user is speaking vs silence.</dd>
+      <dt>TTFT</dt><dd>Time To First Token — latency before the model starts responding.</dd>
+      <dt>CAC</dt><dd>Customer Acquisition Cost — dollars spent to acquire one paying customer.</dd>
+      <dt>LTV</dt><dd>Lifetime Value — total gross profit expected from one customer over their lifetime.</dd>
+      <dt>ARR</dt><dd>Annual Recurring Revenue — normalized annual revenue from subscriptions.</dd>
+      <dt>MRR</dt><dd>Monthly Recurring Revenue.</dd>
+      <dt>TAM / SAM / SOM</dt><dd>Total / Serviceable Addressable / Serviceable Obtainable Market.</dd>
+      <dt>CRDT</dt><dd>Conflict-free Replicated Data Type — data structure enabling multi-device sync.</dd>
+      <dt>OAuth</dt><dd>Open Authorization — standard for third-party access (Gmail, Slack, Notion logins).</dd>
+      <dt>GDPR</dt><dd>General Data Protection Regulation (EU privacy law).</dd>
+      <dt>DPIA</dt><dd>Data Protection Impact Assessment — required GDPR privacy review.</dd>
+      <dt>DPO</dt><dd>Data Protection Officer — GDPR-required role at scale.</dd>
+      <dt>DPA</dt><dd>Data Processing Agreement — contract with a vendor handling user data.</dd>
+      <dt>SOC 2</dt><dd>Service Organization Control 2 — enterprise security compliance certification.</dd>
+      <dt>SSO</dt><dd>Single Sign-On — enterprise identity standard.</dd>
+      <dt>SCIM</dt><dd>System for Cross-domain Identity Management — enterprise user-provisioning standard.</dd>
+      <dt>PH / HN</dt><dd>Product Hunt / Hacker News — launch channels.</dd>
+      <dt>VIP</dt><dd>Very Important Person — user-designated priority contact in Aldrich.</dd>
+      <dt>UX</dt><dd>User Experience.</dd>
+    </dl>
+  </div>
+  <button class="glossary-close" id="glossary-close" aria-label="Close glossary">×</button>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="nav">
+  <button id="glossary-btn" class="nav-glossary" title="Glossary (G)">?</button>
+  <button id="home" class="nav-home" title="First slide (Home)">⌂</button>
+  <button id="to-index" class="nav-index" title="Back to index (I)">≡</button>
+  <button id="prev" title="Previous (←)">‹</button>
+  <button id="next" title="Next (→)">›</button>
+</div>
+<script src="nav.js"></script>
+</body>
+</html>

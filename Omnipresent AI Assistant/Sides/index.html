@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aldrich</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body{overflow:auto;background:var(--bg)}
+  .welcome{
+    min-height:100vh;
+    max-width:1080px;margin:0 auto;
+    padding:14vh 6vw 8vh;
+    display:flex;flex-direction:column;
+  }
+  .hello{font-family:var(--mono);font-size:14px;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-bottom:1.4rem;font-weight:500}
+  .welcome h1{font-size:clamp(56px,7vw,96px);line-height:1.04;font-weight:700;letter-spacing:-.025em;margin-bottom:1.2rem;color:var(--ink)}
+  .welcome .sub{font-size:clamp(18px,1.5vw,22px);color:var(--ink-soft);max-width:640px;line-height:1.55;margin-bottom:4rem;font-weight:400}
+
+  .deck-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:14px;margin-bottom:4rem;
+  }
+  .card{
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:1.6rem 1.7rem;background:var(--surface);
+    border:1px solid var(--rule);border-radius:12px;
+    text-decoration:none;color:inherit;
+    transition:all .18s ease;
+    min-height:140px;
+  }
+  .card:hover{
+    border-color:var(--accent);
+    transform:translateY(-3px);
+    box-shadow:0 10px 24px rgba(26,115,232,.10)
+  }
+  .card .num{
+    font-family:var(--mono);font-size:12px;
+    color:var(--accent);letter-spacing:.12em;
+    text-transform:uppercase;margin-bottom:.6rem;font-weight:500
+  }
+  .card h2{
+    font-size:24px;color:var(--ink);
+    font-weight:700;letter-spacing:-.01em;margin:0;line-height:1.2
+  }
+  .card .arrow{
+    margin-top:1rem;font-size:18px;color:var(--accent);
+    opacity:0;transition:opacity .15s, transform .15s;
+  }
+  .card:hover .arrow{opacity:1;transform:translateX(4px)}
+  .card.primary{
+    border-color:var(--accent);
+    background:linear-gradient(0deg, var(--accent-soft) 0%, var(--surface) 100%)
+  }
+  .card.primary .num{color:var(--accent-strong)}
+
+  .help{
+    margin-top:auto;
+    padding:1.2rem 1.5rem;
+    background:var(--surface);
+    border:1px solid var(--rule);border-radius:8px;
+    font-size:14px;color:var(--ink-soft);line-height:1.6
+  }
+  .help kbd{
+    display:inline-block;padding:2px 8px;
+    background:var(--bg);border:1px solid var(--rule);border-radius:4px;
+    font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin:0 2px
+  }
+  .help strong{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="welcome">
+
+  <div class="hello">Welcome</div>
+  <h1>The Aldrich decks.</h1>
+  <p class="sub">Choose a deck to begin.</p>
+
+  <div class="deck-grid">
+
+    <a class="card primary" href="00_Master_Overview.html">
+      <div>
+        <div class="num">Deck 00 · Master</div>
+        <h2>Master Overview</h2>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="card" href="01_Idea_Validation.html">
+      <div>
+        <div class="num">Deck 01</div>
+        <h2>Idea Validation</h2>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="card" href="02_Target_User_Positioning.html">
+      <div>
+        <div class="num">Deck 02</div>
+        <h2>Target User &amp; Positioning</h2>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="card" href="03_Competitor_Analysis.html">
+      <div>
+        <div class="num">Deck 03</div>
+        <h2>Competitor Analysis</h2>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="card" href="04_Cost_Feasibility.html">
+      <div>
+        <div class="num">Deck 04</div>
+        <h2>Cost Feasibility</h2>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="card" href="05_MVP_Roadmap.html">
+      <div>
+        <div class="num">Deck 05</div>
+        <h2>MVP Roadmap</h2>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="card" href="06_Process.html">
+      <div>
+        <div class="num">Deck 06</div>
+        <h2>Process</h2>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="card" href="07_Go_To_Market_Pricing.html">
+      <div>
+        <div class="num">Deck 07</div>
+        <h2>Go-to-Market &amp; Pricing</h2>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="card" href="08_Risk_Register.html">
+      <div>
+        <div class="num">Deck 08</div>
+        <h2>Risk Register</h2>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+  </div>
+
+  <div class="help">
+    <strong>Inside any deck:</strong>
+    <kbd>←</kbd> <kbd>→</kbd> navigate ·
+    <kbd>1</kbd> first slide ·
+    <kbd>I</kbd> back here ·
+    <kbd>G</kbd> open glossary ·
+    <kbd>Esc</kbd> close
+  </div>
+
+</div>
+</body>
+</html>

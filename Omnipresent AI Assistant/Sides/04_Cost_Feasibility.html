@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aldrich — Cost Feasibility (PK base)</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="deck">
+
+<section class="slide cover active">
+  <div class="deck-title">Aldrich · Deck 4 of 8</div>
+  <div class="eyebrow">Cost Feasibility · Pakistan base</div>
+  <h1>What it costs to build and run.</h1>
+  <p class="subtitle">Year 1 burn at Pakistan cost base (~$470K), infrastructure scaling, LLM economics, unit economics at every scale, revised runway math, and the sensitivity tests that break the model.</p>
+  <div class="meta">Source: Cost_Feasibility.md · Updated for PK salary base · 1 USD ≈ 285 PKR</div>
+  <div class="slide-num">01</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Cost model overview</div>
+  <h2 class="title">Four lines of cost. One target ratio.</h2>
+  <ul>
+    <li><strong>People</strong> — large in absolute dollars, small at PK cost base</li>
+    <li><strong>Cloud infrastructure</strong> — scales super-linearly with user count</li>
+    <li><strong>LLM API usage</strong> — scales with users × action volume (global pricing)</li>
+    <li><strong>Software, legal, compliance</strong> — step-function costs at milestones</li>
+  </ul>
+  <div class="verdict">
+    <div class="label">Healthy ratio — US vs. PK</div>
+    <p>At US salary base, people = 55–65% of spend. <strong>At PK base, people drops to ~25–30%, and infra + LLM rises to ~40–50%.</strong> Cost optimization focus shifts from headcount to routing, caching, and provider mix.</p>
+  </div>
+  <div class="slide-num">02</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="num">Part 1</div>
+  <h2>Year 1 build cost — ~$470K at PK base.</h2>
+  <p class="blurb">From $2.55M US benchmark to $468K. ~82% saving driven by salary base + existing CEO + fractional CTO.</p>
+  <div class="slide-num">03</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Pakistani salary bands — with ±30% range</div>
+  <h2 class="title">Three bands. Range per candidate history.</h2>
+  <table>
+    <tr><th>Band</th><th>PKR / month</th><th>USD / month</th><th>Base / year</th><th>Fully loaded</th><th>±30% range (FL)</th></tr>
+    <tr><td><strong>Junior</strong></td><td>PKR 150,000</td><td>$526</td><td>$6,316</td><td class="new">$8,200</td><td>$5,700 – $10,700</td></tr>
+    <tr><td><strong>Intermediate</strong></td><td>PKR 250,000</td><td>$877</td><td>$10,526</td><td class="new">$13,700</td><td>$9,600 – $17,800</td></tr>
+    <tr><td><strong>Senior</strong></td><td>PKR 450,000</td><td>$1,579</td><td>$18,947</td><td class="new">$24,600</td><td>$17,200 – $32,000</td></tr>
+  </table>
+  <p style="margin-top:1rem;font-size:15px;color:var(--muted)">Conversion rate: 1 USD ≈ 285 PKR (approximate, April 2026). Fully loaded adds 30% for benefits, equipment, payroll tax, and office/tool share. Range reflects years of experience, domain fit, and past employer tier.</p>
+  <div class="slide-num">04</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 1.1 — People cost at PK base</div>
+  <h2 class="title">Year 1 people: ~$124K. Down from $1.84M.</h2>
+  <table>
+    <tr><th>Role</th><th>Band</th><th>Start</th><th>FL / yr</th><th>Y1 pro-rated</th><th>US bench</th></tr>
+    <tr><td>CEO</td><td>Existing (org)</td><td>M0</td><td>$0</td><td>$0</td><td>$180,000</td></tr>
+    <tr><td>CTO (fractional 25%)</td><td>Senior × 0.25</td><td>M0</td><td>$6,150</td><td>$6,150</td><td>$340,000</td></tr>
+    <tr><td>Sr iOS Engineer</td><td>Senior</td><td>M1</td><td>$24,600</td><td>$22,550</td><td>$257,000</td></tr>
+    <tr><td>Sr Android Engineer</td><td>Senior</td><td>M2</td><td>$24,600</td><td>$20,500</td><td>$217,000</td></tr>
+    <tr><td>AI / ML Engineer</td><td>Senior</td><td>M3</td><td>$24,600</td><td>$18,450</td><td>$218,000</td></tr>
+    <tr><td>Product Designer</td><td>Intermediate</td><td>M1</td><td>$13,700</td><td>$12,560</td><td>$202,000</td></tr>
+    <tr><td>Product Manager</td><td>Intermediate</td><td>M4</td><td>$13,700</td><td>$9,130</td><td>$153,000</td></tr>
+    <tr><td>Security / Backend (contract→hire)</td><td>Senior</td><td>M4</td><td>$24,600</td><td>$15,000</td><td>$220,000</td></tr>
+    <tr><td>Fringe + equipment + office share</td><td>—</td><td>—</td><td>—</td><td>$20,000</td><td>$53,000</td></tr>
+    <tr><td><strong>Total Year 1 people</strong></td><td></td><td></td><td></td><td><strong>$124,340</strong></td><td><strong>$1,840,000</strong></td></tr>
+  </table>
+  <div class="slide-num">05</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 1.2 — Legal &amp; compliance</div>
+  <h2 class="title">~$75K — local counsel + international privacy advisor.</h2>
+  <table>
+    <tr><th>Item</th><th>Cost</th><th>Timing</th></tr>
+    <tr><td>Company formation, IP assignment (local firm)</td><td>$5,000</td><td>M0</td></tr>
+    <tr><td>Privacy policy + ToS (intl. privacy attorney)</td><td>$10,000</td><td>M4–6</td></tr>
+    <tr><td>GDPR readiness (DPIA, DPA, ROPA) — international counsel</td><td>$20,000</td><td>M6–9</td></tr>
+    <tr><td>Trademark (US + EU + UK for "Aldrich")</td><td>$8,000</td><td>M3</td></tr>
+    <tr><td>Vendor DPA reviews</td><td>$3,000</td><td>M6–8</td></tr>
+    <tr><td>Pre-launch security audit (external)</td><td>$15,000</td><td>M10–11</td></tr>
+    <tr><td>Pre-launch penetration test</td><td>$10,000</td><td>M11</td></tr>
+    <tr><td>Cyber liability insurance (Y1 premium)</td><td>$4,000</td><td>M10</td></tr>
+    <tr><td><strong>Subtotal</strong></td><td><strong>~$75,000</strong></td><td></td></tr>
+  </table>
+  <p style="margin-top:1rem;font-size:15px;color:var(--muted)">US-bench equivalent: $226K. Saving from local firm rates for routine corporate work; international counsel retained for privacy + cross-border pieces.</p>
+  <div class="slide-num">06</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 1.3 — Infrastructure + tools (Year 1)</div>
+  <h2 class="title">~$151K — essentially unchanged. Global pricing, no PK discount.</h2>
+  <table>
+    <tr><th>Item</th><th>Monthly</th><th>Year 1 total</th></tr>
+    <tr><td>AWS (dev + staging + prod, minimal scale)</td><td>$2,500</td><td>$30,000</td></tr>
+    <tr><td>Anthropic (Claude) API — dev + test + early users</td><td>$3,000</td><td>$36,000</td></tr>
+    <tr><td>OpenAI + Gemini fallback APIs</td><td>$800</td><td>$10,000</td></tr>
+    <tr><td>Cognimemo (V1 memory vendor)</td><td>$2,500</td><td>$30,000</td></tr>
+    <tr><td>Supabase Auth + Postgres</td><td>$500</td><td>$6,000</td></tr>
+    <tr><td>Datadog (observability)</td><td>$1,200</td><td>$14,000</td></tr>
+    <tr><td>GitHub, Linear, Figma, Notion, Slack, Zoom</td><td>$900</td><td>$11,000</td></tr>
+    <tr><td>Apple Developer Program + Google Play</td><td>$200</td><td>$2,400</td></tr>
+    <tr><td>Test device farm (~15 real devices)</td><td>—</td><td>$12,000</td></tr>
+    <tr><td><strong>Subtotal</strong></td><td></td><td><strong>~$151,400</strong></td></tr>
+  </table>
+  <p style="margin-top:1rem;font-size:15px;color:var(--muted)">This is where cost discipline now matters most. LLM routing, caching, and batch processing will reduce the LLM line as we scale.</p>
+  <div class="slide-num">07</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 1.4 — Marketing + launch</div>
+  <h2 class="title">~$75K — global targeting, local production.</h2>
+  <table>
+    <tr><th>Item</th><th>Cost</th></tr>
+    <tr><td>Brand identity (logo, design system)</td><td>$10,000</td></tr>
+    <tr><td>Marketing site + waitlist</td><td>$8,000</td></tr>
+    <tr><td>Content production (hero videos, LinkedIn, launch assets)</td><td>$20,000</td></tr>
+    <tr><td>Product Hunt launch prep</td><td>$5,000</td></tr>
+    <tr><td>Conference / event attendance (selective)</td><td>$10,000</td></tr>
+    <tr><td>Influencer + creator partnerships (seed)</td><td>$15,000</td></tr>
+    <tr><td>Paid channel test budget</td><td>$7,000</td></tr>
+    <tr><td><strong>Subtotal</strong></td><td><strong>~$75,000</strong></td></tr>
+  </table>
+  <div class="slide-num">08</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 1.5 — Year 1 total</div>
+  <h2 class="title">~$468K. 82% cheaper than the US benchmark.</h2>
+  <table>
+    <tr><th>Category</th><th>PK base</th><th>US bench</th><th>% saving</th></tr>
+    <tr><td>People</td><td>$124,000</td><td>$1,840,000</td><td class="ok">93%</td></tr>
+    <tr><td>Legal + compliance</td><td>$75,000</td><td>$226,000</td><td class="ok">67%</td></tr>
+    <tr><td>Infrastructure + tools</td><td>$151,000</td><td>$151,000</td><td>0%</td></tr>
+    <tr><td>Marketing</td><td>$75,000</td><td>$100,000</td><td class="ok">25%</td></tr>
+    <tr><td>Contingency (10%)</td><td>$43,000</td><td>$232,000</td><td class="ok">81%</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>~$468,000</strong></td><td><strong>$2,549,000</strong></td><td class="ok"><strong>~82%</strong></td></tr>
+  </table>
+  <div class="verdict good">
+    <div class="label">What this unlocks</div>
+    <p>A <strong>$1M seed</strong> buys ~20 months of runway at this burn. Enough to hit Series A metrics with ~25% buffer. Or: fund this entirely from parent-org balance sheet + a small angel round.</p>
+  </div>
+  <div class="slide-num">09</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Year 1 burn — visualized</div>
+  <h2 class="title">Infra + LLM is the biggest line now — not people.</h2>
+  <div class="chart-bars">
+    <div class="bar-row"><div class="bar-label">Infrastructure + LLM</div><div class="bar-track"><div class="bar-fill" style="width:32.3%"></div></div><div class="bar-value"><strong>$151K</strong> · 32%</div></div>
+    <div class="bar-row"><div class="bar-label">People (8 FTE)</div><div class="bar-track"><div class="bar-fill good" style="width:26.5%"></div></div><div class="bar-value"><strong>$124K</strong> · 27%</div></div>
+    <div class="bar-row"><div class="bar-label">Legal + compliance</div><div class="bar-track"><div class="bar-fill warn" style="width:16.0%"></div></div><div class="bar-value"><strong>$75K</strong> · 16%</div></div>
+    <div class="bar-row"><div class="bar-label">Marketing + brand</div><div class="bar-track"><div class="bar-fill warn" style="width:16.0%"></div></div><div class="bar-value"><strong>$75K</strong> · 16%</div></div>
+    <div class="bar-row"><div class="bar-label">Contingency</div><div class="bar-track"><div class="bar-fill muted" style="width:9.2%"></div></div><div class="bar-value"><strong>$43K</strong> · 9%</div></div>
+  </div>
+  <p style="margin-top:1.4rem"><strong>Stacked comparison — US vs PK:</strong></p>
+  <div class="stack-bar">
+    <div class="seg" style="flex:1840;background:#1a73e8">People $1.84M</div>
+    <div class="seg" style="flex:226;background:#174ea6">Legal $226K</div>
+    <div class="seg" style="flex:151;background:#1e8e3e">Infra $151K</div>
+    <div class="seg" style="flex:100;background:#e37400">Mkt $100K</div>
+    <div class="seg" style="flex:232;background:#9aa0a6">Buffer $232K</div>
+  </div>
+  <p style="font-family:var(--mono);font-size:12px;color:var(--muted);margin:.3rem 0 .8rem">US benchmark — $2.55M total</p>
+  <div class="stack-bar">
+    <div class="seg" style="flex:124;background:#1a73e8">People $124K</div>
+    <div class="seg" style="flex:75;background:#174ea6">Legal $75K</div>
+    <div class="seg" style="flex:151;background:#1e8e3e">Infra $151K</div>
+    <div class="seg" style="flex:75;background:#e37400">Mkt $75K</div>
+    <div class="seg" style="flex:43;background:#9aa0a6">Buffer $43K</div>
+  </div>
+  <p style="font-family:var(--mono);font-size:12px;color:var(--muted);margin:.3rem 0 0">PK base — $468K total</p>
+  <div class="slide-num">10</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="num">Part 2</div>
+  <h2>Infrastructure at scale.</h2>
+  <p class="blurb">What it really costs to serve 100, 10K, 100K, and 1M users. These numbers don't change with PK base.</p>
+  <div class="slide-num">11</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 2.1 — Non-LLM infra by user count</div>
+  <h2 class="title">Infra grows from $2K/mo to ~$470K/mo between 100 and 1M users.</h2>
+  <table>
+    <tr><th>Component</th><th>100</th><th>10K</th><th>100K</th><th>1M</th></tr>
+    <tr><td>ECS Fargate</td><td>$250</td><td>$3.5K</td><td>$18K</td><td>$120K</td></tr>
+    <tr><td>RDS PostgreSQL</td><td>$180</td><td>$1.2K</td><td>$8.5K</td><td>$65K</td></tr>
+    <tr><td>Redis (cache + queue)</td><td>$100</td><td>$600</td><td>$3.5K</td><td>$22K</td></tr>
+    <tr><td>Kafka (MSK)</td><td>$350</td><td>$1.2K</td><td>$7K</td><td>$45K</td></tr>
+    <tr><td>S3 + transfer + CDN</td><td>$90</td><td>$1.1K</td><td>$8.5K</td><td>$70K</td></tr>
+    <tr><td>Vector store</td><td>incl.</td><td>incl.</td><td>$2.5K</td><td>$30K</td></tr>
+    <tr><td>Observability</td><td>$600</td><td>$2.2K</td><td>$9.5K</td><td>$55K</td></tr>
+    <tr><td>Other (KMS, auth, vendors)</td><td>$400</td><td>$3.5K</td><td>$17K</td><td>$64K</td></tr>
+    <tr><td><strong>Subtotal infra</strong></td><td><strong>$1,970</strong></td><td><strong>$13.3K</strong></td><td><strong>$74.5K</strong></td><td><strong>$471.5K</strong></td></tr>
+  </table>
+  <div class="slide-num">12</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 2.2 — LLM cost per user</div>
+  <h2 class="title">$3.39 / paying user / month — blended.</h2>
+  <p>The plan's $1.80–$3.20 understates because the top 5% destroys the average if not throttled.</p>
+  <table>
+    <tr><th>User type</th><th>% of paid</th><th>Actions/day</th><th>LLM cost/user/mo</th></tr>
+    <tr><td>Light (briefing only)</td><td>40%</td><td>2</td><td>$0.60</td></tr>
+    <tr><td>Normal</td><td>40%</td><td>8</td><td>$2.50</td></tr>
+    <tr><td>Heavy (power)</td><td>15%</td><td>20</td><td>$7.00</td></tr>
+    <tr><td>Extreme</td><td>5%</td><td>50+</td><td>$22.00</td></tr>
+    <tr><td><strong>Blended</strong></td><td>—</td><td>—</td><td><strong>$3.39</strong></td></tr>
+  </table>
+  <div class="verdict warn">
+    <div class="label">Critical control</div>
+    <p>Soft caps on daily actions are essential. The 5% extreme tier is what blows up unit economics.</p>
+  </div>
+  <div class="slide-num">13</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 2.3 — Combined cost scales down per user</div>
+  <h2 class="title">Cost-per-user falls from $23 to $3.86 as scale kicks in.</h2>
+  <table>
+    <tr><th>Scale</th><th>Infra</th><th>LLM</th><th>Total / month</th><th>Cost / user / mo</th></tr>
+    <tr><td>100 users</td><td>$1,970</td><td>$340</td><td>$2,310</td><td>$23.10</td></tr>
+    <tr><td>10,000</td><td>$13.3K</td><td>$33.9K</td><td><strong>$47.2K</strong></td><td><strong>$4.72</strong></td></tr>
+    <tr><td>100,000</td><td>$74.5K</td><td>$339K</td><td><strong>$413.5K</strong></td><td><strong>$4.14</strong></td></tr>
+    <tr><td>1,000,000</td><td>$471.5K</td><td>$3.39M</td><td><strong>$3.86M</strong></td><td><strong>$3.86</strong></td></tr>
+  </table>
+  <p style="margin-top:1rem;font-size:15px;color:var(--muted)">The Business Plan's $600K/mo at 1M users understates LLM by ~5×. Realistic number without aggressive caching + self-hosted LLM is closer to <strong>$3.8M/month</strong> at 1M users.</p>
+  <div class="slide-num">14</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="num">Part 3</div>
+  <h2>Unit economics.</h2>
+  <p class="blurb">Per-user math after App Store takes its cut. Fixed costs lower at PK base — break-even reached sooner.</p>
+  <div class="slide-num">15</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 3.1 — Per-user P&amp;L at 100K paying users</div>
+  <h2 class="title">~48% gross margin. Worse than plan claimed, but still good.</h2>
+  <table>
+    <tr><th>Line</th><th>USD / user / month</th></tr>
+    <tr><td>Revenue (blended)</td><td>$18.00</td></tr>
+    <tr><td>Less: App Store fee (30% on ~70% of subs)</td><td>−$4.50</td></tr>
+    <tr><td>Less: payment processing</td><td>−$0.16</td></tr>
+    <tr><td><strong>Net revenue</strong></td><td><strong>$13.50</strong></td></tr>
+    <tr><td>COGS (LLM + infra + vendor)</td><td>−$4.14</td></tr>
+    <tr><td>Customer support</td><td>−$0.75</td></tr>
+    <tr><td><strong>Gross profit / user</strong></td><td><strong>$8.61 (~48%)</strong></td></tr>
+  </table>
+  <p style="margin-top:1rem">Plan says 82–90% margin — that's before App Store. True margin is 45–50%. Paths to fix: drive 40%+ to web checkout, or qualify for Apple's Reader-App exception.</p>
+  <div class="slide-num">16</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 3.2 + 3.3 — CAC and LTV</div>
+  <h2 class="title">LTV : CAC ≈ 9.4×. Payback ~2.5 months.</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Blended CAC</h3>
+      <p class="bignum accent">$22</p>
+      <p>35–40% organic, 20% App Store organic, 15% content, 5% PH, 20% paid, 5% influencer.</p>
+    </div>
+    <div class="col">
+      <h3>LTV (24-mo lifetime)</h3>
+      <p class="bignum good">$207</p>
+      <p>$8.61 gross profit × 24 mo. Healthy at 2% churn. At 5% → $172. At 8% → $108.</p>
+    </div>
+  </div>
+  <div class="verdict warn">
+    <div class="label">Threshold</div>
+    <p>Below <strong>6%</strong> steady-state monthly churn = good business. Below <strong>10%</strong> = required to avoid insolvency.</p>
+  </div>
+  <div class="slide-num">17</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 3.4 — Break-even (PK base)</div>
+  <h2 class="title">~70K–90K paying users — not 173K.</h2>
+  <p>Year-3 fixed cost drops significantly with PK salary base:</p>
+  <table>
+    <tr><th>Fixed cost category</th><th>US bench / month</th><th>PK base / month</th></tr>
+    <tr><td>People (40 headcount)</td><td>$1,200K</td><td>$180K</td></tr>
+    <tr><td>Legal / compliance / insurance</td><td>$60K</td><td>$30K</td></tr>
+    <tr><td>Marketing</td><td>$150K</td><td>$100K</td></tr>
+    <tr><td>Overhead (office, software, misc)</td><td>$80K</td><td>$30K</td></tr>
+    <tr><td><strong>Total fixed / month</strong></td><td><strong>$1.49M</strong></td><td><strong>~$340K</strong></td></tr>
+  </table>
+  <p style="margin-top:1rem;font-family:var(--mono);font-size:14px;color:var(--ink);background:var(--surface-2);padding:1rem 1.2rem;border-radius:6px;border:1px solid var(--rule);max-width:700px">US: $1.49M ÷ $8.61 = <strong>~173K</strong> paying users · PK: $340K ÷ $8.61 = <strong>~39K</strong> paying users</p>
+  <p style="margin-top:1rem">Realistic break-even at PK base lands <strong>between 40K and 90K paying users</strong> depending on actual headcount trajectory. Profitability far sooner than the US-bench plan.</p>
+  <div class="slide-num">18</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="num">Part 4</div>
+  <h2>Funding requirements — revised.</h2>
+  <p class="blurb">Same milestones. Much less capital required.</p>
+  <div class="slide-num">19</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 4 — Three rounds, PK cost base</div>
+  <h2 class="title">~$1M seed → ~$6M Series A → ~$20M Series B.</h2>
+  <table>
+    <tr><th>Round</th><th>Months</th><th>Raise (PK base)</th><th>Post-money</th><th>Raise (US bench)</th></tr>
+    <tr><td>Seed</td><td>0–14</td><td class="new"><strong>~$1M</strong></td><td>$6M–$10M</td><td>$3.5M–$4.5M</td></tr>
+    <tr><td>Series A</td><td>14–20</td><td class="new"><strong>~$6M–$10M</strong></td><td>$25M–$60M</td><td>$15M–$25M</td></tr>
+    <tr><td>Series B</td><td>26–36</td><td class="new"><strong>~$20M–$35M</strong></td><td>$150M–$350M</td><td>$50M–$80M</td></tr>
+  </table>
+  <p style="margin-top:1rem"><strong>Series A milestones (same):</strong> 25K–50K paying users · Day-30 retention &gt;55% · NPS &gt;40 · clear unit economics.</p>
+  <p><strong>Series B milestones (same):</strong> $15M+ ARR · &lt;6% steady-state churn · CAC payback &lt;6 mo · early enterprise traction.</p>
+  <div class="slide-num">20</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 5 — Revised runway math</div>
+  <h2 class="title">$1M covers 18–20 months at PK base.</h2>
+  <table>
+    <tr><th>Seed size</th><th>Monthly burn (avg Y1)</th><th>Months runway</th><th>Outcome</th></tr>
+    <tr><td>$300K</td><td>~$40K</td><td>~7 months</td><td class="no">Dies before beta</td></tr>
+    <tr><td>$500K</td><td>~$40K</td><td>~12 months</td><td class="no">Tight — no buffer for delays</td></tr>
+    <tr><td><strong>$1M</strong></td><td><strong>~$40K</strong></td><td class="ok"><strong>~20 months</strong></td><td class="ok">Hits Series A with 25% buffer</td></tr>
+    <tr><td>$1.5M</td><td>~$45K</td><td>~25 months</td><td>Comfortable — bigger swing on features or distribution</td></tr>
+  </table>
+  <div class="verdict good">
+    <div class="label">Recommended ask</div>
+    <p><strong>Raise $1M.</strong> At a $6M post-money, dilution is ~14%. Plan $700K spent, $500K committed, 25% buffer. Alternative: fund $500K from parent-org, raise $500K–$1M from angels/strategic.</p>
+  </div>
+  <div class="slide-num">21</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="num">Part 6</div>
+  <h2>Sensitivity — what breaks the model.</h2>
+  <p class="blurb">The risks to unit economics. LLM costs still dominant since they're global.</p>
+  <div class="slide-num">22</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 6 — Downside sensitivities</div>
+  <h2 class="title">Pricing pressure and power-user tax are the killers.</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>If $18 → $12 (Apple/Google ship $5/mo)</h3>
+      <ul>
+        <li>Net revenue/user: $13.50 → $9.00</li>
+        <li>Gross profit: $8.61 → $4.11</li>
+        <li>Break-even (PK): 39K → <strong>83K users</strong> — still manageable</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>If churn rises to 6% steady-state</h3>
+      <ul>
+        <li>LTV: $207 → $143</li>
+        <li>LTV:CAC: 9.4× → 6.5× (still healthy)</li>
+        <li>Lifetime revenue −30% → Series B valuation pressure</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:1.2rem"><strong>Upside — LLM costs −50% by EOY 2026 (plausible):</strong> LLM/user $3.39 → $1.70 · gross profit +$1.69 · margin +10pp. This is likely and would help disproportionately given PK's high infra:people ratio.</p>
+  <div class="slide-num">23</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 6 — Risks specific to PK cost base</div>
+  <h2 class="title">What could raise our cost advantage?</h2>
+  <ul>
+    <li><strong>PKR depreciation</strong> reduces our cost base further in USD terms — upside for us.</li>
+    <li><strong>PKR appreciation / wage inflation</strong> — over 3–5 years, PK tech wages rising 15–25%/yr in PKR terms could compress the advantage to ~70% from 85%. Still significant.</li>
+    <li><strong>Global remote hiring pressure</strong> — if US/EU startups begin hiring senior PK engineers at USD market rates, our talent budget must rise. Happening slowly today; likely faster by 2027.</li>
+    <li><strong>International hires</strong> — if we need a senior ML hire the local market can't supply, we pay USD market rates = $150K–$250K. One of these resets the ratio dramatically.</li>
+  </ul>
+  <div class="verdict warn">
+    <div class="label">Mitigation</div>
+    <p>Budget the upper (+30%) band for Senior ML and Security roles. Allow for one remote international advisor on retainer (~$30K/yr). Lock annual comp reviews to USD, not PKR, for retention.</p>
+  </div>
+  <div class="slide-num">24</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="num">Part 7</div>
+  <h2>Cost efficiency levers.</h2>
+  <p class="blurb">Now that people is only 27% of Y1 spend, the levers shift to infrastructure.</p>
+  <div class="slide-num">25</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 7 — Five levers, ordered by impact at PK base</div>
+  <h2 class="title">Caching, routing, reservations, batching, self-hosting.</h2>
+  <table>
+    <tr><th>Lever</th><th>Mechanism</th><th>Savings @ 100K users</th></tr>
+    <tr><td><strong>1. LLM caching</strong></td><td>Redundant queries hit cache (target 40% hit rate)</td><td>$80K/mo</td></tr>
+    <tr><td><strong>2. Routing optimization</strong></td><td>Gemini Flash for 80%, Claude Sonnet for complex</td><td>$50K/mo</td></tr>
+    <tr><td><strong>3. Batch processing</strong></td><td>Briefings, memory consolidation off-peak</td><td>$30K/mo</td></tr>
+    <tr><td><strong>4. AWS Savings Plans</strong></td><td>1-year compute commits (after M10)</td><td>$15K/mo</td></tr>
+    <tr><td><strong>5. Self-hosted LLM (Y3+)</strong></td><td>Llama 3.1 70B on 8×A100 for bulk ops</td><td>~$1.3M/mo @ 1M users</td></tr>
+  </table>
+  <div class="slide-num">26</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 8 — Cost profile by year (PK base)</div>
+  <h2 class="title">People drops to ~30% of spend by Y3. LLM + infra dominates.</h2>
+  <div class="cols three">
+    <div class="col">
+      <h3>Year 1 (~$468K)</h3>
+      <ul>
+        <li>People 27%</li>
+        <li>Infra + LLM 32%</li>
+        <li>Legal 16%</li>
+        <li>Marketing 16%</li>
+        <li>Buffer 9%</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Year 2 (~$3.0M)</h3>
+      <ul>
+        <li>People 30%</li>
+        <li>LLM + infra 38%</li>
+        <li>Marketing 20%</li>
+        <li>Legal 7%</li>
+        <li>Other 5%</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Year 3 (~$14M)</h3>
+      <ul>
+        <li>LLM + infra 50%</li>
+        <li>People 28%</li>
+        <li>Marketing 15%</li>
+        <li>Other 7%</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:1.2rem"><strong>3-year total cost ~$17.5M</strong> (vs. $45.8M US bench). At $35–50M Y3 ARR (mid-range) vs. $14M run-rate → implied Y3 operating margin ~60–70%.</p>
+  <div class="slide-num">27</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Part 9 — Verdict</div>
+  <h2 class="title">Financially feasible — even more so at PK base.</h2>
+  <ul>
+    <li><strong>Seed ≥$1M.</strong> Funds 18+ months runway to Series A milestones at PK burn.</li>
+    <li><strong>Blended gross margin &gt;45%</strong> after App Store fees. Achievable with web checkout + LLM cost control.</li>
+    <li><strong>Steady-state churn &lt;6%/month.</strong> Achievable if product delivers daily value.</li>
+    <li><strong>App Store fee mitigation</strong> via web-sub flow for ≥40% of users.</li>
+    <li><strong>Aggressive LLM routing from day one</strong> — default cheapest capable model, escalate only when needed.</li>
+  </ul>
+  <div class="slide-num">28</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Cost Feasibility</div>
+  <div class="kicker">Numbers to memorize</div>
+  <h2 class="title">The six numbers that frame every decision.</h2>
+  <div class="callout-grid">
+    <div class="callout good"><div class="cl-label">Seed target</div><div class="cl-value">~$1M</div><div class="cl-note">Down from $4M US bench. Parent-org + angels OK.</div></div>
+    <div class="callout"><div class="cl-label">Year 1 burn</div><div class="cl-value">~$468K</div><div class="cl-note">82% cheaper than US benchmark.</div></div>
+    <div class="callout"><div class="cl-label">LLM / paying user</div><div class="cl-value">$3.39</div><div class="cl-note">Blended. Global pricing — doesn't change with PK.</div></div>
+    <div class="callout"><div class="cl-label">Gross profit / user</div><div class="cl-value">$8.61</div><div class="cl-note">~48% margin after App Store fees.</div></div>
+    <div class="callout good"><div class="cl-label">Break-even (PK)</div><div class="cl-value">~40K</div><div class="cl-note">Paying users. Down from 173K US bench.</div></div>
+    <div class="callout"><div class="cl-label">Year 3 target</div><div class="cl-value">900K / $50M</div><div class="cl-note">Plan target. Honest base case: 400–500K / $20–35M.</div></div>
+  </div>
+  <div class="slide-num">29</div>
+</section>
+
+<section class="slide closing">
+  <div class="end">End of Deck 4</div>
+  <h2>Buildable on $1M seed. Break-even at ~40K paying users. The cost story changed — the quality bar didn't.</h2>
+  <p style="font-size:19px;color:var(--ink-soft);max-width:820px;line-height:1.55">PK cost base doesn't change the product. It changes how much margin for error we have and how early we hit profitability. Assumptions defended weekly: cost/user dashboard from Phase 3, churn monthly, App Store fee blend quarterly.</p>
+  <div class="nav-hint">← / → to navigate · Press G for glossary · <a href="index.html" style="color:var(--accent);text-decoration:none">Back to index</a> · Next: MVP Roadmap</div>
+  <div class="slide-num">30</div>
+</section>
+
+</div>
+
+<!-- Glossary modal -->
+<div class="glossary-modal" id="glossary-modal">
+  <div class="glossary-box">
+    <h2>Glossary — abbreviations used in this deck</h2>
+    <p class="sub">Press Esc or click outside to close. Keyboard: G to open.</p>
+    <dl>
+      <dt>PKR / USD</dt><dd>Pakistani Rupee / US Dollar. Conversion used throughout: 1 USD ≈ 285 PKR.</dd>
+      <dt>FL</dt><dd>Fully loaded — base salary plus ~30% for benefits, equipment, payroll tax, office/tool share.</dd>
+      <dt>FTE</dt><dd>Full-Time Equivalent.</dd>
+      <dt>CAC</dt><dd>Customer Acquisition Cost.</dd>
+      <dt>LTV</dt><dd>Lifetime Value — total gross profit per customer over their relationship.</dd>
+      <dt>ARR / MRR</dt><dd>Annual / Monthly Recurring Revenue.</dd>
+      <dt>ARPU</dt><dd>Average Revenue Per User.</dd>
+      <dt>COGS</dt><dd>Cost of Goods Sold — variable cost to deliver the service per user.</dd>
+      <dt>LLM</dt><dd>Large Language Model — Claude, GPT-4, Gemini.</dd>
+      <dt>P&amp;L</dt><dd>Profit &amp; Loss statement.</dd>
+      <dt>GDPR</dt><dd>EU General Data Protection Regulation.</dd>
+      <dt>DPIA</dt><dd>Data Protection Impact Assessment (GDPR requirement).</dd>
+      <dt>DPA</dt><dd>Data Processing Agreement with vendors.</dd>
+      <dt>ROPA</dt><dd>Record of Processing Activities (GDPR requirement).</dd>
+      <dt>API</dt><dd>Application Programming Interface.</dd>
+      <dt>AWS</dt><dd>Amazon Web Services (cloud provider).</dd>
+      <dt>ECS</dt><dd>Elastic Container Service (AWS compute).</dd>
+      <dt>RDS</dt><dd>Relational Database Service (AWS managed DB).</dd>
+      <dt>MSK</dt><dd>Managed Streaming for Kafka (AWS).</dd>
+      <dt>CDN</dt><dd>Content Delivery Network.</dd>
+      <dt>KMS</dt><dd>Key Management Service (AWS encryption keys).</dd>
+      <dt>IP</dt><dd>Intellectual Property (or Internet Protocol in context).</dd>
+      <dt>ToS</dt><dd>Terms of Service.</dd>
+      <dt>PH</dt><dd>Product Hunt (launch channel).</dd>
+      <dt>PMF</dt><dd>Product-Market Fit.</dd>
+      <dt>CEO / CTO</dt><dd>Chief Executive / Technology Officer. Existing CEO in parent org, fractional CTO.</dd>
+      <dt>NPS</dt><dd>Net Promoter Score.</dd>
+    </dl>
+  </div>
+  <button class="glossary-close" id="glossary-close" aria-label="Close glossary">×</button>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="nav">
+  <button id="glossary-btn" class="nav-glossary" title="Glossary (G)">?</button>
+  <button id="home" class="nav-home" title="First slide (Home)">⌂</button>
+  <button id="to-index" class="nav-index" title="Back to index (I)">≡</button>
+  <button id="prev" title="Previous (←)">‹</button>
+  <button id="next" title="Next (→)">›</button>
+</div>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aldrich — MVP Roadmap</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="deck">
+
+<section class="slide cover active">
+  <div class="deck-title">Aldrich · Deck 5 of 8</div>
+  <div class="eyebrow">MVP Roadmap</div>
+  <h1>22 weeks. Kickoff to paid GA.</h1>
+  <p class="subtitle">What we build for V1, what we deliberately don't, the phase-by-phase critical path, and the gates that decide whether we advance or hold.</p>
+  <div class="meta">Source: MVP_Roadmap.md · 17-week build + 5-week beta</div>
+  <div class="slide-num">01</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Executive summary</div>
+  <h2 class="title">The V1 thesis: three things must be true at Day 30.</h2>
+  <p class="lede">A user who downloads Aldrich and uses it for 30 days should feel that…</p>
+  <ul>
+    <li><strong>Remember.</strong> It remembers what they tell it.</li>
+    <li><strong>Surface.</strong> It proactively surfaces things they'd have missed.</li>
+    <li><strong>Act.</strong> They can trust it to act on their behalf — without fearing it'll do something wrong.</li>
+  </ul>
+  <p style="margin-top:1.2rem">If those three are true, everything else can be added later. If any one is false, nothing else matters. So V1 is built in that exact priority order.</p>
+  <div class="slide-num">02</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">What V1 is — and isn't</div>
+  <h2 class="title">Ruthless scope discipline.</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>V1 is</h3>
+      <ul>
+        <li>Approval-gated and reversible</li>
+        <li>One killer flow done well</li>
+        <li>iOS + Android (no desktop)</li>
+        <li>Push-to-listen (no always-on)</li>
+        <li>3 integrations done deeply</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>V1 is NOT</h3>
+      <ul>
+        <li>An open-ended agent that does anything</li>
+        <li>A ChatGPT replacement for general chat</li>
+        <li>A cross-device real-time sync dream</li>
+        <li>A voice-only product</li>
+        <li>An "always-on listening" experience</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-num">03</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="num">Scope gate</div>
+  <h2>What's in V1.</h2>
+  <p class="blurb">Ten capabilities. Each "feels finished" — not a beta of an idea.</p>
+  <div class="slide-num">04</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">In V1 — capabilities</div>
+  <h2 class="title">10 capabilities. Each one finished, not stubbed.</h2>
+  <table>
+    <tr><th>Capability</th><th>Scope</th></tr>
+    <tr><td><strong>Memory Hub</strong></td><td>Store, retrieve, search, correct facts</td></tr>
+    <tr><td><strong>Morning Briefing</strong></td><td>Calendar preview + top 3 actionables</td></tr>
+    <tr><td><strong>Context Cards</strong></td><td>Surface memory at calendar/location moments</td></tr>
+    <tr><td><strong>Smart Reminders</strong></td><td>"Remind me to ask X when I see Y"</td></tr>
+    <tr><td><strong>Calendar Actions</strong></td><td>Schedule, reschedule, find times, invite</td></tr>
+    <tr><td><strong>Email Triage</strong></td><td>Top 3 summarized; drafts approval-gated</td></tr>
+    <tr><td><strong>Task Creation</strong></td><td>Todoist, Apple Reminders, Notion</td></tr>
+    <tr><td><strong>Ask Aldrich</strong></td><td>NL Q&amp;A against memory + general knowledge</td></tr>
+    <tr><td><strong>Settings &amp; Controls</strong></td><td>Permissions dial, memory viewer, undo stack</td></tr>
+    <tr><td><strong>Onboarding</strong></td><td>48h calibration sequence</td></tr>
+  </table>
+  <div class="slide-num">05</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Deferred to V1.5–V3</div>
+  <h2 class="title">Everything else moves out — by phase.</h2>
+  <div class="cols three">
+    <div class="col">
+      <h3>V1.5 (M2–4)</h3>
+      <ul>
+        <li>Desktop companion (Mac first)</li>
+        <li>Deeper Slack/Linear/Jira</li>
+        <li>Travel planning</li>
+        <li>Group / team memory</li>
+        <li>Custom Aldrich skills</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>V2 (M4–9)</h3>
+      <ul>
+        <li>Ambient capture (non-audio)</li>
+        <li>Multi-agent delegation</li>
+        <li>Team plans + shared memory</li>
+        <li>Developer API</li>
+        <li>Web browsing agent</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>V3 (M9+)</h3>
+      <ul>
+        <li>Financial actions</li>
+        <li>Health-adjacent features</li>
+        <li>Federated learning</li>
+        <li>Enterprise (SSO, SOC2)</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:1.2rem"><strong>Never (unless platforms change):</strong> iOS true always-on listening · actions w/o approval in high-trust categories · training on user data without explicit opt-in · selling user data.</p>
+  <div class="slide-num">06</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="num">17-week build path</div>
+  <h2>Built by dependency, not by demo convenience.</h2>
+  <p class="blurb">Foundation first. Even though it's not demo-able, every later feature depends on it being right.</p>
+  <div class="slide-num">07</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Phase 0 — Weeks 0–1</div>
+  <h2 class="title">Kickoff and foundations.</h2>
+  <ul>
+    <li>Team assembled, roles clear</li>
+    <li>Architecture decisions made and documented (ADRs)</li>
+    <li>Dev environments, CI/CD, observability bootstrapped</li>
+    <li>Privacy and ToS drafts in legal review</li>
+    <li>Design system v0 drafted</li>
+  </ul>
+  <div class="verdict">
+    <div class="label">Gate to proceed</div>
+    <p>All critical-path hires in seat. Architecture ADRs signed off (model provider, memory store, auth, cloud).</p>
+  </div>
+  <div class="slide-num">08</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Phase 1 — Weeks 2–4</div>
+  <h2 class="title">Safety foundation. (Why first: retrofitting is the most common failure mode.)</h2>
+  <ul>
+    <li>Undo stack — any write action logged and reversible for 30 days</li>
+    <li>Kill switch hierarchy: global, per-action-class, per-user</li>
+    <li>Sandbox classifier — destructive actions through policy engine</li>
+    <li>Biometric gate for high-trust actions</li>
+    <li>Circuit breaker — stops autonomous action after N errors in session</li>
+    <li>Audit log write path</li>
+  </ul>
+  <div class="verdict good">
+    <div class="label">End-of-phase gate</div>
+    <p>Red-team session: try to make the unfinished system do something bad — it should fail in the right way every time.</p>
+  </div>
+  <div class="slide-num">09</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Phase 2 — Weeks 4–7</div>
+  <h2 class="title">Memory Hub. The longest lever for retention.</h2>
+  <ul>
+    <li>Write path: conversations, approved facts, extracted entities</li>
+    <li>Retrieval: vector search + structured schema retrieval</li>
+    <li>Fact provenance: source, timestamp, confidence</li>
+    <li>Contradiction detector + memory viewer/editor</li>
+    <li>Retention policies (cold storage after 365 days, user delete)</li>
+    <li>Cross-device sync with encryption at rest</li>
+  </ul>
+  <div class="verdict">
+    <div class="label">Quality bar</div>
+    <p>Retrieval eval: <strong>90%+ precision on top-5</strong> for a 200-query internal set. Memory write latency p95 &lt; 500ms. One week of internal dogfooding.</p>
+  </div>
+  <div class="slide-num">10</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Phase 3 — Weeks 7–10</div>
+  <h2 class="title">ReAct engine and model routing.</h2>
+  <ul>
+    <li>Claude integration with tool-use format</li>
+    <li>Fallback provider (GPT-4 via Azure) configured</li>
+    <li>Small-model router for intent classification (Gemma 2B on-device tier 1)</li>
+    <li>Planner → Executor → Critic pattern (plan validated before execution for multi-step)</li>
+    <li>Chain-depth cap enforced (≤3 without explicit per-step approval)</li>
+    <li>Observability: per-call latency, cost, model, success</li>
+  </ul>
+  <div class="verdict">
+    <div class="label">Quality bar</div>
+    <p>Chain success eval on 200 realistic queries: <strong>95%+ on single-step, 88%+ on 3-step</strong>. Cost-per-query dashboard accurate.</p>
+  </div>
+  <div class="slide-num">11</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Phase 4 — Weeks 10–13 — Five parallel streams</div>
+  <h2 class="title">Build the V1 features in parallel, with isolated interfaces.</h2>
+  <table>
+    <tr><th>Stream</th><th>Owner deliverable</th></tr>
+    <tr><td><strong>A. Morning Briefing &amp; Context Cards</strong></td><td>Calendar preview, "top 3" intent, widget surfacing, Siri Suggestions</td></tr>
+    <tr><td><strong>B. Calendar &amp; Task Actions</strong></td><td>Full calendar suite + Todoist/Reminders/Notion + smart reminders</td></tr>
+    <tr><td><strong>C. Email Triage &amp; Reply</strong></td><td>Gmail + Outlook integration, triage summarization, approval-gated drafts</td></tr>
+    <tr><td><strong>D. Onboarding Flow</strong></td><td>48h calibration, account connection UX, preference capture</td></tr>
+    <tr><td><strong>E. Settings &amp; Trust UI</strong></td><td>Permissions dial, memory viewer, activity log w/ undo, privacy</td></tr>
+  </table>
+  <div class="slide-num">12</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Phases 5–7 — Polish, beta prep, controlled beta</div>
+  <h2 class="title">Three weeks polish. Two weeks beta prep. Three weeks controlled beta.</h2>
+  <div class="cols three">
+    <div class="col">
+      <h3>Phase 5 — Polish (W13–15)</h3>
+      <ul>
+        <li>All features integrated</li>
+        <li>Cross-device sync validated</li>
+        <li>Error + empty states designed</li>
+        <li>WCAG 2.1 AA pass</li>
+        <li>App startup &lt; 2s</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Phase 6 — Beta prep (W15–17)</h3>
+      <ul>
+        <li>App Store submission materials</li>
+        <li>200-tester TestFlight group</li>
+        <li>Marketing site (waitlist-only)</li>
+        <li>Support infra: Intercom, docs</li>
+        <li>ToS &amp; Privacy finalized</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Phase 7 — Beta (W17–20)</h3>
+      <ul>
+        <li>200 → 1K → 5K users</li>
+        <li>Weekly release cadence</li>
+        <li>Telemetry on activation, retention</li>
+        <li>Day 7 &gt; 60% / Day 30 &gt; 35%</li>
+        <li>NPS &gt; 30 by end of beta</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-num">13</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Phase 8 — Weeks 20–22</div>
+  <h2 class="title">Paid GA launch.</h2>
+  <ul>
+    <li>Paid tiers enabled (Free / $18 Pro / $35 Power)</li>
+    <li>Product Hunt + HN + Twitter launch coordinated</li>
+    <li>Press outreach to 20 tier-1 publications</li>
+    <li>5 launch-adjacent content pieces live</li>
+    <li>Founder videos on YouTube + TikTok</li>
+    <li>Referral program live</li>
+  </ul>
+  <div class="verdict good">
+    <div class="label">Launch week targets</div>
+    <p>10K signups · 3–5% paid conversion in week 1 · launch-day traffic handled without infra incident.</p>
+  </div>
+  <div class="slide-num">14</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="num">Decision gates</div>
+  <h2>When to advance, when to hold.</h2>
+  <p class="blurb">Between phases we don't advance automatically.</p>
+  <div class="slide-num">15</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Gate criteria</div>
+  <h2 class="title">Five questions at every phase boundary.</h2>
+  <ul>
+    <li><strong>Are the phase outcomes actually met?</strong> Not "mostly" — actually.</li>
+    <li><strong>Are there critical bugs that must be fixed?</strong></li>
+    <li><strong>Are we on burn?</strong> If &gt;10% over plan, what's the tradeoff?</li>
+    <li><strong>Do we have the team for the next phase?</strong> Hiring on track?</li>
+    <li><strong>Has anything in the market changed that should re-scope?</strong></li>
+  </ul>
+  <p style="margin-top:1.2rem">If any answer is red, pause and re-plan instead of rolling forward.</p>
+  <div class="slide-num">16</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Staffing through 22 weeks</div>
+  <h2 class="title">7 → 14 people, hired in waves.</h2>
+  <table>
+    <tr><th>Stage</th><th>Add</th></tr>
+    <tr><td><strong>Week 0 (kickoff)</strong></td><td>CEO, CTO, founding iOS/Android, AI engineer, designer, part-time legal</td></tr>
+    <tr><td><strong>Week 4</strong></td><td>2nd backend (memory + sync), 2nd AI engineer (routing + evals)</td></tr>
+    <tr><td><strong>Week 8</strong></td><td>PM, head of CX (PT), security engineer (contractor OK)</td></tr>
+    <tr><td><strong>Week 14</strong></td><td>Head of growth, DevRel/community lead</td></tr>
+    <tr><td><strong>Week 20 (paid GA)</strong></td><td>2 support engineers, data analyst</td></tr>
+  </table>
+  <p style="margin-top:1rem"><strong>Total at paid GA: ~12–14 people.</strong> Matches the $2.55M Year 1 burn.</p>
+  <div class="slide-num">17</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Critical-path dependencies</div>
+  <h2 class="title">Five things that, if they slip, everything slips.</h2>
+  <ul>
+    <li><strong>App Store first approval</strong> — blocks beta + GA. Mitigated by early Apple relations meeting.</li>
+    <li><strong>Memory Hub retrieval quality</strong> — blocks Phase 4. Mitigated by evals from Phase 2.</li>
+    <li><strong>Safety foundation</strong> — blocks all action work. Mitigated by making it Phase 1.</li>
+    <li><strong>Claude pricing &amp; rate limits</strong> — could derail unit economics. Provider abstraction.</li>
+    <li><strong>Legal/Privacy framework</strong> — blocks public launch. Engage counsel at Week 0.</li>
+  </ul>
+  <div class="slide-num">18</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Roadmap risks</div>
+  <h2 class="title">Seven risks, each with a probability and a slip estimate.</h2>
+  <table>
+    <tr><th>Risk</th><th>Probability</th><th>Impact</th></tr>
+    <tr><td>App Store rejection (first submission)</td><td>30%</td><td>2–4 week slip</td></tr>
+    <tr><td>Retention below target in beta</td><td>40%</td><td>Delay paid GA</td></tr>
+    <tr><td>Claude API reliability issues</td><td>20%</td><td>Bugs + friction</td></tr>
+    <tr><td>Hiring slippage in AI roles</td><td>40%</td><td>2–4 week slip</td></tr>
+    <tr><td>LLM unit economics worse than modeled</td><td>30%</td><td>Pricing adjustment</td></tr>
+    <tr><td>Privacy regulator inquiry</td><td>15%</td><td>4–8 week slip</td></tr>
+    <tr><td>Key person leaves mid-build</td><td>15%</td><td>4–6 week slip</td></tr>
+  </table>
+  <div class="slide-num">19</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="num">Definition of "Done"</div>
+  <h2>Ready for paid GA.</h2>
+  <p class="blurb">All of the following must be true before we flip paid on.</p>
+  <div class="slide-num">20</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Definition of done — Product + Reliability</div>
+  <h2 class="title">Hard quality bar across product and safety.</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Product</h3>
+      <ul>
+        <li>Zero P0 bugs in past 14 days</li>
+        <li>Day 7 retention &gt; 55%</li>
+        <li>Day 30 retention &gt; 30%</li>
+        <li>NPS &gt; 30 sustained 2 weeks</li>
+        <li>All V1 features live</li>
+        <li>Onboarding completion &gt; 70%</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Reliability &amp; Safety</h3>
+      <ul>
+        <li>Chain success &gt; 90% on 3-step eval</li>
+        <li>Zero high-severity trust incidents past 30 days</li>
+        <li>Circuit breaker + undo exercised in prod</li>
+        <li>Red-team pass against V1 feature set</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-num">21</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Definition of done — Business + Financial</div>
+  <h2 class="title">Business and financial readiness too.</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Business</h3>
+      <ul>
+        <li>App Store + Play Store approved</li>
+        <li>Reviewer relations positive</li>
+        <li>Payment infra tested, ToS/Privacy reviewed</li>
+        <li>Support team trained, on-call set</li>
+        <li>Marketing site live, email infra tested</li>
+        <li>Referral program tested</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Financial</h3>
+      <ul>
+        <li>LLM cost / active user within 20% of forecast</li>
+        <li>Cash runway &gt; 9 months at current burn</li>
+        <li>Series A story components in place: retention, conversion, ARPU, cohort unit economics</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-num">22</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">V1.5+ feature pipeline</div>
+  <h2 class="title">After 4 weeks of stable V1 metrics, V1.5 starts.</h2>
+  <p>Priority set by (a) cohort retention, (b) beta requests, (c) what unit economics allow.</p>
+  <ul>
+    <li>1. Desktop companion (Mac first) — highest-value power-user unlock</li>
+    <li>2. Deeper Slack and Linear read/write</li>
+    <li>3. "Aldrich skills" — user-defined automations</li>
+    <li>4. Group memory (households or teams)</li>
+    <li>5. Watch complications (context at a glance)</li>
+    <li>6. Travel planning (once reliability allows)</li>
+    <li>7. More integrations (Notion, Gmail labels, Calendly, Superhuman…)</li>
+  </ul>
+  <p style="margin-top:1rem"><strong>Discipline:</strong> every new capability ships with the same rule — safety first, approval-gated, logged, undoable.</p>
+  <div class="slide-num">23</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">The "no" list</div>
+  <h2 class="title">Pre-decided rejections to protect focus and trust.</h2>
+  <ul>
+    <li>Make Aldrich always-listening on iOS — impossible</li>
+    <li>Skip the approval gate on email send for Power users — no</li>
+    <li>"Train on your data" with financial incentive — no, brand damage</li>
+    <li>Cryptocurrency trading integration — regulatory + trust risk</li>
+    <li>"Pick your LLM" power feature — adds complexity, hurts consistency</li>
+    <li>Enterprise version before Month 9 — focus</li>
+    <li>More than 2 languages before Month 12 — focus (English + Spanish in V1.5)</li>
+  </ul>
+  <div class="slide-num">24</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">Summary timeline</div>
+  <h2 class="title">From kickoff to paid revenue: ~5 months.</h2>
+  <table>
+    <tr><th>Weeks</th><th>Phase</th><th>Output</th></tr>
+    <tr><td>0–1</td><td>Kickoff</td><td>Team, architecture, environments</td></tr>
+    <tr><td>2–4</td><td>Safety foundation</td><td>Undo, kill switch, sandbox, biometric gate</td></tr>
+    <tr><td>4–7</td><td>Memory Hub</td><td>Write, retrieve, search, correct</td></tr>
+    <tr><td>7–10</td><td>ReAct + routing</td><td>Intent → plan → tool → result</td></tr>
+    <tr><td>10–13</td><td>V1 features (parallel)</td><td>Briefing, actions, triage, onboarding, settings</td></tr>
+    <tr><td>13–15</td><td>Polish</td><td>Integration, perf, error states, a11y</td></tr>
+    <tr><td>15–17</td><td>Beta prep + submission</td><td>Store approval, beta ramp</td></tr>
+    <tr><td>17–20</td><td>Controlled beta</td><td>200 → 5K users, metrics</td></tr>
+    <tr><td>20–22</td><td>Paid GA</td><td>10K users week-1, paid tier live</td></tr>
+  </table>
+  <div class="slide-num">25</div>
+</section>
+
+<section class="slide closing">
+  <div class="end">End of Deck 5</div>
+  <h2>Every phase ships finished work. We'd rather be a month late with something trustworthy than on time with something that damages the brand in week one.</h2>
+  <p style="font-size:18px;color:var(--ink-soft);max-width:780px;line-height:1.55">Re-review at the end of every phase gate. From paid GA to Series A readiness with healthy cohort metrics: ~12 months.</p>
+  <div class="nav-hint">← / → to navigate · <a href="index.html" style="color:var(--accent);text-decoration:none">Back to index</a> · Next: Process</div>
+  <div class="slide-num">26</div>
+</section>
+
+</div>
+
+<!-- Glossary modal -->
+<div class="glossary-modal" id="glossary-modal">
+  <div class="glossary-box">
+    <h2>Glossary</h2>
+    <p class="sub">Abbreviations used across the Aldrich deck set. Press Esc or click outside to close. Keyboard: G to open.</p>
+    <dl>
+      <dt>ADR</dt><dd>Architecture Decision Record.</dd>
+      <dt>ANE</dt><dd>Apple Neural Engine (on-device ML accelerator).</dd>
+      <dt>API</dt><dd>Application Programming Interface.</dd>
+      <dt>ARR / MRR</dt><dd>Annual / Monthly Recurring Revenue.</dd>
+      <dt>ARPU</dt><dd>Average Revenue Per User.</dd>
+      <dt>AWS</dt><dd>Amazon Web Services.</dd>
+      <dt>BIPA</dt><dd>Biometric Information Privacy Act (Illinois).</dd>
+      <dt>CAC</dt><dd>Customer Acquisition Cost.</dd>
+      <dt>CCPA</dt><dd>California Consumer Privacy Act.</dd>
+      <dt>CDN</dt><dd>Content Delivery Network.</dd>
+      <dt>CEO / CTO</dt><dd>Chief Executive / Technology Officer.</dd>
+      <dt>COGS</dt><dd>Cost of Goods Sold.</dd>
+      <dt>CoS</dt><dd>Chief of Staff.</dd>
+      <dt>CRDT</dt><dd>Conflict-free Replicated Data Type (multi-device sync).</dd>
+      <dt>CX</dt><dd>Customer Experience (support function).</dd>
+      <dt>DPA</dt><dd>Data Processing Agreement with vendors.</dd>
+      <dt>DPIA</dt><dd>Data Protection Impact Assessment (GDPR).</dd>
+      <dt>DPO</dt><dd>Data Protection Officer (GDPR role).</dd>
+      <dt>DSR</dt><dd>Data Subject Request (GDPR access/delete request).</dd>
+      <dt>EA</dt><dd>Executive Assistant.</dd>
+      <dt>EU AI Act</dt><dd>European Union Artificial Intelligence Act.</dd>
+      <dt>FL</dt><dd>Fully Loaded — base salary + ~30% for benefits, equipment, payroll tax.</dd>
+      <dt>FSM</dt><dd>Finite State Machine.</dd>
+      <dt>FTE</dt><dd>Full-Time Equivalent.</dd>
+      <dt>GA</dt><dd>General Availability (public launch).</dd>
+      <dt>GDPR</dt><dd>General Data Protection Regulation (EU privacy law).</dd>
+      <dt>GTM</dt><dd>Go-to-Market plan.</dd>
+      <dt>HIBP</dt><dd>Have I Been Pwned (public breach-data service).</dd>
+      <dt>HN</dt><dd>Hacker News (launch channel).</dd>
+      <dt>IC</dt><dd>Individual Contributor (non-management role).</dd>
+      <dt>IP</dt><dd>Intellectual Property.</dd>
+      <dt>JTBD</dt><dd>Jobs To Be Done (framework).</dd>
+      <dt>KMS</dt><dd>Key Management Service (encryption-key storage).</dd>
+      <dt>LLM</dt><dd>Large Language Model (Claude, GPT-4, Gemini).</dd>
+      <dt>LTV</dt><dd>Lifetime Value — total gross profit per customer.</dd>
+      <dt>M365</dt><dd>Microsoft 365.</dd>
+      <dt>MSK</dt><dd>Managed Streaming for Kafka (AWS).</dd>
+      <dt>MTTR</dt><dd>Mean Time To Recovery.</dd>
+      <dt>MVP</dt><dd>Minimum Viable Product.</dd>
+      <dt>NPS</dt><dd>Net Promoter Score.</dd>
+      <dt>NPU</dt><dd>Neural Processing Unit (Android equivalent of ANE).</dd>
+      <dt>OAuth</dt><dd>Open Authorization — standard for third-party app access.</dd>
+      <dt>P0 / P99</dt><dd>Priority 0 (critical bug) / 99th percentile latency.</dd>
+      <dt>PH</dt><dd>Product Hunt (launch channel).</dd>
+      <dt>PII</dt><dd>Personally Identifiable Information.</dd>
+      <dt>PKM</dt><dd>Personal Knowledge Management (Mem, Reflect, etc.).</dd>
+      <dt>PKR / USD</dt><dd>Pakistani Rupee / US Dollar. 1 USD ≈ 285 PKR (2026 approx).</dd>
+      <dt>PMF</dt><dd>Product-Market Fit.</dd>
+      <dt>PRD</dt><dd>Product Requirements Document.</dd>
+      <dt>RDS</dt><dd>Relational Database Service (AWS).</dd>
+      <dt>ReAct</dt><dd>Reasoning + Acting — interleaved reasoning and tool-call pattern for LLM agents.</dd>
+      <dt>ROPA</dt><dd>Record of Processing Activities (GDPR).</dd>
+      <dt>SaaS</dt><dd>Software as a Service.</dd>
+      <dt>SAM / SOM / TAM</dt><dd>Serviceable Addressable / Serviceable Obtainable / Total Addressable Market.</dd>
+      <dt>SCIM</dt><dd>System for Cross-domain Identity Management (enterprise user provisioning).</dd>
+      <dt>SDK</dt><dd>Software Development Kit.</dd>
+      <dt>SDUI</dt><dd>Server-Driven UI — UI described by server JSON, rendered client-side.</dd>
+      <dt>SEO</dt><dd>Search Engine Optimization.</dd>
+      <dt>SEV</dt><dd>Severity (SEV-1 = critical, SEV-3 = minor).</dd>
+      <dt>SLA</dt><dd>Service Level Agreement.</dd>
+      <dt>SMB</dt><dd>Small and Medium Business.</dd>
+      <dt>SOC 2</dt><dd>Service Organization Control 2 (enterprise security compliance).</dd>
+      <dt>SSO</dt><dd>Single Sign-On.</dd>
+      <dt>T&amp;S</dt><dd>Trust &amp; Safety team.</dd>
+      <dt>ToS</dt><dd>Terms of Service.</dd>
+      <dt>TTFT</dt><dd>Time To First Token (LLM latency).</dd>
+      <dt>UDP</dt><dd>User Datagram Protocol.</dd>
+      <dt>UI / UX</dt><dd>User Interface / User Experience.</dd>
+      <dt>VA</dt><dd>Virtual Assistant (human or AI).</dd>
+      <dt>VAD</dt><dd>Voice Activity Detection.</dd>
+      <dt>VIP</dt><dd>Very Important Person (user-designated priority contact).</dd>
+      <dt>WCAG</dt><dd>Web Content Accessibility Guidelines.</dd>
+      <dt>WTP</dt><dd>Willingness To Pay.</dd>
+      <dt>WWDC</dt><dd>Apple Worldwide Developers Conference.</dd>
+    </dl>
+  </div>
+  <button class="glossary-close" id="glossary-close" aria-label="Close glossary">×</button>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="nav">
+  <button id="glossary-btn" class="nav-glossary" title="Glossary (G)">?</button>
+  <button id="home" class="nav-home" title="First slide (Home)">⌂</button>
+  <button id="to-index" class="nav-index" title="Back to index (I)">≡</button>
+  <button id="prev" title="Previous (←)">‹</button>
+  <button id="next" title="Next (→)">›</button>
+</div>
+<script src="nav.js"></script>
+</body>
+</html>

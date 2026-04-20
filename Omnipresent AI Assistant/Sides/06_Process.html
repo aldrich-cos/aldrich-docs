@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aldrich — Process</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="deck">
+
+<section class="slide cover active">
+  <div class="deck-title">Aldrich · Deck 6 of 8</div>
+  <div class="eyebrow">Process</div>
+  <h1>How it gets built. How it works. How it runs.</h1>
+  <p class="subtitle">Four overlapping processes — development, runtime, user experience, operations — and the safety immune system that runs continuously around all of them.</p>
+  <div class="meta">Source: Process.md · 10 sections</div>
+  <div class="slide-num">01</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 1 — The four processes</div>
+  <h2 class="title">Aldrich isn't a single process. It's four overlapping workflows.</h2>
+  <table>
+    <tr><th>Process</th><th>Owner</th><th>Trigger</th><th>Duration</th></tr>
+    <tr><td>Development</td><td>Engineering</td><td>Product decision / user feedback</td><td>1–8 weeks/iteration</td></tr>
+    <tr><td>Runtime</td><td>System</td><td>Intent / scheduled trigger / webhook</td><td>200ms–8s per chain</td></tr>
+    <tr><td>User experience</td><td>User</td><td>Morning / event / command</td><td>5s–45s per interaction</td></tr>
+    <tr><td>Operations</td><td>DevOps + Support</td><td>Alert / incident / report</td><td>1min–24h per event</td></tr>
+  </table>
+  <div class="slide-num">02</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="num">Section 2</div>
+  <h2>Development process.</h2>
+  <p class="blurb">Six engineering principles. Eight non-negotiable gates. One critical-path build order.</p>
+  <div class="slide-num">03</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 2.1 — Engineering principles</div>
+  <h2 class="title">Six rules every PR is held to.</h2>
+  <ul>
+    <li><strong>Safety layer first.</strong> No action ships before its type is in the Sandbox Classifier, given an undo path, covered by adversarial tests.</li>
+    <li><strong>Every PR ships with tests.</strong> Integration tests against sandbox accounts (Gmail, Slack, Notion) — not just unit tests.</li>
+    <li><strong>LLM-dependent code has a non-LLM fallback.</strong> If the LLM is unavailable or wrong, degrade gracefully.</li>
+    <li><strong>Latency budgets are enforced in CI.</strong> A PR that regresses P99 by &gt;10% on any critical path fails CI.</li>
+    <li><strong>Every action has a compensation.</strong> If it can't be undone, it has a compensating transaction (apology email, etc.).</li>
+    <li><strong>No experimental ML in production write paths.</strong> Experimental models can inform — they can't decide.</li>
+  </ul>
+  <div class="slide-num">04</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 2.3 — Critical-path build order</div>
+  <h2 class="title">17 weeks, sequenced by dependency.</h2>
+  <table>
+    <tr><th>Weeks</th><th>What gets built</th><th>What it unblocks</th></tr>
+    <tr><td>1–2</td><td>Safety foundation: Action Record schema, Sandbox Classifier, Circuit Breaker, Undo Stack</td><td>Everything below</td></tr>
+    <tr><td>3–4</td><td>Auth &amp; Vault: Supabase + OAuth 2.0 PKCE, KMS envelope encryption</td><td>All integrations</td></tr>
+    <tr><td>5–7</td><td>First integration: Gmail + Calendar (read + draft only)</td><td>Architecture validated</td></tr>
+    <tr><td>8–10</td><td>ReAct engine: Go FSM, Claude Sonnet, error recovery, Llama Guard firewall</td><td>Agent capability</td></tr>
+    <tr><td>11–12</td><td>Memory system: Cognimemo, ingestion, retrieval, TTL forgetting</td><td>Personalization</td></tr>
+    <tr><td>13–15</td><td>Mobile clients (parallel iOS + Android): SDUI renderer, biometric gate, WebSocket</td><td>End-user surface</td></tr>
+    <tr><td>16</td><td>Integration + hardening: end-to-end tests, pentest, load test, store submission</td><td>Launch</td></tr>
+  </table>
+  <div class="slide-num">05</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 2.4 — Non-negotiable gates</div>
+  <h2 class="title">A feature cannot ship unless ALL of these are true.</h2>
+  <ul>
+    <li>Action type registered in the Sandbox Classifier (or marked read-only).</li>
+    <li>Has an undo path OR a compensating transaction OR is in the biometric-required tier.</li>
+    <li>≥5 integration tests against real sandbox accounts.</li>
+    <li>P99 latency inside the budget (200ms local, 1500ms cloud).</li>
+    <li>Data access uses minimum-scope OAuth permission.</li>
+    <li>Failure mode has a user-visible explanation.</li>
+    <li>Adversarial test suite includes ≥3 cases attempting to abuse the new capability.</li>
+    <li>A kill switch exists — feature flag that disables in seconds.</li>
+  </ul>
+  <div class="slide-num">06</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 2.5 — Release cadence</div>
+  <h2 class="title">All releases gated by feature flags. Default rollout: 1 → 10 → 50 → 100 over 48h.</h2>
+  <table>
+    <tr><th>Frequency</th><th>What ships</th></tr>
+    <tr><td>Every 2 weeks</td><td>Minor features, bug fixes</td></tr>
+    <tr><td>Monthly</td><td>Integrations, UI refinements</td></tr>
+    <tr><td>Quarterly</td><td>Major version (V1.1, V1.2…) with net-new capability</td></tr>
+    <tr><td>Emergency</td><td>Security fixes, App Store-required changes — hours, not days</td></tr>
+  </table>
+  <div class="slide-num">07</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="num">Section 3</div>
+  <h2>Runtime process.</h2>
+  <p class="blurb">What happens 5–15 times per day per active user.</p>
+  <div class="slide-num">08</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 3.1 — The full data journey</div>
+  <h2 class="title">Five stages, voice → action.</h2>
+  <ol style="list-style:none;counter-reset:s;margin:1.2rem 0;max-width:980px">
+    <li style="counter-increment:s;position:relative;padding-left:2.4rem;font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--ink-soft);margin-bottom:.9rem">
+      <span style="position:absolute;left:0;top:0;font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:600">01</span>
+      <strong>User initiates</strong> — wake word OR push-to-talk OR scheduled trigger OR incoming event.
+    </li>
+    <li style="counter-increment:s;position:relative;padding-left:2.4rem;font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--ink-soft);margin-bottom:.9rem">
+      <span style="position:absolute;left:0;top:0;font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:600">02</span>
+      <strong>Local processing</strong> — Silero VAD on-device → Gemma 2B intent classifier (~180ms TTFT) → simple intent handled locally; complex sent encrypted to cloud.
+    </li>
+    <li style="counter-increment:s;position:relative;padding-left:2.4rem;font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--ink-soft);margin-bottom:.9rem">
+      <span style="position:absolute;left:0;top:0;font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:600">03</span>
+      <strong>Cloud reasoning</strong> — pgvector retrieves top-20 memories. ReAct loop: Reason → Act → Observe → repeat (max 8 steps, 30k token budget).
+    </li>
+    <li style="counter-increment:s;position:relative;padding-left:2.4rem;font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--ink-soft);margin-bottom:.9rem">
+      <span style="position:absolute;left:0;top:0;font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:600">04</span>
+      <strong>Safety + biometric</strong> — sandbox classifier checks category/risk/budget; high-risk requires Face ID/PIN.
+    </li>
+    <li style="counter-increment:s;position:relative;padding-left:2.4rem;font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--ink-soft);margin-bottom:.9rem">
+      <span style="position:absolute;left:0;top:0;font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:600">05</span>
+      <strong>Execution</strong> — action fires. Action Record stored with forward + inverse payloads. 30-second undo window. Committed if not undone.
+    </li>
+  </ol>
+  <div class="slide-num">09</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 3.2 — The ReAct loop in plain English</div>
+  <h2 class="title">Reason → Act → Observe → repeat.</h2>
+  <ul>
+    <li><strong>Reason.</strong> "What is the user actually asking for?"</li>
+    <li><strong>Act.</strong> Pick a tool from the allowed registry (e.g., <code>calendar.getFreeBusy</code>) and call it.</li>
+    <li><strong>Observe.</strong> What did the tool return? Is it what I expected?</li>
+    <li><strong>Reason.</strong> "Given what I now know, what's the next step?"</li>
+    <li><strong>Repeat</strong> 2–4, up to 8 times max.</li>
+    <li><strong>Produce.</strong> Generate the final SDUI JSON output (drafted email, confirmation card, etc.).</li>
+  </ul>
+  <p style="margin-top:1rem">Each step is an LLM call. Each tool call hits a real API. Whole loop runs inside a Go FSM that enforces the 8-step cap and 30k token budget.</p>
+  <div class="slide-num">10</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 3.3 — When the loop fails</div>
+  <h2 class="title">Six failure types, six pre-decided responses.</h2>
+  <table>
+    <tr><th>Failure</th><th>Response</th></tr>
+    <tr><td>LLM returns invalid tool JSON</td><td>Retry with error feedback in prompt (max 3 retries)</td></tr>
+    <tr><td>Tool call returns 5xx</td><td>Exponential backoff; secondary provider if available</td></tr>
+    <tr><td>Loop exceeds 8 steps</td><td>Halt. Surface "I need more info" SDUI card</td></tr>
+    <tr><td>Token budget exceeded</td><td>Halt. Surface "More complex than expected"</td></tr>
+    <tr><td>Llama Guard flags output</td><td>Halt. Log incident. Generic safe response</td></tr>
+    <tr><td>Circuit breaker trips</td><td>Halt all loops for user. Alert ops. UDP broadcast kills in-flight tool calls</td></tr>
+  </table>
+  <div class="slide-num">11</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 3.5 — Privacy boundary at runtime</div>
+  <h2 class="title">What stays on-device. What leaves. What's never stored.</h2>
+  <div class="cols three">
+    <div class="col">
+      <h3>Stays on-device</h3>
+      <ul>
+        <li>Raw audio</li>
+        <li>Full screen content</li>
+        <li>Biometric data</li>
+        <li>Local-app content not explicitly sent</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Leaves device (encrypted)</h3>
+      <ul>
+        <li>Intent summaries</li>
+        <li>Email metadata; full body only on approval</li>
+        <li>Calendar event titles + times</li>
+        <li>Approved action payloads</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Never stored after session</h3>
+      <ul>
+        <li>Raw audio (deleted post-transcription)</li>
+        <li>Rejected drafts (unless user opts in)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-num">12</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="num">Section 4</div>
+  <h2>User experience process.</h2>
+  <p class="blurb">What it actually feels like — from install to morning briefing to error recovery.</p>
+  <div class="slide-num">13</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 4.1 — Onboarding (first 48 hours)</div>
+  <h2 class="title">Calibration first. Action later. Trust built through visible intelligence.</h2>
+  <ul>
+    <li><strong>Hour 0:</strong> Install → 5-question calibration interview (~3 min) → OAuth for 1–3 integrations.</li>
+    <li><strong>Hours 1–48:</strong> Observation phase. Daily "I noticed…" briefings, no actions proposed. Trust is built through visible intelligence without risk.</li>
+    <li><strong>Day 2:</strong> First proposed action — low-stakes, reversible, educational. ("Buffer 15 min before your 9am calls?")</li>
+    <li><strong>Week 1:</strong> Suggestions only.</li>
+    <li><strong>Week 2:</strong> Low-stakes actions with approval (drafts, schedule suggestions).</li>
+    <li><strong>Week 3+:</strong> Routine auto-actions; exceptions escalated.</li>
+    <li><strong>Month 2+:</strong> High-frequency routine auto-executed; destructive/financial always gated.</li>
+  </ul>
+  <div class="slide-num">14</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 4.2 — The daily rhythm</div>
+  <h2 class="title">Loud at 7am. Silent in deep work. A quiet summary in the evening.</h2>
+  <ul>
+    <li><strong>6:00–7:30am</strong> — Aldrich processed overnight: scored emails, calendar conflicts, Slack mentions, sleep data. Lock-screen briefing card: "3 things need your attention."</li>
+    <li><strong>~45 seconds of scrolling</strong> — Approve, Edit, or skip. Three actions handled before coffee.</li>
+    <li><strong>Throughout the day</strong> — User in deep work. Aldrich silent. Real-time intervention only for: deep-work conflict, VIP message, time-sensitive commitment.</li>
+    <li><strong>Evening summary</strong> — "11 actions today. 9 auto-approved. 2 needed your input."</li>
+  </ul>
+  <div class="slide-num">15</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 4.3 — Approval flow</div>
+  <h2 class="title">Every approval card carries: what, why, source, affordances.</h2>
+  <p>Anatomy of an SDUI Action Card:</p>
+  <ul>
+    <li><strong>Title:</strong> "Reschedule call with Sarah to 3pm?"</li>
+    <li><strong>Why (one line):</strong> "Current 2pm slot conflicts with Deep Work block."</li>
+    <li><strong>Source attribution:</strong> "Sarah's email at 9:14am."</li>
+    <li><strong>Affordances:</strong> [Edit] [Approve] [Reject].</li>
+  </ul>
+  <p style="margin-top:1.2rem"><strong>Approve flow:</strong> tap Approve → Face ID (if high-risk tier) → action fires → 30-second undo banner → committed after 30s.</p>
+  <p><strong>Edit flow:</strong> tap Edit → inline editor → tweak → resume Approve flow.</p>
+  <div class="slide-num">16</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 4.4 — Error recovery</div>
+  <h2 class="title">Every card has a "Something went wrong" button.</h2>
+  <ul>
+    <li>User describes what happened — preset options + freeform: "Wrong recipient" / "Wrong time" / "Wrong decision" / "Other."</li>
+    <li>Aldrich offers compensation immediately: <strong>reversible</strong> → one-tap undo; <strong>not reversible</strong> → generated apology; <strong>serious</strong> → escalation ticket to human support.</li>
+    <li>System side: incident logged with <code>user_reported = TRUE</code>; if &gt;5 incidents in 24h, T&amp;S team alerted; feedback added to next-iteration training pool.</li>
+    <li>Within 24h: explanation email — "Here's what happened. I've updated my approach."</li>
+  </ul>
+  <div class="slide-num">17</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="num">Section 5</div>
+  <h2>Operations process.</h2>
+  <p class="blurb">On-call, severity, incident response, kill switches.</p>
+  <div class="slide-num">18</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 5.1 — Severity</div>
+  <h2 class="title">SEV-1 pages immediately. SEV-2 same business day. SEV-3 within 48h.</h2>
+  <table>
+    <tr><th>Severity</th><th>Example</th><th>Response</th></tr>
+    <tr><td><strong>SEV-1</strong></td><td>Circuit breaker tripped / LLM error rate &gt;5% for &gt;2min / OAuth vault unreachable / unauthorized action</td><td>Page immediately</td></tr>
+    <tr><td><strong>SEV-2</strong></td><td>Local inference cold-start &gt;10s for &gt;1% / memory P99 &gt;1s / new safety incident category</td><td>Slack notification; same business day</td></tr>
+    <tr><td><strong>SEV-3</strong></td><td>Single-user issue / minor UI bug / non-critical integration failure</td><td>Ticket; 48h SLA</td></tr>
+  </table>
+  <div class="slide-num">19</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 5.2 — Incident response</div>
+  <h2 class="title">Acknowledge → investigate → contain → communicate → resolve → postmortem.</h2>
+  <ul>
+    <li><strong>Acknowledge</strong> within 5 min for SEV-1.</li>
+    <li><strong>Investigate</strong> — Datadog query, ReAct chain logs, single-user vs. system-wide.</li>
+    <li><strong>Contain</strong> — system-wide: kill switch + feature flag off. Single-user: freeze actions, notify user.</li>
+    <li><strong>Communicate</strong> — single-user: in-app within 1h. System-wide: status page + X within 15 min.</li>
+    <li><strong>Resolve</strong> — root cause + fix deployed (bypassing normal cadence if SEV-1).</li>
+    <li><strong>Postmortem</strong> — blameless, written within 5 business days. Adversarial test suite updated.</li>
+  </ul>
+  <div class="slide-num">20</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 5.4 — Kill switch hierarchy</div>
+  <h2 class="title">Three levels of emergency kill.</h2>
+  <ul>
+    <li><strong>User-level.</strong> User hits kill switch in app → all their active ReAct loops halt within 5s (UDP broadcast). Pending approvals dismissed. OAuth tokens flagged "paused."</li>
+    <li><strong>Feature-level.</strong> Product team disables a capability (e.g., auto-send email) via flag → all instances halt within 60s globally.</li>
+    <li><strong>System-level.</strong> Engineering on-call hits the system kill → all new ReAct loops rejected at API gateway; in-flight loops complete but no new ones start. Absolute emergency only.</li>
+  </ul>
+  <div class="slide-num">21</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 5.3 — Weekly operational ritual</div>
+  <h2 class="title">Three meetings, one rhythm.</h2>
+  <ul>
+    <li><strong>Monday — Weekly metrics review.</strong> AAPUW (north star), Day-30 retention, error rates, LLM cost/user. Red/yellow/green scorecard.</li>
+    <li><strong>Wednesday — Adversarial test review.</strong> Any failures in the 500-case corpus? Any new attack patterns from production?</li>
+    <li><strong>Friday — "Ship it" review.</strong> What ships next week? Go/no-go on each feature flag.</li>
+  </ul>
+  <div class="slide-num">22</div>
+</section>
+
+<section class="slide divider">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="num">Section 8</div>
+  <h2>Safety — the immune system.</h2>
+  <p class="blurb">Three lines of defense. Quarterly red team. Continuous user-reportable safety.</p>
+  <div class="slide-num">23</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 8.1 — Three lines of defense</div>
+  <h2 class="title">Defense in depth. No single layer is trusted alone.</h2>
+  <div class="cols three">
+    <div class="col">
+      <h3>Line 1 — Input</h3>
+      <ul>
+        <li>Deterministic sandbox classifier on every input</li>
+        <li>LLM output schema-validated against tool registry</li>
+        <li>External content tagged "untrusted," through Llama Guard</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Line 2 — Action</h3>
+      <ul>
+        <li>Risk levels: low/medium/high/critical</li>
+        <li>High/critical → biometric gate</li>
+        <li>Action budgets per user per hour</li>
+        <li>Circuit breaker on anomalies</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Line 3 — Reversibility</h3>
+      <ul>
+        <li>30-second undo window for reversible actions</li>
+        <li>Compensating transactions for irreversible</li>
+        <li>Full audit log for forensics</li>
+        <li>Account-level pause</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-num">24</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 8.2 — Adversarial testing</div>
+  <h2 class="title">Quarterly red team. 100+ scenarios. Every win becomes a test.</h2>
+  <ul>
+    <li>Internal red team (security engineer + outside contractor) attempts 100+ attacks: prompt injection via email, impersonation, privilege escalation, data exfiltration, bulk-action abuse.</li>
+    <li>Every successful attack becomes a test case in the adversarial suite (grows to 500+ cases).</li>
+    <li>Every weakness becomes a ticket with SLA — critical: 48h, high: 1 week, medium: 1 month.</li>
+    <li>Results reviewed by leadership and published internally.</li>
+  </ul>
+  <div class="verdict">
+    <div class="label">User-reportable safety</div>
+    <p>Every action card has a "Report a concern" link. Reports route to T&amp;S queue with 24h SLA. Patterns trigger capability review. Repeated user policy violations → suspension.</p>
+  </div>
+  <div class="slide-num">25</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 9 — Data lifecycle</div>
+  <h2 class="title">Creation → active → archive → deletion → export.</h2>
+  <ul>
+    <li><strong>Creation.</strong> User authorizes integration → tokens encrypted with user-specific key → stored in vault. Data flows from integrations → classified → summarized → memory hub.</li>
+    <li><strong>Active use.</strong> Memory retrieved on every ReAct loop (~50–300ms). Frequently retrieved stays warm; rarely retrieved cools off.</li>
+    <li><strong>Archival (after 90d inactivity).</strong> Cold memories → S3 + DynamoDB. Resurrectable on demand (~200ms extra).</li>
+    <li><strong>Deletion (GDPR right to erasure).</strong> Cascade across 8 tables + S3 prefix + pgvector + Kafka offset reset. Completes within 30 days. Confirmation email. OAuth tokens revoked with all third parties.</li>
+    <li><strong>Account export (GDPR portability).</strong> Background job → JSON → signed URL via email, valid 7 days.</li>
+  </ul>
+  <div class="slide-num">26</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Process</div>
+  <div class="kicker">Section 10 — At a glance</div>
+  <h2 class="title">Six layers. Six measures of health.</h2>
+  <table>
+    <tr><th>Layer</th><th>Key process</th><th>Measure of health</th></tr>
+    <tr><td>Development</td><td>Safety-first build, feature-flag rollouts</td><td>Cycle time merge → 100%</td></tr>
+    <tr><td>Runtime</td><td>ReAct loop, sandbox + circuit breaker, SDUI</td><td>AAPUW, action success, chain failure rate</td></tr>
+    <tr><td>UX</td><td>Morning briefing, graduated trust, undo</td><td>Day-30 retention, NPS, approval rate</td></tr>
+    <tr><td>Operations</td><td>On-call, incident response, postmortem</td><td>MTTR, SEV-1 rate, recurrence</td></tr>
+    <tr><td>Safety</td><td>Three lines of defense, adversarial tests</td><td>Suite pass rate (target 100%)</td></tr>
+    <tr><td>Data lifecycle</td><td>Ingest → memory → archive → deletion</td><td>GDPR SLA compliance</td></tr>
+  </table>
+  <div class="slide-num">27</div>
+</section>
+
+<section class="slide closing">
+  <div class="end">End of Deck 6</div>
+  <h2>Every step is instrumented. Every action is reversible. Every failure has a documented recovery path.</h2>
+  <p style="font-size:18px;color:var(--ink-soft);max-width:780px;line-height:1.55">That's what makes an agentic AI product trustworthy at scale. Revise this document every 6 months as the system matures.</p>
+  <div class="nav-hint">← / → to navigate · <a href="index.html" style="color:var(--accent);text-decoration:none">Back to index</a> · Next: Go-To-Market &amp; Pricing</div>
+  <div class="slide-num">28</div>
+</section>
+
+</div>
+
+<!-- Glossary modal -->
+<div class="glossary-modal" id="glossary-modal">
+  <div class="glossary-box">
+    <h2>Glossary</h2>
+    <p class="sub">Abbreviations used across the Aldrich deck set. Press Esc or click outside to close. Keyboard: G to open.</p>
+    <dl>
+      <dt>ADR</dt><dd>Architecture Decision Record.</dd>
+      <dt>ANE</dt><dd>Apple Neural Engine (on-device ML accelerator).</dd>
+      <dt>API</dt><dd>Application Programming Interface.</dd>
+      <dt>ARR / MRR</dt><dd>Annual / Monthly Recurring Revenue.</dd>
+      <dt>ARPU</dt><dd>Average Revenue Per User.</dd>
+      <dt>AWS</dt><dd>Amazon Web Services.</dd>
+      <dt>BIPA</dt><dd>Biometric Information Privacy Act (Illinois).</dd>
+      <dt>CAC</dt><dd>Customer Acquisition Cost.</dd>
+      <dt>CCPA</dt><dd>California Consumer Privacy Act.</dd>
+      <dt>CDN</dt><dd>Content Delivery Network.</dd>
+      <dt>CEO / CTO</dt><dd>Chief Executive / Technology Officer.</dd>
+      <dt>COGS</dt><dd>Cost of Goods Sold.</dd>
+      <dt>CoS</dt><dd>Chief of Staff.</dd>
+      <dt>CRDT</dt><dd>Conflict-free Replicated Data Type (multi-device sync).</dd>
+      <dt>CX</dt><dd>Customer Experience (support function).</dd>
+      <dt>DPA</dt><dd>Data Processing Agreement with vendors.</dd>
+      <dt>DPIA</dt><dd>Data Protection Impact Assessment (GDPR).</dd>
+      <dt>DPO</dt><dd>Data Protection Officer (GDPR role).</dd>
+      <dt>DSR</dt><dd>Data Subject Request (GDPR access/delete request).</dd>
+      <dt>EA</dt><dd>Executive Assistant.</dd>
+      <dt>EU AI Act</dt><dd>European Union Artificial Intelligence Act.</dd>
+      <dt>FL</dt><dd>Fully Loaded — base salary + ~30% for benefits, equipment, payroll tax.</dd>
+      <dt>FSM</dt><dd>Finite State Machine.</dd>
+      <dt>FTE</dt><dd>Full-Time Equivalent.</dd>
+      <dt>GA</dt><dd>General Availability (public launch).</dd>
+      <dt>GDPR</dt><dd>General Data Protection Regulation (EU privacy law).</dd>
+      <dt>GTM</dt><dd>Go-to-Market plan.</dd>
+      <dt>HIBP</dt><dd>Have I Been Pwned (public breach-data service).</dd>
+      <dt>HN</dt><dd>Hacker News (launch channel).</dd>
+      <dt>IC</dt><dd>Individual Contributor (non-management role).</dd>
+      <dt>IP</dt><dd>Intellectual Property.</dd>
+      <dt>JTBD</dt><dd>Jobs To Be Done (framework).</dd>
+      <dt>KMS</dt><dd>Key Management Service (encryption-key storage).</dd>
+      <dt>LLM</dt><dd>Large Language Model (Claude, GPT-4, Gemini).</dd>
+      <dt>LTV</dt><dd>Lifetime Value — total gross profit per customer.</dd>
+      <dt>M365</dt><dd>Microsoft 365.</dd>
+      <dt>MSK</dt><dd>Managed Streaming for Kafka (AWS).</dd>
+      <dt>MTTR</dt><dd>Mean Time To Recovery.</dd>
+      <dt>MVP</dt><dd>Minimum Viable Product.</dd>
+      <dt>NPS</dt><dd>Net Promoter Score.</dd>
+      <dt>NPU</dt><dd>Neural Processing Unit (Android equivalent of ANE).</dd>
+      <dt>OAuth</dt><dd>Open Authorization — standard for third-party app access.</dd>
+      <dt>P0 / P99</dt><dd>Priority 0 (critical bug) / 99th percentile latency.</dd>
+      <dt>PH</dt><dd>Product Hunt (launch channel).</dd>
+      <dt>PII</dt><dd>Personally Identifiable Information.</dd>
+      <dt>PKM</dt><dd>Personal Knowledge Management (Mem, Reflect, etc.).</dd>
+      <dt>PKR / USD</dt><dd>Pakistani Rupee / US Dollar. 1 USD ≈ 285 PKR (2026 approx).</dd>
+      <dt>PMF</dt><dd>Product-Market Fit.</dd>
+      <dt>PRD</dt><dd>Product Requirements Document.</dd>
+      <dt>RDS</dt><dd>Relational Database Service (AWS).</dd>
+      <dt>ReAct</dt><dd>Reasoning + Acting — interleaved reasoning and tool-call pattern for LLM agents.</dd>
+      <dt>ROPA</dt><dd>Record of Processing Activities (GDPR).</dd>
+      <dt>SaaS</dt><dd>Software as a Service.</dd>
+      <dt>SAM / SOM / TAM</dt><dd>Serviceable Addressable / Serviceable Obtainable / Total Addressable Market.</dd>
+      <dt>SCIM</dt><dd>System for Cross-domain Identity Management (enterprise user provisioning).</dd>
+      <dt>SDK</dt><dd>Software Development Kit.</dd>
+      <dt>SDUI</dt><dd>Server-Driven UI — UI described by server JSON, rendered client-side.</dd>
+      <dt>SEO</dt><dd>Search Engine Optimization.</dd>
+      <dt>SEV</dt><dd>Severity (SEV-1 = critical, SEV-3 = minor).</dd>
+      <dt>SLA</dt><dd>Service Level Agreement.</dd>
+      <dt>SMB</dt><dd>Small and Medium Business.</dd>
+      <dt>SOC 2</dt><dd>Service Organization Control 2 (enterprise security compliance).</dd>
+      <dt>SSO</dt><dd>Single Sign-On.</dd>
+      <dt>T&amp;S</dt><dd>Trust &amp; Safety team.</dd>
+      <dt>ToS</dt><dd>Terms of Service.</dd>
+      <dt>TTFT</dt><dd>Time To First Token (LLM latency).</dd>
+      <dt>UDP</dt><dd>User Datagram Protocol.</dd>
+      <dt>UI / UX</dt><dd>User Interface / User Experience.</dd>
+      <dt>VA</dt><dd>Virtual Assistant (human or AI).</dd>
+      <dt>VAD</dt><dd>Voice Activity Detection.</dd>
+      <dt>VIP</dt><dd>Very Important Person (user-designated priority contact).</dd>
+      <dt>WCAG</dt><dd>Web Content Accessibility Guidelines.</dd>
+      <dt>WTP</dt><dd>Willingness To Pay.</dd>
+      <dt>WWDC</dt><dd>Apple Worldwide Developers Conference.</dd>
+    </dl>
+  </div>
+  <button class="glossary-close" id="glossary-close" aria-label="Close glossary">×</button>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="nav">
+  <button id="glossary-btn" class="nav-glossary" title="Glossary (G)">?</button>
+  <button id="home" class="nav-home" title="First slide (Home)">⌂</button>
+  <button id="to-index" class="nav-index" title="Back to index (I)">≡</button>
+  <button id="prev" title="Previous (←)">‹</button>
+  <button id="next" title="Next (→)">›</button>
+</div>
+<script src="nav.js"></script>
+</body>
+</html>
