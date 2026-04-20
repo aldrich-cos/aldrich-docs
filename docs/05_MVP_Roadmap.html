@@ -128,12 +128,58 @@
   <div class="slide-num">06</div>
 </section>
 
+
+<section class="slide">
+  <div class="deck-title">Aldrich · MVP Roadmap</div>
+  <div class="kicker">The user journey — what V1 actually does for the user</div>
+  <h2 class="title">Five steps. Same five every day.</h2>
+  <p>Every V1 capability serves this loop. Every roadmap decision is judged against whether it makes one of these steps materially better.</p>
+  <div class="stepper">
+    <div class="step done">
+      <div class="circle">1</div>
+      <div class="label">Install</div>
+      <div class="sub">App Store / Play Store · 48-hour calibration</div>
+    </div>
+    <div class="step done">
+      <div class="circle">2</div>
+      <div class="label">Calibrate</div>
+      <div class="sub">3 questions · OAuth 1–3 integrations · observation phase</div>
+    </div>
+    <div class="step done">
+      <div class="circle">3</div>
+      <div class="label">Briefing</div>
+      <div class="sub">Lock-screen card · 3 things that need attention · ~45s scroll</div>
+    </div>
+    <div class="step done">
+      <div class="circle">4</div>
+      <div class="label">Approve</div>
+      <div class="sub">Tap Approve / Edit / Reject · biometric for high-trust · 30s undo</div>
+    </div>
+    <div class="step done">
+      <div class="circle">5</div>
+      <div class="label">Memory write</div>
+      <div class="sub">Async to pgvector · routine confidence updated · trust compounds</div>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:2rem">
+    <div class="col">
+      <h3>Daily rhythm</h3>
+      <p style="font-size:15px;line-height:1.55">Loop runs 5–15 times per active user per day. Heaviest concentration at 6–8am (morning briefing) and 6–9pm (second-shift catch-up). Most of the day Aldrich is silent.</p>
+    </div>
+    <div class="col">
+      <h3>Why this stepper matters</h3>
+      <p style="font-size:15px;line-height:1.55">Every PRD asks "which step does this improve?" Features that don't fit one of these five steps require explicit founder approval. This is the discipline that keeps V1 from sprawling.</p>
+    </div>
+  </div>
+  <div class="slide-num">07</div>
+</section>
+
 <section class="slide divider">
   <div class="deck-title">Aldrich · MVP Roadmap</div>
   <div class="num">17-week build path</div>
   <h2>Built by dependency, not by demo convenience.</h2>
   <p class="blurb">Foundation first. Even though it's not demo-able, every later feature depends on it being right.</p>
-  <div class="slide-num">07</div>
+  <div class="slide-num">08</div>
 </section>
 
 <section class="slide">
@@ -151,7 +197,7 @@
     <div class="label">Gate to proceed</div>
     <p>All critical-path hires in seat. Architecture ADRs signed off (model provider, memory store, auth, cloud).</p>
   </div>
-  <div class="slide-num">08</div>
+  <div class="slide-num">09</div>
 </section>
 
 <section class="slide">
@@ -170,7 +216,7 @@
     <div class="label">End-of-phase gate</div>
     <p>Red-team session: try to make the unfinished system do something bad — it should fail in the right way every time.</p>
   </div>
-  <div class="slide-num">09</div>
+  <div class="slide-num">10</div>
 </section>
 
 <section class="slide">
@@ -189,7 +235,7 @@
     <div class="label">Quality bar</div>
     <p>Retrieval eval: <strong>90%+ precision on top-5</strong> for a 200-query internal set. Memory write latency p95 &lt; 500ms. One week of internal dogfooding.</p>
   </div>
-  <div class="slide-num">10</div>
+  <div class="slide-num">11</div>
 </section>
 
 <section class="slide">
@@ -208,7 +254,7 @@
     <div class="label">Quality bar</div>
     <p>Chain success eval on 200 realistic queries: <strong>95%+ on single-step, 88%+ on 3-step</strong>. Cost-per-query dashboard accurate.</p>
   </div>
-  <div class="slide-num">11</div>
+  <div class="slide-num">12</div>
 </section>
 
 <section class="slide">
@@ -223,7 +269,7 @@
     <tr><td><strong>D. Onboarding Flow</strong></td><td>48h calibration, account connection UX, preference capture</td></tr>
     <tr><td><strong>E. Settings &amp; Trust UI</strong></td><td>Permissions dial, memory viewer, activity log w/ undo, privacy</td></tr>
   </table>
-  <div class="slide-num">12</div>
+  <div class="slide-num">13</div>
 </section>
 
 <section class="slide">
@@ -262,7 +308,7 @@
       </ul>
     </div>
   </div>
-  <div class="slide-num">13</div>
+  <div class="slide-num">14</div>
 </section>
 
 <section class="slide">
@@ -281,7 +327,7 @@
     <div class="label">Launch week targets</div>
     <p>10K signups · 3–5% paid conversion in week 1 · launch-day traffic handled without infra incident.</p>
   </div>
-  <div class="slide-num">14</div>
+  <div class="slide-num">15</div>
 </section>
 
 <section class="slide divider">
@@ -289,7 +335,7 @@
   <div class="num">Decision gates</div>
   <h2>When to advance, when to hold.</h2>
   <p class="blurb">Between phases we don't advance automatically.</p>
-  <div class="slide-num">15</div>
+  <div class="slide-num">16</div>
 </section>
 
 <section class="slide">
@@ -304,7 +350,7 @@
     <li><strong>Has anything in the market changed that should re-scope?</strong></li>
   </ul>
   <p style="margin-top:1.2rem">If any answer is red, pause and re-plan instead of rolling forward.</p>
-  <div class="slide-num">16</div>
+  <div class="slide-num">17</div>
 </section>
 
 <section class="slide">
@@ -320,7 +366,7 @@
     <tr><td><strong>Week 20 (paid GA)</strong></td><td>2 support engineers, data analyst</td></tr>
   </table>
   <p style="margin-top:1rem"><strong>Total at paid GA: ~12–14 people.</strong> Matches the $2.55M Year 1 burn.</p>
-  <div class="slide-num">17</div>
+  <div class="slide-num">18</div>
 </section>
 
 <section class="slide">
@@ -334,7 +380,7 @@
     <li><strong>Claude pricing &amp; rate limits</strong> — could derail unit economics. Provider abstraction.</li>
     <li><strong>Legal/Privacy framework</strong> — blocks public launch. Engage counsel at Week 0.</li>
   </ul>
-  <div class="slide-num">18</div>
+  <div class="slide-num">19</div>
 </section>
 
 <section class="slide">
@@ -351,7 +397,7 @@
     <tr><td>Privacy regulator inquiry</td><td>15%</td><td>4–8 week slip</td></tr>
     <tr><td>Key person leaves mid-build</td><td>15%</td><td>4–6 week slip</td></tr>
   </table>
-  <div class="slide-num">19</div>
+  <div class="slide-num">20</div>
 </section>
 
 <section class="slide divider">
@@ -359,7 +405,7 @@
   <div class="num">Definition of "Done"</div>
   <h2>Ready for paid GA.</h2>
   <p class="blurb">All of the following must be true before we flip paid on.</p>
-  <div class="slide-num">20</div>
+  <div class="slide-num">21</div>
 </section>
 
 <section class="slide">
@@ -388,7 +434,7 @@
       </ul>
     </div>
   </div>
-  <div class="slide-num">21</div>
+  <div class="slide-num">22</div>
 </section>
 
 <section class="slide">
@@ -416,7 +462,7 @@
       </ul>
     </div>
   </div>
-  <div class="slide-num">22</div>
+  <div class="slide-num">23</div>
 </section>
 
 <section class="slide">
@@ -434,7 +480,7 @@
     <li>7. More integrations (Notion, Gmail labels, Calendly, Superhuman…)</li>
   </ul>
   <p style="margin-top:1rem"><strong>Discipline:</strong> every new capability ships with the same rule — safety first, approval-gated, logged, undoable.</p>
-  <div class="slide-num">23</div>
+  <div class="slide-num">24</div>
 </section>
 
 <section class="slide">
@@ -450,7 +496,7 @@
     <li>Enterprise version before Month 9 — focus</li>
     <li>More than 2 languages before Month 12 — focus (English + Spanish in V1.5)</li>
   </ul>
-  <div class="slide-num">24</div>
+  <div class="slide-num">25</div>
 </section>
 
 <section class="slide">
@@ -469,7 +515,7 @@
     <tr><td>17–20</td><td>Controlled beta</td><td>200 → 5K users, metrics</td></tr>
     <tr><td>20–22</td><td>Paid GA</td><td>10K users week-1, paid tier live</td></tr>
   </table>
-  <div class="slide-num">25</div>
+  <div class="slide-num">26</div>
 </section>
 
 <section class="slide closing">
@@ -477,7 +523,7 @@
   <h2>Every phase ships finished work. We'd rather be a month late with something trustworthy than on time with something that damages the brand in week one.</h2>
   <p style="font-size:18px;color:var(--ink-soft);max-width:780px;line-height:1.55">Re-review at the end of every phase gate. From paid GA to Series A readiness with healthy cohort metrics: ~12 months.</p>
   <div class="nav-hint">← / → to navigate · <a href="index.html" style="color:var(--accent);text-decoration:none">Back to index</a> · Next: Process</div>
-  <div class="slide-num">26</div>
+  <div class="slide-num">27</div>
 </section>
 
 </div>
