@@ -137,6 +137,7 @@
   <div class="kicker">Risk #4 — AI · HIGH</div>
   <h2 class="title">Prompt injection / jailbreak in production.</h2>
   <p><strong>Likelihood:</strong> High (70%+ attempts; varies success) · <strong>Impact:</strong> Major to Severe · <strong>Owner:</strong> Head of Security</p>
+  <p style="color:var(--muted)"><strong>Reference incident:</strong> The <strong>2026 Vercel v0</strong> exfiltration — prompt-injected user content coaxing the AI assistant into leaking API tokens and private source — is now the canonical public example. Treat it as the template, not an edge case.</p>
   <ul>
     <li><strong>Mitigation (defense in depth).</strong> Content-role separation — external content wrapped in "untrusted" tags. First-pass classifier flags imperatives. Hard-coded allowlist of destructive actions (separate non-LLM policy engine). Biometric gate for high-trust. Memory-write requires explicit user tap. Continuous red team + bug bounty within 6 months. 30-day undo stack.</li>
     <li><strong>Contingency.</strong> Hour 1: kill switch on the action class. Hour 2–24: incident response, notify affected, log, estimate blast radius. 24–72h: public postmortem. Add vector to eval harness.</li>
