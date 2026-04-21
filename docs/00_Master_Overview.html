@@ -1002,49 +1002,66 @@
 
 <section class="slide">
   <div class="deck-title">Aldrich · Master Overview · Part 4</div>
-  <div class="kicker">Challenge 4 of 7 — added after the 2026 Vercel v0 incident</div>
+  <div class="kicker">Challenge 4 of 7 · threat model — added after the 2026 Vercel v0 incident</div>
   <h2 class="title">Security &amp; privacy — we hand an AI agent the keys to a user's digital life.</h2>
-  <p class="lede">An assistant with read/write OAuth into Gmail, Slack, Calendar, GitHub and a multi-year memory store is one of the most attractive targets in consumer software. The <strong>2026 Vercel v0 incident</strong> — where attackers used prompt-injected user content to get the AI assistant to exfiltrate API tokens and private source — is the current template, not an outlier. Anything the agent <em>reads</em> can carry instructions targeting what the agent <em>can do</em>.</p>
+  <p class="lede">An assistant with OAuth into Gmail, Slack, Calendar, GitHub plus a multi-year memory store is one of the most attractive targets in consumer software. The <strong>2026 Vercel v0 incident</strong> — where prompt-injected user content coaxed the AI assistant into exfiltrating API tokens and private source — is the current template, not an outlier.</p>
   <div class="cols">
     <div class="col">
       <h3>What's actually exposed</h3>
       <ul>
-        <li>OAuth tokens for Gmail / Slack / Calendar / GitHub / banking — wide scope, long-lived by default</li>
-        <li>Memory = years of high-signal personal context; a unique data-theft target (not replaceable like a password)</li>
+        <li>OAuth tokens — Gmail, Slack, Calendar, GitHub — wide scope, long-lived by default</li>
+        <li>Memory = years of personal context; a unique data-theft target, not replaceable like a password</li>
         <li>On-behalf-of action rights — emails sent, meetings booked, files shared, with the user's identity</li>
-        <li>Cross-tenant risk if the memory substrate is ever multi-tenant</li>
         <li>Jurisdiction — PK hosting has real data-locality tradeoffs enterprise counterparties will ask about</li>
       </ul>
     </div>
     <div class="col">
       <h3>Where the attacks come from</h3>
       <ul>
-        <li><strong>Prompt injection</strong> in anything Aldrich reads — email bodies, shared docs, Slack threads, webpages, PDFs, calendar invites</li>
+        <li><strong>Prompt injection</strong> in anything Aldrich reads — emails, docs, Slack threads, PDFs, calendar invites</li>
         <li>Compromised or hostile MCP servers returning malicious payloads</li>
-        <li>Token theft via supply-chain attacks on SDKs / browser extensions</li>
-        <li>Insider risk — our own engineers should not be able to read raw memory without break-glass audit</li>
-        <li>Social-engineered OAuth consent screens ("Aldrich Plus" impersonators)</li>
+        <li>Token theft via supply-chain attacks on SDKs or browser extensions</li>
+        <li>Insider risk — our own engineers should not read raw memory without break-glass audit</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:1rem;color:var(--muted)">Anything the agent <em>reads</em> can carry instructions targeting what the agent <em>can do</em>. Mitigations on the next slide.</p>
+  <div class="slide-num">29a</div>
+</section>
+
+<section class="slide">
+  <div class="deck-title">Aldrich · Master Overview · Part 4</div>
+  <div class="kicker">Challenge 4 of 7 · response</div>
+  <h2 class="title">What ships with V1 so we're not the next case study.</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Technical controls</h3>
+      <ul>
+        <li><strong>Content / instruction isolation</strong> — retrieved text never steers the agent; external content wrapped as untrusted</li>
+        <li><strong>Capability-scoped, short-lived OAuth</strong> — minimum scope per feature, revocable in minutes</li>
+        <li><strong>Action budget + approval gate</strong> (already V1 scope) extended with a second confirmation for high-blast-radius actions</li>
+        <li><strong>Tenant-isolated memory + per-user encryption keys</strong>; engineers access via audited break-glass only</li>
+        <li><strong>Red-team prompt-injection suite in CI</strong> before every major release</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Organizational &amp; compliance</h3>
+      <ul>
+        <li><strong>Dedicated security engineer in the first 12 months</strong> — previously folded into "infra/backend," which under-reads the threat model</li>
+        <li><strong>Bug bounty</strong> from public beta; <strong>published incident-response</strong> pipeline with GDPR's 72h SLA baked in</li>
+        <li><strong>SOC 2 Type I</strong> before enterprise POCs, <strong>Type II</strong> before any enterprise ACV</li>
+        <li><strong>ISO 27001</strong> on the 24-month path; data-locality addendum for EU customers</li>
       </ul>
     </div>
   </div>
   <div class="highlight-box warn">
     <div class="hb-icon"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
     <div class="hb-body">
-      <span class="label">Required but easy to underscope</span>
-      <ul>
-        <li><strong>Content / instruction isolation from day one</strong> — retrieved text never steers the agent; external content is wrapped as untrusted by the model-side tooling</li>
-        <li><strong>Capability-scoped, short-lived OAuth</strong> — minimum scope per feature, revocable in minutes, not days</li>
-        <li><strong>Action budget + human approval gate</strong> already in V1 scope (see Challenge 1) — extend to a second confirmation for high-blast-radius actions (bulk sends, money, external comms to VIPs)</li>
-        <li><strong>Tenant-isolated memory with per-user encryption keys</strong>; engineers read via audited break-glass only</li>
-        <li><strong>Red-team prompt-injection suite in CI</strong> before every major release; bug bounty from public beta</li>
-        <li><strong>Published incident-response and data-breach disclosure pipeline</strong> (GDPR 72h SLA baked in)</li>
-        <li><strong>Dedicated security engineer in the first 12 months</strong> — previously folded into "infra/backend," which under-reads the threat model</li>
-        <li><strong>SOC 2 Type I before enterprise POCs, Type II before any enterprise ACV</strong>; ISO 27001 on the 24-month path</li>
-      </ul>
+      <span class="label">Kill criterion</span>
+      <p>If V1 ships without a working content/instruction isolation boundary and a documented incident-response pipeline, we are one news cycle away from being the cautionary tale. Vercel recovered because it already had scale and enterprise trust. We would not.</p>
     </div>
   </div>
-  <p style="margin-top:1rem"><strong>Kill criterion:</strong> if V1 ships without a working content/instruction isolation boundary and a documented incident-response pipeline, we are one news cycle away from being the cautionary tale. Vercel recovered because it already had scale and enterprise trust. We would not.</p>
-  <div class="slide-num">29a</div>
+  <div class="slide-num">29b</div>
 </section>
 
 <section class="slide">
